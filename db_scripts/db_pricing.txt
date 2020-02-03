@@ -1,0 +1,51 @@
+CREATE DATABASE priceupdate;
+
+CREATE TABLE IF NOT EXISTS  priceupdate.productlists (
+productlist_id INT  AUTO_INCREMENT PRIMARY KEY,
+file_supplier int,
+file_supp_name varchar(64),
+file_name varchar(32),
+file_loc varchar(256),
+file_col_sep char(1),
+file_prod_col varchar(32),
+file_prod_desc_col varchar(32),
+file_EAN_col varchar(32),
+file_category_col varchar(32),
+file_subcat1_col varchar(32),
+file_subcat2_col varchar(32),
+file_purch_price_col decimal(11,2)
+) ENGINE=INNODB;
+
+
+CREATE TABLE IF NOT EXISTS  priceupdate.groupingrules (
+group_id INT  AUTO_INCREMENT PRIMARY KEY,
+group_code varchar(16),
+group_desc varchar(16),
+group_price_grp varchar(16),
+group_selection_SQL varchar(256),
+group_selection_other varchar(256)
+) ENGINE=INNODB;
+
+
+CREATE TABLE IF NOT EXISTS priceupdate.pricegroups (
+prcgrp_id INT  AUTO_INCREMENT PRIMARY KEY,
+prcgrp_code varchar(16),
+prcgrp_name varchar(32),
+prcgrp_formula varchar(256)
+) ENGINE=INNODB;
+
+
+CREATE TABLE IF NOT EXISTS priceupdate.pricing (
+prcupd_id INT  AUTO_INCREMENT PRIMARY KEY,
+prcupd_file varchar(32),
+prcupd_manufacturer varchar(32),
+prcupd_supplier int,
+prcupd_prod varchar(32),
+prcupd_EAN varchar(32),
+prcupd_category varchar(32),
+prcupd_subcat1 varchar(32),
+prcupd_subcat2 varchar(32),
+prcupd_purch_price decimal(11,2),
+prcupd_prcgrp_code varchar(16),
+prcupd_time_stamp timestamp
+) ENGINE=INNODB;
