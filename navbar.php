@@ -6,7 +6,7 @@
         <a href="index.php">Home</a>
       </div>
       <div>
-        <a href="productfilesetup.php">Productfiles Setup</a>
+        <a href="productlists.php">Productfiles Setup</a>
       </div>
       <div>
         <a href="groupingrules.php">Grouping Rules Setup</a>
