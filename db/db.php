@@ -6,11 +6,11 @@
 
 	//$servername = "localhost:50205";
 	//echo var_dump($_SERVER);
-
+	// LOCAL CONNECTION 1 RESERVED!!
 	$servername = "localhost:3306";
 	$uname = "root";  // tämä on tietokannan käyttäjä, ei tekemäsi järjestelmän
 	$pword = "root";
-	$dbname = "yhdistys";
+	$dbname = "priceupdate";
 	$conn = @mysqli_connect($servername, $uname, $pword, $dbname);
 
 	if(!$conn) {
@@ -20,14 +20,16 @@
 	}
 	$conn = @mysqli_connect($servername, $uname, $pword, $dbname);
 
+	// LOCAL CONNECTION 2 FREE
 	if(!$conn) {
 		$servername = "localhost:51548";
 		$uname = "azure";
 		$pword = "6#vWHD_$";
-		//$uname = "";
-		//$pword = "";
+
 		$conn = @mysqli_connect($servername, $uname, $pword, $dbname);
 	}
+
+		// LOCAL CONNECTION 3 FREE
 	if(!$conn) {
 		$servername = "localhost:50205";
 		$uname = "root";

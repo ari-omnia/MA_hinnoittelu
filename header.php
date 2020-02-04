@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <title>Yhdistysrekkarit</title>
+    <title>Mikro-Aitta Pricing</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
@@ -49,8 +49,8 @@ Header
         <?php
         if (!isset($_SESSION['id'])) {
           echo '<form action="includes/loginyp.php" method="post">
-            <input type="text" name="kayttajatunnus" placeholder="Käyttäjätunnus">
-            <input type="password" name="salasana" placeholder="Salasana">
+            <input type="text" name="user" placeholder="User">
+            <input type="password" name="pword" placeholder="Password">
             <button type="submit" class="button button--login" name="login-submit">Login</button>
           </form>
           <a href="signup.php" class="header-signup">Signup</a>';

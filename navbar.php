@@ -3,25 +3,21 @@
 -->
     <div class="navbar">
       <div>
-        <a href="index.php">Koti</a>
+        <a href="index.php">Home</a>
       </div>
       <div>
-        <a href="jasenrekisteri_selaus.php">Jäsenrekisteri</a>
+        <a href="productfilesetup.php">Productfiles Setup</a>
       </div>
       <div>
-        <a href="kalustoluettelolist.php">Kalustoluettelo</a>
+        <a href="groupingrules.php">Grouping Rules Setup</a>
       </div>
-
-        <div class="dropdown">
-          <button class="dropbtn">Perustiedot</button>
-          <div class="dropdown-content">
-            <a href="jasenlaji_selaus.php">Jäsenlajit</a>
-            <a href="kayttajatiedotList.php">Käyttäjätiedot</a>
-            <a href="jasenmaksutList.php">Jäsenmaksut</a>
-          </div>
-        </div>
-
       <div>
-        <a href="#">Hallinta</a>
+        <a href="groupingrules.php">Price Groups Setup</a>
+      </div>
+      <div>
+        <a href="pricing view.php">Pricing View</a>
+      </div>
+      <div>
+        <a href="settings.php">Settings</a>
       </div>
     </div>
