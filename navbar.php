@@ -2,9 +2,7 @@
   Navigation/Function bar
 -->
     <div class="navbar">
-      <div>
-        <a href="index.php">Home</a>
-      </div>
+
       <div>
         <a href="productfilesetup.php">Productfiles Setup</a>
       </div>
