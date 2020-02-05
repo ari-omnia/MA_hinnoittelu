@@ -57,7 +57,7 @@ require "includes/logged.php";
                 // output data columns
             		echo "<table class='listtable'>
                   <thead><tr>
-					<th>Val</th>
+					          <th>Val</th>
                     <th>Id</th>
                     <th>Supplier</th>
                     <th>Sup. name</th>
@@ -68,15 +68,15 @@ require "includes/logged.php";
             		while($row = mysqli_fetch_assoc($result)) {
 						$id = $row["productlist_id"];
             			echo "<tr>
-				  <form name='jasenlajirivi' action='productlist.php?mode=0' method='post'>
-                  <td><input class='button button--rowselect' type='submit' name='update' value=''>
-                  <input type='hidden' name='id' value=$id></td>
-                  <td>".$row["productlist_id"]."</td>
-				  <td>".$row["file_supplier"]."</td>
-                  <td>".$row["file_supp_name"]."</td>
-                  <td".$row["file_name"]."</td>
-                  <td".$row["file_loc"]."</td>
-				  </form>
+          				  <form name='productlistrow' action='productlist.php?mode=0' method='post'>
+                            <td><input class='button button--rowselect' type='submit' name='update' value=''>
+                            <input type='hidden' name='id' value=$id></td>
+                            <td>".$row["productlist_id"]."</td>
+          				          <td>".$row["file_supplier"]."</td>
+                            <td>".$row["file_supp_name"]."</td>
+                            <td>".$row["file_name"]."</td>
+                            <td>".$row["file_loc"]."</td>
+          				  </form>
                   </tr>";
             		}
             		echo "</table>";

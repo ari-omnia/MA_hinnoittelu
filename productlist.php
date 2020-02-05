@@ -1,38 +1,33 @@
   <?php
-  require "header.php";
+    require "header.php";
   ?>
 
-  <script src="js/file_suppenhallinta.js"></script>
+  <script src="js/productlist.js"></script>
   <script src="js/ypjslib.js"></script>
 
   <?php
-	if(!empty($_POST['add'])) {
-		$mode = $_POST['add'];
-	} elseif (!empty($_POST['update'])) {
-      $mode = $_POST['update'];
-	} elseif (!empty($_POST['delete'])) {
-      $mode = $_POST['delete'];
-	}
+  	if(!empty($_POST['add'])) {
+  		$mode = $_POST['add'];
+  	} elseif (!empty($_POST['update'])) {
+        $mode = $_POST['update'];
+  	} elseif (!empty($_POST['delete'])) {
+        $mode = $_POST['delete'];
+  	}
+
     $mode = $_GET['mode'];
-	if(!empty($_POST['id'])) {
-      $id = $_POST['id'];
-	}
-	else {
-	  $id = -1;
-	}
 
-	if(!empty($_POST['productlist_id'])) {
-	  $productlist_id = $_POST['productlist_id'];
-	}
-	else {
-	  $productlist_id = -1;
-	}
+  	if(!empty($_POST['id'])) {
+        $id = $_POST['id'];
+  	}
+  	else {
+  	  $id = -1;
+  	}
 
-	if ($id > 0) {
-      $sql = "SELECT productlist_id, file_supp, file_supp_name, file_name, file_loc from file_supp where productlist_id = $id";
-	  $result = mysqli_query($conn, $sql);
-      $row = mysqli_fetch_assoc($result);
-	}
+  	if ($id > 0) {
+        $sql = "SELECT * from productlists where productlist_id = $id";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+  	}
 
     ?>
 
@@ -45,13 +40,11 @@
         <!-- SUPLLIER       -->
         <!-- ***************-->
         <div class="row">
-          <!--fieldset style = "margin-left: auto; margin-right: auto; "-->
             <div class="col-25">
               Supplier
             </div>
             <div class="col-75">
-              <input type="text"  name="file_supp" value=<?php echo $value = ($id > 0) ? $row['file_supp'] : ""; ?>>
-			  <!--<div id="file_supp_response" class="response"></div>-->
+              <input type="text"  name="file_supplier" value=<?php echo $value = ($id > 0) ? $row['file_supplier'] : ""; ?>>
             </div>
         </div>
         <!-- ***************-->
@@ -88,7 +81,6 @@
             <div class="col-75">
               <input type="text" name="file_loc"  value=<?php echo $value = ($id > 0) ? $row['file_loc'] : ""; ?>>
             </div>
-          <!--/fieldset-->
         </div>
         <!-- ***************-->
         <!-- FILE COL SEP   -->
@@ -98,9 +90,8 @@
               File Column separator
             </div>
             <div class="col-75">
-              <input type="text" name="file_loc"  value=<?php echo $value = ($id > 0) ? $row['file_col_sep'] : ""; ?>>
+              <input type="text" name="file_col_sep"  value=<?php echo $value = ($id > 0) ? $row['file_col_sep'] : ""; ?>>
             </div>
-          <!--/fieldset-->
         </div>
         <!-- ***************-->
         <!-- PROD COL  -->
@@ -110,7 +101,7 @@
               Product col.
             </div>
             <div class="col-75">
-              <input type="text" name="file_loc"  value=<?php echo $value = ($id > 0) ? $row['file_prod_col'] : ""; ?>>
+              <input type="text" name="file_prod_col"  value=<?php echo $value = ($id > 0) ? $row['file_prod_col'] : ""; ?>>
             </div>
           <!--/fieldset-->
         </div>
@@ -122,9 +113,8 @@
               Product Description col.
             </div>
             <div class="col-75">
-              <input type="text" name="file_loc"  value=<?php echo $value = ($id > 0) ? $row['file_prod_desc_col'] : ""; ?>>
+              <input type="text" name="file_prod_desc_col"  value=<?php echo $value = ($id > 0) ? $row['file_prod_desc_col'] : ""; ?>>
             </div>
-          <!--/fieldset-->
         </div>
         <!-- ***************-->
         <!-- EAN COL  -->
@@ -134,9 +124,8 @@
               EAN col.
             </div>
             <div class="col-75">
-              <input type="text" name="file_loc"  value=<?php echo $value = ($id > 0) ? $row['file_EAN_col'] : ""; ?>>
+              <input type="text" name="file_EAN_col"  value=<?php echo $value = ($id > 0) ? $row['file_EAN_col'] : ""; ?>>
             </div>
-          <!--/fieldset-->
         </div>
         <!-- ***************-->
         <!-- CATEGORY COL   -->
@@ -146,9 +135,8 @@
               Category col.
             </div>
             <div class="col-75">
-              <input type="text" name="file_loc"  value=<?php echo $value = ($id > 0) ? $row['file_category_col'] : ""; ?>>
+              <input type="text" name="file_category_col"  value=<?php echo $value = ($id > 0) ? $row['file_category_col'] : ""; ?>>
             </div>
-          <!--/fieldset-->
         </div>
         <!-- ***************-->
         <!-- SUB CATEGORY 1   -->
@@ -158,9 +146,8 @@
               Sub Category 1 col.
             </div>
             <div class="col-75">
-              <input type="text" name="file_loc"  value=<?php echo $value = ($id > 0) ? $row['file_subcat1_col'] : ""; ?>>
+              <input type="text" name="file_subcat1_col"  value=<?php echo $value = ($id > 0) ? $row['file_subcat1_col'] : ""; ?>>
             </div>
-          <!--/fieldset-->
         </div>
         <!-- ***************-->
         <!-- SUB CATEGORY 2   -->
@@ -170,9 +157,8 @@
               Sub Category 2 col.
             </div>
             <div class="col-75">
-              <input type="text" name="file_loc"  value=<?php echo $value = ($id > 0) ? $row['file_subcat2_col'] : ""; ?>>
+              <input type="text" name="file_subcat2_col"  value=<?php echo $value = ($id > 0) ? $row['file_subcat2_col'] : ""; ?>>
             </div>
-          <!--/fieldset-->
         </div>
         <!-- ***************-->
         <!-- PURCH PRICE COL   -->
@@ -182,9 +168,8 @@
               Purchase price col.
             </div>
             <div class="col-75">
-              <input type="text" name="file_loc"  value=<?php echo $value = ($id > 0) ? $row['file_purch_price_col'] : ""; ?>>
+              <input type="text" name="file_purch_price_col"  value=<?php echo $value = ($id > 0) ? $row['file_purch_price_col'] : ""; ?>>
             </div>
-          <!--/fieldset-->
         </div>
 
         <!-- ***************-->
