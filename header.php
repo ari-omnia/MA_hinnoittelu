@@ -39,7 +39,7 @@ Header
       <div style="flex-grow: 6">
         Käyttäjän tiedot
       </div -->
-      <div class="header-login">
+      <div  class="header-login" >
         <!--
         Here is the HTML login form.
         Notice that the "method" is set to "post" because the data we send is sensitive data.
@@ -57,7 +57,7 @@ Header
         }
         else if (isset($_SESSION['id'])) {
           echo '<form action="includes/logoutyp.php" method="post">
-            <button type="submit" class="button button--login" formaction="omientietojenhallinta.php" name="user-submit">Omat tiedot</button>
+            <button type="submit" class="button button--login" formaction="omientietojenhallinta.php" name="user-submit">Profile</button>
             <button type="submit" class="button button--login" name="login-submit">Logout</button>
           </form>';
         }
