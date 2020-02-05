@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS  priceupdate.users (
 us_id INT  AUTO_INCREMENT PRIMARY KEY,
 us_user VARCHAR(16) NOT NULL UNIQUE,
 us_password VARCHAR(128) NOT NULL,
-us_lastnamt VARCHAR(32) NOT NULL,
+us_lastname VARCHAR(32) NOT NULL,
 us_firstname VARCHAR(16) NOT NULL,
 us_email VARCHAR(64) NOT NULL,
 us_phone VARCHAR(32) NOT NULL
