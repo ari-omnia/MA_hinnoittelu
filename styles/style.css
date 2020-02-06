@@ -131,11 +131,11 @@ input[type='date'] {
 /* Function containetr */
 .function-container {
   display: flex;
-  background-color: #a4c4da;
+  background-color: #e3e3e3;
   /*width: 1350px;*/
   width: 95%;
   height: 60px;
-  border-radius: 25px;
+  border-radius: 5px;
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 15px;
@@ -183,11 +183,11 @@ input[type='date'] {
 /** List View  container styles**/
 .listcontainer {
   display: flex;
-  background-color: #a4c4da;
+  background-color: #e3e3e3;
   width: 95%;
   min-height: 200px;
   overflow: hidden;
-  border-radius: 25px;
+  border-radius: 5px;
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 15px;
@@ -196,7 +196,7 @@ input[type='date'] {
 }
 /* Button  delete in list container */
 .listcontainer-btn1 {
-  background-color: #a4c4da;
+  background-color: #e3e3e3;
   width: 1350px;
   height: 60px;
   border-radius: 25px;
@@ -233,10 +233,10 @@ tr:nth-child(even) {
 }
 /** Single record Column container styles**/
 .container {
-  background-color: #a4c4da;
+  background-color: #e3e3e3;
   width: 500px;
   height: auto;
-  border-radius: 25px;
+  border-radius: 5px;
   padding: 20px;
   margin-top: 15px;
   margin-bottom: 15px;
@@ -299,7 +299,7 @@ tr:nth-child(even) {
 .pagination-button {
   font-size: 14px;
   width: 80px;
-  background-color: #a4c4da;
+  background-color: #e3e3e3;
   color: white;
   padding: 12px 20px;
   border: none;
