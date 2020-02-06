@@ -112,6 +112,7 @@ input[type='date'] {
   align-items: center;
   background-color: #06212b;
   justify-content: center;
+  padding-bottom: 15px;
 }
 
 /* Style the navigation bar links */
@@ -126,6 +127,8 @@ input[type='date'] {
 .navbar a:hover {
   background-color: #9c1616;
   color: black;
+  padding-top: 5px;
+  padding-bottom: 15px;
 }
 
 /* Function containetr */
@@ -234,7 +237,7 @@ tr:nth-child(even) {
 /** Single record Column container styles**/
 .container {
   background-color: #e3e3e3;
-  width: 500px;
+  width: 700px;
   height: auto;
   border-radius: 5px;
   padding: 20px;
@@ -253,7 +256,7 @@ tr:nth-child(even) {
 .col-25 {
   float: left;
   width: 30%;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .col-75 {
