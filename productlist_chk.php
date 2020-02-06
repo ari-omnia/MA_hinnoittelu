@@ -67,7 +67,7 @@
     global $conn;
 
     $kentat = array ('file_supplier',	'file_supp_name',	'file_name',	'file_loc',	'file_col_sep',
-                    'file_prod_col',	'file_prod_desc_col',	'file_EAN_col',	'file_category_col',
+                    'file_mfg_col',	'file_prod_col',	'file_prod_desc_col',	'file_EAN_col',	'file_category_col',
                     'file_subcat1_col',	'file_subcat2_col',	'file_purch_price_col');
 
     $file_supplier = $_POST["file_supplier"];
@@ -75,6 +75,7 @@
     $file_name = $_POST["file_name"];
     $file_loc = $_POST["file_loc"];
     $file_col_sep	= $_POST["file_col_sep"];
+    $file_mfg_col = $_POST["file_mfg_col"];
     $file_prod_col = $_POST["file_prod_col"];
     $file_prod_desc_col	= $_POST["file_prod_desc_col"];
     $file_EAN_col	= $_POST["file_EAN_col"];
@@ -89,8 +90,8 @@
 
   	if ($mode == 'Add') {
       $sql = "INSERT INTO productlists($kentat) VALUES ('$file_supplier',	'$file_supp_name',	'$file_name',
-            '$file_loc',	'$file_col_sep',	'$file_prod_col',	'$file_prod_desc_col',	'$file_EAN_col',	'$file_category_col',
-            '$file_subcat1_col',	'$file_subcat2_col',	$file_purch_price_col)";
+            '$file_loc',	'$file_col_sep',	$file_mfg_col,	$file_prod_col,	$file_prod_desc_col,	$file_EAN_col,	$file_category_col,
+            $file_subcat1_col,	$file_subcat2_col,	$file_purch_price_col)";
     } elseif ($mode == 'Update') {
   	  $productlist_id = $_POST["productlist_id"];
       $sql = "UPDATE productlists SET
@@ -99,12 +100,13 @@
       file_name = '$file_name',
       file_loc = '$file_loc',
       file_col_sep	= '$file_col_sep',
-      file_prod_col = '$file_prod_col',
-      file_prod_desc_col	= '$file_prod_desc_col',
-      file_EAN_col	= '$file_EAN_col',
-      file_category_col	= '$file_category_col',
-      file_subcat1_col	= '$file_subcat1_col',
-      file_subcat2_col	= '$file_subcat2_col',
+      file_mfg_col = $file_mfg_col,
+      file_prod_col = $file_prod_col,
+      file_prod_desc_col	= $file_prod_desc_col,
+      file_EAN_col	= $file_EAN_col,
+      file_category_col	= $file_category_col,
+      file_subcat1_col	= $file_subcat1_col,
+      file_subcat2_col	= $file_subcat2_col,
       file_purch_price_col	= $file_purch_price_col
       WHERE productlist_id = $id";
       }
