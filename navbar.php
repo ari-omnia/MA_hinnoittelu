@@ -10,7 +10,7 @@
         <a href="groupingrules.php">Grouping Rules Setup</a>
       </div>
       <div>
-        <a href="groupingrules.php">Price Groups Setup</a>
+        <a href="pricegroups.php">Price Groups Setup</a>
       </div>
       <div>
         <a href="pricing view.php">Pricing View</a>
