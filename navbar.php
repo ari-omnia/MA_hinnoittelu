@@ -13,7 +13,7 @@
         <a href="pricegroups.php">Price Groups Setup</a>
       </div>
       <div>
-        <a href="pricing view.php">Pricing View</a>
+        <a href="pricings.php">Pricing View</a>
       </div>
       <div>
         <a href="settings.php">Settings</a>
