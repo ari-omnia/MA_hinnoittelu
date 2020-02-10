@@ -61,7 +61,8 @@ require "includes/logged.php";
                     <th>Id</th>
                     <th>Price grp code</th>
                     <th>Price grp description</th>
-                    <th>Price grp formula</th>
+                    <th>Add %</th>
+                    <th>Add fee</th>
                   </tr></thead>";
                 // output data of each row
             		while($row = mysqli_fetch_assoc($result)) {
@@ -73,7 +74,8 @@ require "includes/logged.php";
                             <td>".$row["prcgrp_id"]."</td>
                             <td>".$row["prcgrp_code"]."</td>
           				          <td>".$row["prcgrp_name"]."</td>
-                            <td>".$row["prcgrp_formula"]."</td>
+                            <td>".$row["prcgrp_add_percentage"]."</td>
+                            <td>".$row["prcgrp_add_fixedfee"]."</td>
           				  </form>
                   </tr>";
             		}
