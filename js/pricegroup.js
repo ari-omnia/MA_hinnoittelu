@@ -7,15 +7,21 @@ function validateForm() {
     return false;
   }
 
-  var fprcgrpname = document.forms[mainform]["prcgrpname"].value;
+  var fprcgrpname = document.forms[mainform]["prcgrp_name"].value;
   if (fprcgrpname == "") {
     alert("Group description is mandatory!");
     return false;
   }
 
-  var fprcgrpformula = document.forms[mainform]["prcgrp_formula"].value;
-  if (fprcgrpformula == "") {
-    alert("Price group formula is mandatory!");
+  var fprcgrpaddpercentage = document.forms[mainform]["prcgrp_add_percentage"].value;
+  if (fprcgrpaddpercentage == "") {
+    alert("Percentage is mandatory!");
+    return false;
+  }
+
+  var fprcgrpaddpfixedfee = document.forms[mainform]["prcgrp_add_fixedfee"].value;
+  if (fprcgrpaddpfixedfee == "") {
+    alert("Fixed fee is mandatory!");
     return false;
   }
 

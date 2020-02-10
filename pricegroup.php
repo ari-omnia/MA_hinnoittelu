@@ -60,18 +60,30 @@
             </div>
         </div>
         <!-- ***************-->
-        <!-- PRICE GROUP FORMULA     -->
+        <!-- PRICE GROUP ADD PERCENTAGE     -->
         <!-- ***************-->
         <div class="row">
             <div class="col-25">
-              Price group formula
+              Add %
             </div>
             <div class="col-75">
-              <input type="text" name="prcgrp_formula" value=<?php echo $value = ($id > 0) ? $row['prcgrp_formula'] : ""; ?>>
+              <input type="text" name="prcgrp_add_percentage" value=<?php echo $value = ($id > 0) ? $row['prcgrp_add_percentage'] : ""; ?>>
 			  <input type='hidden' name='id' value=<?php echo $id?>></td>
             </div>
         </div>
 
+        <!-- ***************-->
+        <!-- PRICE GROUP ADD FIXED FEE     -->
+        <!-- ***************-->
+        <div class="row">
+            <div class="col-25">
+              Add fee
+            </div>
+            <div class="col-75">
+              <input type="text" name="prcgrp_add_fixedfee" value=<?php echo $value = ($id > 0) ? $row['prcgrp_add_fixedfee'] : ""; ?>>
+			  <input type='hidden' name='id' value=<?php echo $id?>></td>
+            </div>
+        </div>
         <!-- ***************-->
         <!-- ***************-->
         <!--div class="row"-->

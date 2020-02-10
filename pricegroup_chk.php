@@ -66,24 +66,27 @@
     global $mode;
     global $conn;
 
-    $kentat = array ('prcgrp_code',	'prcgrp_name',	'prcgrp_formula');
+    $kentat = array ('prcgrp_code',	'prcgrp_name',	'prcgrp_add_percentage', 'prcgrp_add_fixedfee');
 
     $prcgrp_code = $_POST["prcgrp_code"];
     $prcgrp_name = $_POST["prcgrp_name"];
-    $prcgrp_formula = $_POST["prcgrp_formula"];
+    $prcgrp_add_percentage = $_POST["prcgrp_add_percentage"];
+    $prcgrp_add_fixedfee = $_POST["prcgrp_add_fixedfee"];
+
 
     // prepare
     $kentat = implode(",",$kentat);
   	$id = $_POST['id'];
 
   	if ($mode == 'Add') {
-      $sql = "INSERT INTO pricegroups($kentat) VALUES ('$prcgrp_code',	'$prcgrp_name',	'$prcgrp_formula')";
+      $sql = "INSERT INTO pricegroups($kentat) VALUES ('$prcgrp_code',	'$prcgrp_name',	'$prcgrp_add_percentage', '$prcgrp_add_fixedfee')";
     } elseif ($mode == 'Update') {
   	  $prcgrp_id = $_POST["prcgrp_id"];
       $sql = "UPDATE pricegroups SET
       prcgrp_code = '$prcgrp_code',
       prcgrp_name = '$prcgrp_name',
-      prcgrp_formula = '$prcgrp_formula'
+      prcgrp_add_percentage = '$prcgrp_add_percentage',
+      prcgrp_add_fixedfee = '$prcgrp_add_fixedfee'
       WHERE prcgrp_id = $id";
       }
       echo $sql;

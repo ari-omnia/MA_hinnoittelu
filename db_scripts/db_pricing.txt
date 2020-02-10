@@ -60,3 +60,7 @@ us_firstname VARCHAR(16) NOT NULL,
 us_email VARCHAR(64) NOT NULL,
 us_phone VARCHAR(32) NOT NULL
 ) ENGINE=INNODB;
+
+ALTER TABLE `pricegroups` DROP COLUMN prcgrp_formula;
+ALTER TABLE `pricegroups` ADD COLUMN `prcgrp_add_percentage` DECIMAL(4,2) NULL;
+ALTER TABLE `pricegroups` ADD COLUMN `prcgrp_add_fixedfee` DECIMAL(11,2) NULL;
