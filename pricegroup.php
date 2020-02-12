@@ -97,6 +97,7 @@
               }
               ?>
               <input class="button button--add" onclick="window.history.go(-1); return false;" type="submit" name="back" value="Cancel">
+              <div id="txtHint">Customer info will be listed here...</div>
           </div>
         </div>
       </form>
