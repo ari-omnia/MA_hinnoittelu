@@ -1,5 +1,6 @@
 <?php
   require "header.php";
+  require "fileHandler.php";
 ?>
 
     <!-- <div style="width:450px; height:350px; border-radius: 25px; padding:20px; background-color:grey ; margin-top: 15px; margin-bottom: 15px;margin-left: 20%; margin-right: auto;"-->
