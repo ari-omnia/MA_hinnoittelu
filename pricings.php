@@ -56,34 +56,34 @@ require "includes/logged.php";
               if(mysqli_num_rows($result) > 0) {
                 // output data columns
             		echo "<table class='listtable'>
-                  <thead><tr>
-					          <th>Val</th>
-                    <th>Id</th>
-                    <th>Price upd. file</th>
-                    <th>Prod. Manufacturer</th>
-                    <th>Product</th>
-                    <th>EAN code</th>
-                    <th>Category</th>
-                    <th>Sub cat. 1</th>
-                    <th>Sub cat. 2</th>
-                    <th>Pur. price</th>
+                    <thead><tr>
+    					<th>Val</th>
+                        <th>Id</th>
+                        <th>Price upd. file</th>
+                        <th>Prod. Manufacturer</th>
+                        <th>Product</th>
+                        <th>EAN code</th>
+                        <th>Category</th>
+                        <th>Sub cat. 1</th>
+                        <th>Sub cat. 2</th>
+                        <th>Pur. price</th>
                   </tr></thead>";
                 // output data of each row
             		while($row = mysqli_fetch_assoc($result)) {
-						$id = $row["prcupd_id"];
+						$id = $row["id"];
             			echo "<tr>
           				  <form name='pricingrow' action='pricing.php?mode=0' method='post'>
                             <td><input class='button button--rowselect' type='submit' name='update' value=''>
                             <input type='hidden' name='id' value=$id></td>
-                            <td>".$row["prcupd_id"]."</td>
-                            <td>".$row["prcupd_file"]."</td>
-          				          <td>".$row["prcupd_manufacturer"]."</td>
-                            <td>".$row["prcupd_prod"]."</td>
-                            <td>".$row["prcupd_EAN"]."</td>
-                            <td>".$row["prcupd_category"]."</td>
-                            <td>".$row["prcupd_subcat1"]."</td>
-                            <td>".$row["prcupd_subcat2"]."</td>
-                            <td>".$row["prcupd_purch_price"]."</td>
+                            <td>".$row["id"]."</td>
+                            <td>".$row["supplier_file"]."</td>
+          				    <td>".$row["manufacturer"]."</td>
+                            <td>".$row["product_code"]."</td>
+                            <td>".$row["ean_code"]."</td>
+                            <td>".$row["category"]."</td>
+                            <td>".$row["subcat1"]."</td>
+                            <td>".$row["subcat2"]."</td>
+                            <td>".$row["price_group_code"]."</td>
           				  </form>
                   </tr>";
             		}

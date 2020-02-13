@@ -56,24 +56,24 @@ require "includes/logged.php";
               if(mysqli_num_rows($result) > 0) {
                 // output data columns
             		echo "<table class='listtable'>
-                  <thead><tr>
-					          <th>Val</th>
-                    <th>Id</th>
-                    <th>Group code</th>
-                    <th>Group description</th>
-                    <th>Price group</th>
+                    <thead><tr>
+    					<th>Val</th>
+                        <th>Id</th>
+                        <th>Group code</th>
+                        <th>Group description</th>
+                        <th>Price group</th>
                   </tr></thead>";
                 // output data of each row
             		while($row = mysqli_fetch_assoc($result)) {
-						$id = $row["group_id"];
+						$id = $row["id"];
             			echo "<tr>
           				  <form name='groupinglistrow' action='groupingrule.php?mode=0' method='post'>
                             <td><input class='button button--rowselect' type='submit' name='update' value=''>
                             <input type='hidden' name='id' value=$id></td>
-                            <td>".$row["group_id"]."</td>
-                            <td>".$row["group_code"]."</td>
-          				          <td>".$row["group_desc"]."</td>
-                            <td>".$row["group_price_grp"]."</td>
+                            <td>".$row["id"]."</td>
+                            <td>".$row["grouping_code"]."</td>
+          				          <td>".$row["grouping_desc"]."</td>
+                            <td>".$row["price_group"]."</td>
           				  </form>
                   </tr>";
             		}

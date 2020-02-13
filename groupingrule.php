@@ -24,7 +24,7 @@
   	}
 
   	if ($id > 0) {
-        $sql = "SELECT * from groupingrules where group_id = $id";
+        $sql = "SELECT * from groupingrules where id = $id";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
   	}
@@ -44,7 +44,7 @@
               Group code
             </div>
             <div class="col-75">
-              <input type="text"  name="group_code" value=<?php echo $value = ($id > 0) ? $row['group_code'] : ""; ?>>
+              <input type="text"  name="grouping_code" value=<?php echo $value = ($id > 0) ? $row['grouping_code'] : ""; ?>>
             </div>
         </div>
         <!-- ***************-->
@@ -55,7 +55,7 @@
               Group description
             </div>
             <div class="col-75">
-              <input type="text" name="group_desc" value=<?php echo $value = ($id > 0) ? $row['group_desc'] : ""; ?>>
+              <input type="text" name="grouping_desc" value=<?php echo $value = ($id > 0) ? $row['grouping_desc'] : ""; ?>>
 			  <input type='hidden' name='id' value=<?php echo $id?>></td>
             </div>
         </div>
@@ -67,7 +67,7 @@
               Price group
             </div>
             <div class="col-75">
-              <input type="text" name="group_price_grp" value=<?php echo $value = ($id > 0) ? $row['group_price_grp'] : ""; ?>>
+              <input type="text" name="price_group" value=<?php echo $value = ($id > 0) ? $row['price_group'] : ""; ?>>
 			  <input type='hidden' name='id' value=<?php echo $id?>></td>
             </div>
         </div>
@@ -79,7 +79,7 @@
               Grouping rule selection
             </div>
             <div class="col-75">
-              <input type="text" name="group_selection_SQL"  value=<?php echo $value = ($id > 0) ? $row['group_selection_SQL'] : ""; ?>>
+              <input type="text" name="grouping_SQL_selection"  value=<?php echo $value = ($id > 0) ? $row['grouping_SQL_selection'] : ""; ?>>
             </div>
         </div>
         <!-- ***************-->
@@ -90,7 +90,7 @@
               Group selection other
             </div>
             <div class="col-75">
-              <input type="text" name="group_selection_other" maxlength="1" value=<?php echo $value = ($id > 0) ? $row['group_selection_other'] : ""; ?>>
+              <input type="text" name="grouping_selection_other" maxlength="1" value=<?php echo $value = ($id > 0) ? $row['grouping_selection_other'] : ""; ?>>
             </div>
         </div>
 

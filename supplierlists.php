@@ -5,7 +5,7 @@ require "includes/logged.php";
   //!! define how many results you want per page
   $results_per_page = 10;
   // find out the number of results stored in database
-  $sql='SELECT * FROM productlists';
+  $sql='SELECT * FROM supplierlists';
   $result = mysqli_query($conn, $sql);
   $number_of_results = mysqli_num_rows($result);
   // determine number of total pages available
@@ -25,7 +25,7 @@ require "includes/logged.php";
     <!-- Actual Page DIV -->
     <section class="function-container">
       <div>
-        <input class="button button--add" type="submit" value="Lisää" onclick="window.location.href='productlist.php?mode=1'">
+        <input class="button button--add" type="submit" value="Lisää" onclick="window.location.href='supplierlist.php?mode=1'">
         <?php
 		if(isset($_GET['return']))
         {
@@ -37,7 +37,7 @@ require "includes/logged.php";
            echo "Tietue poistettu onnistuneesti";
           }
           if($_GET['return'] == 'alreadyExists') {
-           echo "Product list löytyy jo kannasta";
+           echo "Supplier list löytyy jo kannasta";
           }
 	    	}
          ?>
@@ -51,31 +51,33 @@ require "includes/logged.php";
           <div class="col-25">
 
             <?php
-              $sql = "SELECT productlist_id, file_supplier, file_supp_name, file_name, file_loc from productlists LIMIT " . $this_page_first_result . "," .  $results_per_page;
+              $sql = "SELECT id, supplier_code, supplier_name, purchase_price_factor, supplier_file, file_path from supplierlists LIMIT " . $this_page_first_result . "," .  $results_per_page;
               $result = mysqli_query($conn, $sql);
               if(mysqli_num_rows($result) > 0) {
                 // output data columns
             		echo "<table class='listtable'>
-                  <thead><tr>
-					          <th>Val</th>
-                    <th>Id</th>
-                    <th>Supplier</th>
-                    <th>Sup. name</th>
-                    <th>File name</th>
-                    <th>File location</th>
-                  </tr></thead>";
+                    <thead><tr>
+    					<th>Val</th>
+                        <th>Id</th>
+                        <th>Supplier</th>
+                        <th>Sup. name</th>
+                        <th>Price factor</th>
+                        <th>File name</th>
+                        <th>File location</th>
+                    </tr></thead>";
                 // output data of each row
             		while($row = mysqli_fetch_assoc($result)) {
-						$id = $row["productlist_id"];
+						$id = $row["id"];
             			echo "<tr>
-          				  <form name='productlistrow' action='productlist.php?mode=0' method='post'>
+          				  <form name='supplierlistrow' action='supplierlist.php?mode=0' method='post'>
                             <td><input class='button button--rowselect' type='submit' name='update' value=''>
                             <input type='hidden' name='id' value=$id></td>
-                            <td>".$row["productlist_id"]."</td>
-          				          <td>".$row["file_supplier"]."</td>
-                            <td>".$row["file_supp_name"]."</td>
-                            <td>".$row["file_name"]."</td>
-                            <td>".$row["file_loc"]."</td>
+                            <td>".$row["id"]."</td>
+          				    <td>".$row["supplier_code"]."</td>
+                            <td>".$row["supplier_name"]."</td>
+                            <td>".$row["purchase_price_factor"]."</td>
+                            <td>".$row["supplier_file"]."</td>
+                            <td>".$row["file_path"]."</td>
           				  </form>
                   </tr>";
             		}

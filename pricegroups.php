@@ -56,26 +56,26 @@ require "includes/logged.php";
               if(mysqli_num_rows($result) > 0) {
                 // output data columns
             		echo "<table class='listtable'>
-                  <thead><tr>
-					          <th>Val</th>
-                    <th>Id</th>
-                    <th>Price grp code</th>
-                    <th>Price grp description</th>
-                    <th>Add %</th>
-                    <th>Add fee</th>
-                  </tr></thead>";
+                    <thead><tr>
+    					<th>Val</th>
+                        <th>Id</th>
+                        <th>Price grp code</th>
+                        <th>Price grp description</th>
+                        <th>Add %</th>
+                        <th>Add fee</th>
+                    </tr></thead>";
                 // output data of each row
             		while($row = mysqli_fetch_assoc($result)) {
-						$id = $row["prcgrp_id"];
+						$id = $row["id"];
             			echo "<tr>
           				  <form name='pricegrouprow' action='pricegroup.php?mode=0' method='post'>
                             <td><input class='button button--rowselect' type='submit' name='update' value=''>
                             <input type='hidden' name='id' value=$id></td>
-                            <td>".$row["prcgrp_id"]."</td>
-                            <td>".$row["prcgrp_code"]."</td>
-          				          <td>".$row["prcgrp_name"]."</td>
-                            <td>".$row["prcgrp_add_percentage"]."</td>
-                            <td>".$row["prcgrp_add_fixedfee"]."</td>
+                            <td>".$row["id"]."</td>
+                            <td>".$row["price_group_code"]."</td>
+          				          <td>".$row["price_group_desc"]."</td>
+                            <td>".$row["sales_price_factor"]."</td>
+                            <td>".$row["fixed_sum_to_price"]."</td>
           				  </form>
                   </tr>";
             		}

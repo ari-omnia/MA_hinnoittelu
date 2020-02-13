@@ -24,7 +24,7 @@
   	}
 
   	if ($id > 0) {
-        $sql = "SELECT * from pricegroups where prcgrp_id = $id";
+        $sql = "SELECT * from pricegroups where id = $id";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
   	}
@@ -44,7 +44,7 @@
               Price group code
             </div>
             <div class="col-75">
-              <input type="text"  name="prcgrp_code" value=<?php echo $value = ($id > 0) ? $row['prcgrp_code'] : ""; ?>>
+              <input type="text"  name="price_group_code" value=<?php echo $value = ($id > 0) ? $row['price_group_code'] : ""; ?>>
             </div>
         </div>
         <!-- ***************-->
@@ -55,7 +55,7 @@
               Price group description
             </div>
             <div class="col-75">
-              <input type="text" name="prcgrp_name" value=<?php echo $value = ($id > 0) ? $row['prcgrp_name'] : ""; ?>>
+              <input type="text" name="price_group_desc" value=<?php echo $value = ($id > 0) ? $row['price_group_desc'] : ""; ?>>
 			  <input type='hidden' name='id' value=<?php echo $id?>></td>
             </div>
         </div>
@@ -67,7 +67,7 @@
               Add %
             </div>
             <div class="col-75">
-              <input type="text" name="prcgrp_add_percentage" value=<?php echo $value = ($id > 0) ? $row['prcgrp_add_percentage'] : ""; ?>>
+              <input type="text" name="sales_price_factor" value=<?php echo $value = ($id > 0) ? $row['sales_price_factor'] : ""; ?>>
 			  <input type='hidden' name='id' value=<?php echo $id?>></td>
             </div>
         </div>
@@ -80,7 +80,7 @@
               Add fee
             </div>
             <div class="col-75">
-              <input type="text" name="prcgrp_add_fixedfee" value=<?php echo $value = ($id > 0) ? $row['prcgrp_add_fixedfee'] : ""; ?>>
+              <input type="text" name="fixed_sum_to_price" value=<?php echo $value = ($id > 0) ? $row['fixed_sum_to_price'] : ""; ?>>
 			  <input type='hidden' name='id' value=<?php echo $id?>></td>
             </div>
         </div>

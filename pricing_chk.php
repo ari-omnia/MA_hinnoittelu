@@ -47,7 +47,7 @@
  function checkifItemExist($conn) {
    //$jasenlaji = strip_tags($_POST["jasenlaji"]);
    //$sql = "SELECT jasenlaji from jasenlaji where jasenlaji like ".'"'."%".$_POST['jasenlaji']."%".'"';
-   $sql = "SELECT * from pricings where prcupd_code = $POST[prcupd_code]";
+   $sql = "SELECT * from pricings where product_code = $POST[product_code]";
 
 
    $result = mysqli_query($conn, $sql);
@@ -66,28 +66,62 @@
     global $mode;
     global $conn;
 
-    $kentat = array ('prcupd_file',	'prcupd_manufacturer',	prcupd_supplier,	'prcupd_prod',
-    'prcupd_EAN',	'prcupd_category',	'prcupd_subcat1',		'prcupd_subcat2', prcupd_purch_price);
+    $kentat = array ('supplier_file', 'manufacturer', 'supplier_code', 'product_code', 'product_desc',
+    'ean_code',	'category',	'subcat1', 'subcat2', 'supplier_purchase_price', 'new_purchase_price',
+    'grouping_code', 'price_group_code');
 
     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    $prcgrp_code = $_POST["prcgrp_code"];
-    $prcgrp_name = $_POST["prcgrp_name"];
-    $prcgrp_formula = $_POST["prcgrp_formula"];
+    $supplier_file = $_POST["supplier_file"];
+    $manufacturer = $_POST["manufacturer"];
+    $supplier_code = $_POST["supplier_code"];
+    $product_code = $_POST["product_code"];
+    $product_desc = $_POST["product_desc"];
+    $ean_code = $_POST["ean_code"];
+    $category = $_POST["category"];
+    $subcat1 = $_POST["subcat1"];
+    $subcat2 = $_POST["subcat2"];
+    $supplier_purchase_price = $_POST["supplier_purchase_price"];
+    $new_purchase_price = $_POST["new_purchase_price"];
+    $grouping_code= $_POST["grouping_code"];
+    $price_group_code = $_POST["price_group_code"];
 
     // prepare
     $kentat = implode(",",$kentat);
   	$id = $_POST['id'];
 
   	if ($mode == 'Add') {
-      $sql = "INSERT INTO pricegroups($kentat) VALUES ('$prcgrp_code',	'$prcgrp_name',	'$prcgrp_formula')";
+      $sql = "INSERT INTO pricing($kentat)
+      VALUES ('$supplier_file',
+          '$manufacturer',
+          '$supplier_code',
+          '$product_code',
+          '$product_desc',
+          '$ean_code',
+          '$category',
+          '$subcat1',
+          '$subcat2',
+          '$supplier_purchase_price',
+          '$new_purchase_price',
+          '$grouping_code',
+          '$price_group_code')";
     } elseif ($mode == 'Update') {
-  	  $prcgrp_id = $_POST["prcgrp_id"];
-      $sql = "UPDATE pricegroups SET
-      prcgrp_code = '$prcgrp_code',
-      prcgrp_name = '$prcgrp_name',
-      prcgrp_formula = '$prcgrp_formula'
-      WHERE prcgrp_id = $id";
+  	  $id = $_POST["id"];
+      $sql = "UPDATE pricing SET
+      supplier_file = '$supplier_file',
+      manufacturer = '$manufacturer',
+      supplier_code = '$supplier_code',
+      product_code = '$product_code',
+      product_desc = '$product_desc',
+      ean_code = '$ean_code',
+      category = '$category',
+      subcat1 = '$subcat1',
+      subcat2 = '$subcat2',
+      supplier_purchase_price = '$supplier_purchase_price',
+      new_purchase_price = '$new_purchase_price',
+      grouping_code = '$grouping_code',
+      price_group_code = '$price_group_code'
+      WHERE id = $id";
       }
       echo $sql;
   return $sql;
@@ -96,8 +130,8 @@
 
   //  DELETE
   function itemDelete() {
-    $prcgrp_id = $_POST['id'];
-    $sql = "DELETE FROM pricegroups WHERE prcgrp_id = '$prcgrp_id'";
+    $id = $_POST['id'];
+    $sql = "DELETE FROM pricegroups WHERE id = 'id'";
     return $sql;
   }
 

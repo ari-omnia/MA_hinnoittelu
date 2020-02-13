@@ -47,7 +47,7 @@
  function checkifItemExist($conn) {
    //$jasenlaji = strip_tags($_POST["jasenlaji"]);
    //$sql = "SELECT jasenlaji from jasenlaji where jasenlaji like ".'"'."%".$_POST['jasenlaji']."%".'"';
-   $sql = "SELECT * from groupingrules where group_code = $POST[group_code]";
+   $sql = "SELECT * from groupingrules where grouping_code = $POST[grouping_code]";
 
 
    $result = mysqli_query($conn, $sql);
@@ -66,30 +66,30 @@
     global $mode;
     global $conn;
 
-    $kentat = array ('group_code',	'group_desc',	'group_price_grp',	'group_selection_SQL',	'group_selection_other');
+    $kentat = array ('grouping_code',	'grouping_desc',	'price_group',	'grouping_SQL_selection',	'grouping_selection_other');
 
-    $group_code = $_POST["group_code"];
-    $group_desc = $_POST["group_desc"];
-    $group_price_grp = $_POST["group_price_grp"];
-    $group_selection_SQL = $_POST["group_selection_SQL"];
-    $group_selection_other	= $_POST["group_selection_other"];
+    $grouping_code = $_POST["grouping_code"];
+    $grouping_desc = $_POST["grouping_desc"];
+    $price_group = $_POST["price_group"];
+    $grouping_SQL_selection = $_POST["grouping_SQL_selection"];
+    $grouping_selection_other	= $_POST["grouping_selection_other"];
 
     // prepare
     $kentat = implode(",",$kentat);
   	$id = $_POST['id'];
 
   	if ($mode == 'Add') {
-      $sql = "INSERT INTO groupingrules($kentat) VALUES ('$group_code',	'$group_desc',	'$group_price_grp',
-            '$group_selection_SQL',	'$group_selection_other')";
+      $sql = "INSERT INTO groupingrules($kentat) VALUES ('$grouping_code',	'$grouping_desc',	'$price_group',
+            '$grouping_SQL_selection',	'$grouping_selection_other')";
     } elseif ($mode == 'Update') {
-  	  $group_id = $_POST["group_id"];
+  	  $id = $_POST["id"];
       $sql = "UPDATE groupingrules SET
-      group_code = '$group_code',
-      group_desc = '$group_desc',
-      group_price_grp = '$group_price_grp',
-      group_selection_SQL = '$group_selection_SQL',
-      group_selection_other	= '$group_selection_other'
-      WHERE group_id = $id";
+      grouping_code = '$grouping_code',
+      grouping_desc = '$grouping_desc',
+      price_group = '$price_group',
+      grouping_SQL_selection = '$grouping_SQL_selection',
+      grouping_selection_other	= '$grouping_selection_other'
+      WHERE id = $id";
       }
       echo $sql;
   return $sql;
@@ -98,8 +98,8 @@
 
   //  DELETE
   function itemDelete() {
-    $group_id = $_POST['id'];
-    $sql = "DELETE FROM groupingrules WHERE group_id = '$group_id'";
+    $id = $_POST['id'];
+    $sql = "DELETE FROM groupingrules WHERE id = '$id'";
     return $sql;
   }
 

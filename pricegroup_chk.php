@@ -47,7 +47,7 @@
  function checkifItemExist($conn) {
    //$jasenlaji = strip_tags($_POST["jasenlaji"]);
    //$sql = "SELECT jasenlaji from jasenlaji where jasenlaji like ".'"'."%".$_POST['jasenlaji']."%".'"';
-   $sql = "SELECT * from pricegroups where prcgrp_code = $POST[prcgrp_code]";
+   $sql = "SELECT * from pricegroups where price_group_code = $POST[price_group_code]";
 
 
    $result = mysqli_query($conn, $sql);
@@ -66,12 +66,12 @@
     global $mode;
     global $conn;
 
-    $kentat = array ('prcgrp_code',	'prcgrp_name',	'prcgrp_add_percentage', 'prcgrp_add_fixedfee');
+    $kentat = array ('price_group_code',	'price_group_desc',	'sales_price_factor', 'fixed_sum_to_price');
 
-    $prcgrp_code = $_POST["prcgrp_code"];
-    $prcgrp_name = $_POST["prcgrp_name"];
-    $prcgrp_add_percentage = $_POST["prcgrp_add_percentage"];
-    $prcgrp_add_fixedfee = $_POST["prcgrp_add_fixedfee"];
+    $price_group_code = $_POST["price_group_code"];
+    $price_group_desc = $_POST["price_group_desc"];
+    $sales_price_factor = $_POST["sales_price_factor"];
+    $fixed_sum_to_price = $_POST["fixed_sum_to_price"];
 
 
     // prepare
@@ -79,15 +79,15 @@
   	$id = $_POST['id'];
 
   	if ($mode == 'Add') {
-      $sql = "INSERT INTO pricegroups($kentat) VALUES ('$prcgrp_code',	'$prcgrp_name',	'$prcgrp_add_percentage', '$prcgrp_add_fixedfee')";
+      $sql = "INSERT INTO pricegroups($kentat) VALUES ('$price_group_code',	'$price_group_desc',	'$sales_price_factor', '$fixed_sum_to_price')";
     } elseif ($mode == 'Update') {
-  	  $prcgrp_id = $_POST["prcgrp_id"];
+  	  $id = $_POST["id"];
       $sql = "UPDATE pricegroups SET
-      prcgrp_code = '$prcgrp_code',
-      prcgrp_name = '$prcgrp_name',
-      prcgrp_add_percentage = '$prcgrp_add_percentage',
-      prcgrp_add_fixedfee = '$prcgrp_add_fixedfee'
-      WHERE prcgrp_id = $id";
+      price_group_code = '$price_group_code',
+      price_group_desc = '$price_group_desc',
+      sales_price_factor = '$sales_price_factor',
+      fixed_sum_to_price = '$fixed_sum_to_price'
+      WHERE id = $id";
       }
       echo $sql;
   return $sql;
@@ -96,8 +96,8 @@
 
   //  DELETE
   function itemDelete() {
-    $prcgrp_id = $_POST['id'];
-    $sql = "DELETE FROM pricegroups WHERE prcgrp_id = '$prcgrp_id'";
+    $id = $_POST['id'];
+    $sql = "DELETE FROM pricegroups WHERE id = '$id'";
     return $sql;
   }
 
