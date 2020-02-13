@@ -1,66 +1,84 @@
 CREATE DATABASE IF NOT EXISTS priceupdate;
 
-CREATE TABLE IF NOT EXISTS  priceupdate.productlists (
-productlist_id INT  AUTO_INCREMENT PRIMARY KEY,
-file_supplier int,
-file_supp_name varchar(64),
-file_name varchar(32),
-file_loc varchar(256),
-file_col_sep char(1),
-file_mfg_col int(2),
-file_prod_col int(2),
-file_prod_desc_col int(2),
-file_EAN_col int(2),
-file_category_col int(2),
-file_subcat1_col int(2),
-file_subcat2_col int(2),
-file_purch_price_col int(2)
+CREATE TABLE IF NOT EXISTS  priceupdate.supplierlists (
+id INT  AUTO_INCREMENT PRIMARY KEY,
+supplier_code int,
+supplier_name varchar(64),
+purchase_price_factor decimal(3,2),
+supplier_file varchar(32),
+data_start_row int(1),
+file_path varchar(256),
+file_column_separator char(1),
+column_manufacturer int(2),
+column_product_code int(2),
+column_product_desc int(2),
+column_ean_code int(2),
+column_category int(2),
+column_subcat1 int(2),
+column_subcat2 int(2),
+column_purchase_price int(2)
 ) ENGINE=INNODB;
 
 
 CREATE TABLE IF NOT EXISTS  priceupdate.groupingrules (
-group_id INT  AUTO_INCREMENT PRIMARY KEY,
-group_code varchar(16),
-group_desc varchar(16),
-group_price_grp varchar(16),
-group_selection_SQL varchar(256),
-group_selection_other varchar(256)
+id INT  AUTO_INCREMENT PRIMARY KEY,
+grouping_code varchar(16),
+grouping_desc varchar(16),
+price_group varchar(16),
+grouping_SQL_selection varchar(256),
+grouping_selection_other varchar(256)
 ) ENGINE=INNODB;
 
 
 CREATE TABLE IF NOT EXISTS priceupdate.pricegroups (
-prcgrp_id INT  AUTO_INCREMENT PRIMARY KEY,
-prcgrp_code varchar(16),
-prcgrp_name varchar(32),
-prcgrp_formula varchar(256)
+id INT  AUTO_INCREMENT PRIMARY KEY,
+price_group_code varchar(16),
+price_group_desc varchar(32),
+sales_price_factor decimal(3,2),
+fixed_sum_to_price decimal(11,2)
 ) ENGINE=INNODB;
 
 
-CREATE TABLE IF NOT EXISTS priceupdate.pricing (
-prcupd_id INT  AUTO_INCREMENT PRIMARY KEY,
-prcupd_file varchar(32),
-prcupd_manufacturer varchar(32),
-prcupd_supplier int,
-prcupd_prod varchar(32),
-prcupd_EAN varchar(32),
-prcupd_category varchar(32),
-prcupd_subcat1 varchar(32),
-prcupd_subcat2 varchar(32),
-prcupd_purch_price decimal(11,2),
-prcupd_prcgrp_code varchar(16),
-prcupd_time_stamp timestamp
+CCREATE TABLE IF NOT EXISTS priceupdate.pricing (
+id INT  AUTO_INCREMENT PRIMARY KEY,
+supplier_file varchar(32),
+manufacturer varchar(32),
+supplier_code int,
+product_code varchar(32),
+product_desc varchar(64),
+ean_code varchar(32),
+category varchar(32),
+subcat1 varchar(32),
+subcat2 varchar(32),
+supplier_purchase_price decimal(11,2),
+new_purchase_price decimal(11,2),
+grouping_code varchar(16),
+price_group_code varchar(16),
+time_stamp timestamp
+) ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS priceupdate.unifiedlists (
+id INT  AUTO_INCREMENT PRIMARY KEY,
+supplier_file varchar(32),
+manufacturer varchar(32),
+supplier_code int,
+product_code varchar(32),
+product_desc varchar(64),
+ean_code varchar(32),
+category varchar(32),
+subcat1 varchar(32),
+subcat2 varchar(32),
+supplier_purchase_price decimal(11,2),
+price_group_code varchar(16),
+time_stamp timestamp
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS  priceupdate.users (
-us_id INT  AUTO_INCREMENT PRIMARY KEY,
-us_user VARCHAR(16) NOT NULL UNIQUE,
-us_password VARCHAR(128) NOT NULL,
-us_lastnamt VARCHAR(32) NOT NULL,
-us_firstname VARCHAR(16) NOT NULL,
-us_email VARCHAR(64) NOT NULL,
-us_phone VARCHAR(32) NOT NULL
+id INT  AUTO_INCREMENT PRIMARY KEY,
+user VARCHAR(16) NOT NULL UNIQUE,
+password VARCHAR(128) NOT NULL,
+lastname VARCHAR(32) NOT NULL,
+firstname VARCHAR(16) NOT NULL,
+email VARCHAR(64) NOT NULL,
+phone VARCHAR(32) NOT NULL
 ) ENGINE=INNODB;
-
-ALTER TABLE `pricegroups` DROP COLUMN prcgrp_formula;
-ALTER TABLE `pricegroups` ADD COLUMN `prcgrp_add_percentage` DECIMAL(4,2) NULL;
-ALTER TABLE `pricegroups` ADD COLUMN `prcgrp_add_fixedfee` DECIMAL(11,2) NULL;

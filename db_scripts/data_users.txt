@@ -1,4 +1,4 @@
 INSERT INTO users
-  (`us_user`, `us_password`, `us_lastname`, `us_firstname`, `us_email`, `us_email`)
+  (`user`, `password`, `lastname`, `firstname`, `email`, `phone`)
 VALUES
 ('ari', '$2b$10$.3luwjrixIUykj5mV9N6mOxpGgaaz82ZTyz5df1gXltFL4./tvtWq', 'Testinen', 'Tapio', 'tapio.testinen@gmail.com', '0401234567');

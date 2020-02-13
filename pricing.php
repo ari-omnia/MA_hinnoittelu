@@ -24,7 +24,7 @@
   	}
 
   	if ($id > 0) {
-        $sql = "SELECT * from pricing where prcupd_id = $id";
+        $sql = "SELECT * from pricing where id = $id";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
   	}
@@ -37,14 +37,14 @@
         <legend><?php echo $legend = ($mode == "1") ? "Add pricing" : "Update"; ?></legend>
 
         <!-- ***************-->
-        <!-- PRICE GROUP FILE      -->
+        <!-- SUPPLIER FILE      -->
         <!-- ***************-->
         <div class="row">
             <div class="col-25">
               Pricing file
             </div>
             <div class="col-75">
-              <input type="text"  name="prcupd_file" value=<?php echo $value = ($id > 0) ? $row['prcupd_file'] : ""; ?>>
+              <input type="text"  name="supplier_file" value=<?php echo $value = ($id > 0) ? $row['supplier_file'] : ""; ?>>
             </div>
         </div>
         <!-- ***************-->
@@ -55,19 +55,43 @@
               Manufacturer
             </div>
             <div class="col-75">
-              <input type="text" name="prcupd_manufacturer" value=<?php echo $value = ($id > 0) ? $row['prcupd_manufacturer'] : ""; ?>>
+              <input type="text" name="manufacturer" value=<?php echo $value = ($id > 0) ? $row['manufacturer'] : ""; ?>>
 			  <input type='hidden' name='id' value=<?php echo $id?>></td>
             </div>
         </div>
         <!-- ***************-->
-        <!-- PRODUCT        -->
+        <!-- SUPLLIER      -->
+        <!-- ***************-->
+        <div class="row">
+            <div class="col-25">
+              Supplier
+            </div>
+            <div class="col-75">
+              <input type="text" name="supplier_code" value=<?php echo $value = ($id > 0) ? $row['supplier_code'] : ""; ?>>
+			  <input type='hidden' name='id' value=<?php echo $id?>></td>
+            </div>
+        </div>
+        <!-- ***************-->
+        <!-- PRODUCT CODE       -->
         <!-- ***************-->
         <div class="row">
             <div class="col-25">
               Product
             </div>
             <div class="col-75">
-              <input type="text" name="prcupd_prod" value=<?php echo $value = ($id > 0) ? $row['prcupd_prod'] : ""; ?>>
+              <input type="text" name="product_code" value=<?php echo $value = ($id > 0) ? $row['product_code'] : ""; ?>>
+			  <input type='hidden' name='id' value=<?php echo $id?>></td>
+            </div>
+        </div>
+        <!-- ***************-->
+        <!-- PRODUCT DESCRIPTION     -->
+        <!-- ***************-->
+        <div class="row">
+            <div class="col-25">
+              Description
+            </div>
+            <div class="col-75">
+              <input type="text" name="product_desc" value=<?php echo $value = ($id > 0) ? $row['product_desc'] : ""; ?>>
 			  <input type='hidden' name='id' value=<?php echo $id?>></td>
             </div>
         </div>
@@ -79,7 +103,7 @@
               EAN code
             </div>
             <div class="col-75">
-              <input type="text" name="prcupd_EAN" value=<?php echo $value = ($id > 0) ? $row['prcupd_EAN'] : ""; ?>>
+              <input type="text" name="ean_code" value=<?php echo $value = ($id > 0) ? $row['ean_code'] : ""; ?>>
             </div>
         </div>
         <!-- ***************-->
@@ -90,7 +114,7 @@
               Category
             </div>
             <div class="col-75">
-              <input type="text" name="prcupd_category" value=<?php echo $value = ($id > 0) ? $row['prcupd_category'] : ""; ?>>
+              <input type="text" name="category" value=<?php echo $value = ($id > 0) ? $row['category'] : ""; ?>>
             </div>
         </div>
         <!-- ***************-->
@@ -101,7 +125,7 @@
               Sub cat. 1
             </div>
             <div class="col-75">
-              <input type="text" name="prcupd_subcat1" value=<?php echo $value = ($id > 0) ? $row['prcupd_subcat1'] : ""; ?>>
+              <input type="text" name="subcat1" value=<?php echo $value = ($id > 0) ? $row['subcat1'] : ""; ?>>
             </div>
         </div>
         <!-- ***************-->
@@ -112,21 +136,64 @@
               Sub cat. 2
             </div>
             <div class="col-75">
-              <input type="text" name="prcupd_subcat2" value=<?php echo $value = ($id > 0) ? $row['prcupd_subcat2'] : ""; ?>>
+              <input type="text" name="subcat2" value=<?php echo $value = ($id > 0) ? $row['subcat2'] : ""; ?>>
             </div>
         </div>
         <!-- ***************-->
-        <!-- PURCH PRICE       -->
+        <!-- ORIGINAL PURCH PRICE       -->
         <!-- ***************-->
         <div class="row">
             <div class="col-25">
-              Purchase price
+              Supplier price
             </div>
             <div class="col-75">
-              <input type="text" name="prcupd_purch_price" value=<?php echo $value = ($id > 0) ? $row['prcupd_purch_price'] : ""; ?>>
+              <input type="text" name="supplier_purchase_price" value=<?php echo $value = ($id > 0) ? $row['supplier_purchase_price'] : ""; ?>>
             </div>
         </div>
-
+        <!-- ***************-->
+        <!-- NEW PURCH PRICE       -->
+        <!-- ***************-->
+        <div class="row">
+            <div class="col-25">
+              New price
+            </div>
+            <div class="col-75">
+              <input type="text" name="new_purchase_price" value=<?php echo $value = ($id > 0) ? $row['new_purchase_price'] : ""; ?>>
+            </div>
+        </div>
+        <!-- ***************-->
+        <!-- SALES PRICE       -->
+        <!-- ***************-->
+        <div class="row">
+            <div class="col-25">
+              Sales price
+            </div>
+            <div class="col-75">
+              <input type="text" name="sales_price" value=<?php echo $value = ($id > 0) ? $row['sales_price'] : ""; ?>>
+            </div>
+        </div>
+        <!-- ***************-->
+        <!-- GROUPING CODE       -->
+        <!-- ***************-->
+        <div class="row">
+            <div class="col-25">
+              Groupin code
+            </div>
+            <div class="col-75">
+              <input type="text" name="grouping_code" value=<?php echo $value = ($id > 0) ? $row['grouping_code'] : ""; ?>>
+            </div>
+        </div>
+        <!-- ***************-->
+        <!-- PRICE GROUP CODE       -->
+        <!-- ***************-->
+        <div class="row">
+            <div class="col-25">
+              Price group
+            </div>
+            <div class="col-75">
+              <input type="text" name="price_group_code" value=<?php echo $value = ($id > 0) ? $row['price_group_code'] : ""; ?>>
+            </div>
+        </div>
         <!-- ***************-->
         <!-- ***************-->
         <!--div class="row"-->

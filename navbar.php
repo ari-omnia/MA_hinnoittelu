@@ -4,7 +4,7 @@
     <div class="navbar">
 
       <div>
-        <a href="productlists.php">Productfiles Setup</a>
+        <a href="supplierlists.php">Supplier Setup</a>
       </div>
       <div>
         <a href="groupingrules.php">Grouping Rules Setup</a>

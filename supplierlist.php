@@ -2,7 +2,7 @@
     require "header.php";
   ?>
 
-  <script src="js/productlist.js"></script>
+  <script src="js/supplierlist.js"></script>
   <script src="js/ypjslib.js"></script>
 
   <?php
@@ -24,7 +24,7 @@
   	}
 
   	if ($id > 0) {
-        $sql = "SELECT * from productlists where productlist_id = $id";
+        $sql = "SELECT * from supplierlists where id = $id";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
   	}
@@ -33,7 +33,7 @@
 
     <!-- <div style="width:450px; height:350px; border-radius: 25px; padding:20px; background-color:grey ; margin-top: 15px; margin-bottom: 15px;margin-left: 20%; margin-right: auto;"-->
     <div class="container">
-      <form name="productlist" action="productlist_chk.php" method="post">
+      <form name="supplierlist" action="supplierlist_chk.php" method="post">
         <legend><?php echo $legend = ($mode == "1") ? "Add supplier file" : "Update"; ?></legend>
 
         <!-- ***************-->
@@ -44,7 +44,7 @@
               Supplier
             </div>
             <div class="col-75">
-              <input type="text"  name="file_supplier" value=<?php echo $value = ($id > 0) ? $row['file_supplier'] : ""; ?>>
+              <input type="text"  name="supplier_code" value=<?php echo $value = ($id > 0) ? $row['supplier_code'] : ""; ?>>
             </div>
         </div>
         <!-- ***************-->
@@ -55,7 +55,18 @@
               Supllier name
             </div>
             <div class="col-75">
-              <input type="text" name="file_supp_name" value=<?php echo $value = ($id > 0) ? $row['file_supp_name'] : ""; ?>>
+              <input type="text" name="supplier_name" value=<?php echo $value = ($id > 0) ? $row['supplier_name'] : ""; ?>>
+			  <input type='hidden' name='id' value=<?php echo $id?>></td>
+            </div>
+        </div><!-- ***************-->
+        <!-- PURCHASE PRICE FACTOR -->
+        <!-- ***************-->
+        <div class="row">
+            <div class="col-25">
+              Price factor
+            </div>
+            <div class="col-75">
+              <input type="text" name="purchase_price_factor" value=<?php echo $value = ($id > 0) ? $row['purchase_price_factor'] : ""; ?>>
 			  <input type='hidden' name='id' value=<?php echo $id?>></td>
             </div>
         </div>
@@ -67,7 +78,19 @@
               File name
             </div>
             <div class="col-75">
-              <input type="text" name="file_name" value=<?php echo $value = ($id > 0) ? $row['file_name'] : ""; ?>>
+              <input type="text" name="supplier_file" value=<?php echo $value = ($id > 0) ? $row['supplier_file'] : ""; ?>>
+			  <input type='hidden' name='id' value=<?php echo $id?>></td>
+            </div>
+        </div>
+        <!-- ***************-->
+        <!-- FILE DATA STARTGIN ROW      -->
+        <!-- ***************-->
+        <div class="row">
+            <div class="col-25">
+              Data start
+            </div>
+            <div class="col-75">
+              <input type="text" name="data_start_row" value=<?php echo $value = ($id > 0) ? $row['data_start_row'] : ""; ?>>
 			  <input type='hidden' name='id' value=<?php echo $id?>></td>
             </div>
         </div>
@@ -79,7 +102,7 @@
               File location
             </div>
             <div class="col-75">
-              <input type="text" name="file_loc"  value=<?php echo $value = ($id > 0) ? $row['file_loc'] : ""; ?>>
+              <input type="text" name="file_path"  value=<?php echo $value = ($id > 0) ? $row['file_path'] : ""; ?>>
             </div>
         </div>
         <!-- ***************-->
@@ -90,7 +113,7 @@
               File Column separator
             </div>
             <div class="col-75">
-              <input type="text" name="file_col_sep" maxlength="1" value=<?php echo $value = ($id > 0) ? $row['file_col_sep'] : ""; ?>>
+              <input type="text" name="file_column_separator" maxlength="1" value=<?php echo $value = ($id > 0) ? $row['file_column_separator'] : ""; ?>>
             </div>
         </div>
         <!-- ***************-->
@@ -101,7 +124,7 @@
               Manufacturer col.
             </div>
             <div class="col-75">
-              <input type="text" name="file_mfg_col" maxlength="2" value=<?php echo $value = ($id > 0) ? $row['file_mfg_col'] : ""; ?>>
+              <input type="text" name="column_manufacturer" maxlength="2" value=<?php echo $value = ($id > 0) ? $row['column_manufacturer'] : ""; ?>>
             </div>
           <!--/fieldset-->
         </div>
@@ -113,7 +136,7 @@
               Product col.
             </div>
             <div class="col-75">
-              <input type="text" name="file_prod_col"  maxlength="2" value=<?php echo $value = ($id > 0) ? $row['file_prod_col'] : ""; ?>>
+              <input type="text" name="column_product_code"  maxlength="2" value=<?php echo $value = ($id > 0) ? $row['column_product_code'] : ""; ?>>
             </div>
           <!--/fieldset-->
         </div>
@@ -125,7 +148,7 @@
               Product Description col.
             </div>
             <div class="col-75">
-              <input type="text" name="file_prod_desc_col" maxlength="2" value=<?php echo $value = ($id > 0) ? $row['file_prod_desc_col'] : ""; ?>>
+              <input type="text" name="column_product_desc" maxlength="2" value=<?php echo $value = ($id > 0) ? $row['column_product_desc'] : ""; ?>>
             </div>
         </div>
         <!-- ***************-->
@@ -136,7 +159,7 @@
               EAN col.
             </div>
             <div class="col-75">
-              <input type="text" name="file_EAN_col" maxlength="2" value=<?php echo $value = ($id > 0) ? $row['file_EAN_col'] : ""; ?>>
+              <input type="text" name="column_ean_code" maxlength="2" value=<?php echo $value = ($id > 0) ? $row['column_ean_code'] : ""; ?>>
             </div>
         </div>
         <!-- ***************-->
@@ -147,7 +170,7 @@
               Category col.
             </div>
             <div class="col-75">
-              <input type="text" name="file_category_col" maxlength="2" value=<?php echo $value = ($id > 0) ? $row['file_category_col'] : ""; ?>>
+              <input type="text" name="column_category" maxlength="2" value=<?php echo $value = ($id > 0) ? $row['column_category'] : ""; ?>>
             </div>
         </div>
         <!-- ***************-->
@@ -158,7 +181,7 @@
               Sub Category 1 col.
             </div>
             <div class="col-75">
-              <input type="text" name="file_subcat1_col" maxlength="2" value=<?php echo $value = ($id > 0) ? $row['file_subcat1_col'] : ""; ?>>
+              <input type="text" name="column_subcat1" maxlength="2" value=<?php echo $value = ($id > 0) ? $row['column_subcat1'] : ""; ?>>
             </div>
         </div>
         <!-- ***************-->
@@ -169,7 +192,7 @@
               Sub Category 2 col.
             </div>
             <div class="col-75">
-              <input type="text" name="file_subcat2_col" maxlength="2" value=<?php echo $value = ($id > 0) ? $row['file_subcat2_col'] : ""; ?>>
+              <input type="text" name="column_subcat2" maxlength="2" value=<?php echo $value = ($id > 0) ? $row['column_subcat2'] : ""; ?>>
             </div>
         </div>
         <!-- ***************-->
@@ -180,7 +203,7 @@
               Purchase price col.
             </div>
             <div class="col-75">
-              <input type="text" name="file_purch_price_col" maxlength="2" value=<?php echo $value = ($id > 0) ? $row['file_purch_price_col'] : ""; ?>>
+              <input type="text" name="column_purchase_price" maxlength="2" value=<?php echo $value = ($id > 0) ? $row['column_purchase_price'] : ""; ?>>
             </div>
         </div>
 
