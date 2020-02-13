@@ -1,5 +1,6 @@
   <?php
     require "header.php";
+    require "includes/logged.php";
   ?>
 
   <script src="js/groupingrule.js"></script>

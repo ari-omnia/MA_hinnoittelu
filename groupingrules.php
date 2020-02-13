@@ -96,7 +96,7 @@ require "includes/logged.php";
         for ($page=1;$page<=$number_of_pages;$page++) {
           //echo "<button class='pagination-button' type='button'>$page</button>";
           //echo '<a href="kalustoluetteloList.php?page=' . $page . '">' . $page . '</a> ';
-          echo '<a class="pagination-button" href="jasenlaji_selaus.php?page=' . $page . '">' . $page . '</a> ';
+          echo '<a class="pagination-button" href="groupingrules.php?page=' . $page . '">' . $page . '</a> ';
         }
         //!!
         ?>
