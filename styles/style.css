@@ -17,7 +17,7 @@ input[type='text'], textarea {
 }
 /* Input fields */
 input[type='password'], textarea {
-  font-size: 19px;
+  font-size: 14px;
   width: 250px;
   height: 30px;
   background-color: #e6e6e6
