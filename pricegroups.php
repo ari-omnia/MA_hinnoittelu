@@ -25,7 +25,7 @@ require "includes/logged.php";
     <!-- Actual Page DIV -->
     <section class="function-container">
       <div>
-        <input class="button button--add" type="submit" value="Lisää" onclick="window.location.href='pricegroup.php?mode=1'">
+        <input class="button button--add" type="submit" value="Add" onclick="window.location.href='pricegroup.php?mode=1'">
         <?php
 		if(isset($_GET['return']))
         {
