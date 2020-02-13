@@ -6,18 +6,18 @@
     {
         global $conn;
         
-        $res = $conn->query("SELECT * FROM productlists");
+        $res = $conn->query("SELECT * FROM supplierlists");
 
         while($row = $res->fetch_assoc())
         {
-            arrangeFile($row['file_name'], $row);
+            arrangeFile($row['supplier_file'], $row);
         }
     }
 
     /*
      * Arrange one supplier's file to the unified data table.
      * If $row is empty we have to get the single record (row) from
-     * productlists table based on the file name. 
+     * supplierlists table based on the file name. 
      */
     function arrangeFile($file, $row = '')
     {
@@ -25,22 +25,28 @@
         
         if($row == '')
         {
-            $res = $conn->query("SELECT * FROM productlists WHERE file_name = '".$file."';");
+            $res = $conn->query("SELECT * FROM supplierlists WHERE supplier_file = '".$file."';");
 
             $row = $res->fetch_assoc();
         }
         
-        $handle = fopen($row['file_loc'].'/'.$file, 'r');
+        $handle = fopen($row['file_path'].'/'.$file, 'r');
 
-        if($row['file_col_sep'] == "t" || $row['file_col_sep'] == "T")
+        if($row['file_column_separator'] == "t" || $row['file_column_separator'] == "T")
         {
             $sep = "\t";    // Separator char is tab.
         }
         else
         {
-            $sep = $row['file_col_sep'];
+            $sep = $row['file_column_separator'];
         }
 
+        // Check if there is a headline row. If there is read it out of the way. We don't need it.
+        if($row['data_start_row'] == 1)
+        {
+            fgetcsv($handle, 0, $sep);
+        }
+        
 //            while(($data = fgetcsv($handle, 0, $sep)) !== false) // Uncomment this line to go through all lines in file.
         for($i = 0; $i < 2; $i++)   // ... and remove this line...
         {
@@ -49,27 +55,32 @@
             // Suppress notices about NULL indexes in the next query.
             error_reporting(E_ALL & ~E_NOTICE); 
 
-            $ins = "INSERT INTO pricing 
-                                (prcupd_category, 
-                                 prcupd_EAN, 
-                                 prcupd_file, 
-                                 prcupd_manufacturer, 
-                                 prcupd_prod, 
-                                 prcupd_purch_price, 
-                                 prcupd_subcat1, 
-                                 prcupd_subcat2, 
-                                 prcupd_supplier
+            $ins = "INSERT INTO unifiedlists
+                                (
+                                    supplier_file,
+                                    manufacturer,
+                                    supplier_code,
+                                    product_code,
+                                    product_desc,
+                                    ean_code,
+                                    category,
+                                    subcat1,
+                                    subcat2,
+                                    supplier_purchase_price
                                 )
-                    VALUES ('".$data[$row["file_category_col"]]."', 
-                            '".$data[$row["file_EAN_col"]]."', 
-                            '".$row["file_name"]."',
-                            '".$data[$row["file_mfg_col"]]."',
-                            '".$data[$row["file_prod_col"]]."',
-                            '".$data[$row["file_purch_price_col"]]."',
-                            '".$data[$row["file_subcat1_col"]]."',
-                            '".$data[$row["file_subcat2_col"]]."',
-                            '".$data[$row["file_supplier"]]."'
-                           )";
+                    VALUES 
+                            (
+                                '".$row["supplier_file"]."', 
+                                '".$data[$row["column_manufacturer"]]."', 
+                                '".$data[$row["supplier_code"]]."',
+                                '".$data[$row["column_product_code"]]."',
+                                '".$data[$row["column_product_desc"]]."',
+                                '".$data[$row["column_ean_code"]]."',
+                                '".$data[$row["column_category"]]."',
+                                '".$data[$row["column_subcat1"]]."',
+                                '".$data[$row["column_subcat2"]]."',
+                                '".$data[$row["column_purchase_price"]]."'
+                            )";
 
             $conn->query($ins);
 
@@ -77,8 +88,3 @@
             error_reporting(E_ALL); 
         }
     }
-    
-//    arrangeFile('gandalf.txt');
-//    arrangeFile('ingram.txt');
-//    fetchAllFiles();
-    
