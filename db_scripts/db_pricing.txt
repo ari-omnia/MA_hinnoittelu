@@ -39,7 +39,7 @@ fixed_sum_to_price decimal(11,2)
 ) ENGINE=INNODB;
 
 
-CCREATE TABLE IF NOT EXISTS priceupdate.pricing (
+CREATE TABLE IF NOT EXISTS priceupdate.pricing (
 id INT  AUTO_INCREMENT PRIMARY KEY,
 supplier_file varchar(32),
 manufacturer varchar(32),
