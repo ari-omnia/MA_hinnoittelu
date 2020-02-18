@@ -52,6 +52,7 @@ subcat1 varchar(32),
 subcat2 varchar(32),
 supplier_purchase_price decimal(11,2),
 new_purchase_price decimal(11,2),
+sales_price decimal(11,2),
 grouping_code varchar(16),
 price_group_code varchar(16),
 time_stamp timestamp
