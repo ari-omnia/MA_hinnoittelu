@@ -45,7 +45,9 @@
               Pricing file
             </div>
             <div class="col-75">
-              <input type="text"  name="supplier_file" value=<?php echo $value = ($id > 0) ? $row['supplier_file'] : ""; ?>>
+                <?php echo $value = ($id > 0) ? $row['supplier_file'] : ""; ?>
+                <!--input type="text"  name="supplier_file" value=<?//php echo $value = ($id > 0) ? $row['supplier_file'] : ""; ?>-->
+                <input type='hidden' name='id' value=<?php echo $id?>></td>
             </div>
         </div>
         <!-- ***************-->
@@ -56,8 +58,8 @@
               Manufacturer
             </div>
             <div class="col-75">
-              <input type="text" name="manufacturer" value=<?php echo $value = ($id > 0) ? $row['manufacturer'] : ""; ?>>
-			  <input type='hidden' name='id' value=<?php echo $id?>></td>
+                <?php echo $value = ($id > 0) ? $row['manufacturer'] : ""; ?>
+                <!--input type="text" name="manufacturer" value=<?//php echo $value = ($id > 0) ? $row['manufacturer'] : ""; ?>-->
             </div>
         </div>
         <!-- ***************-->
@@ -68,8 +70,8 @@
               Supplier
             </div>
             <div class="col-75">
-              <input type="text" name="supplier_code" value=<?php echo $value = ($id > 0) ? $row['supplier_code'] : ""; ?>>
-			  <input type='hidden' name='id' value=<?php echo $id?>></td>
+                <?php echo $value = ($id > 0) ? $row['supplier_code'] : ""; ?>
+                <!--input type="text" name="supplier_code" value=<?//php echo $value = ($id > 0) ? $row['supplier_code'] : ""; ?>-->
             </div>
         </div>
         <!-- ***************-->
@@ -80,8 +82,8 @@
               Product
             </div>
             <div class="col-75">
-              <input type="text" name="product_code" value=<?php echo $value = ($id > 0) ? $row['product_code'] : ""; ?>>
-			  <input type='hidden' name='id' value=<?php echo $id?>></td>
+                <?php echo $value = ($id > 0) ? $row['product_code'] : ""; ?>
+                <!--input type="text" name="product_code" value=<?//php echo $value = ($id > 0) ? $row['product_code'] : ""; ?>-->
             </div>
         </div>
         <!-- ***************-->
@@ -92,8 +94,8 @@
               Description
             </div>
             <div class="col-75">
-              <input type="text" name="product_desc" value=<?php echo $value = ($id > 0) ? $row['product_desc'] : ""; ?>>
-			  <input type='hidden' name='id' value=<?php echo $id?>></td>
+                <?php echo $value = ($id > 0) ? $row['product_desc'] : ""; ?>
+                <!--input type="text" name="product_desc" value=<?//php echo $value = ($id > 0) ? $row['product_desc'] : ""; ?>-->
             </div>
         </div>
         <!-- ***************-->
@@ -104,7 +106,8 @@
               EAN code
             </div>
             <div class="col-75">
-              <input type="text" name="ean_code" value=<?php echo $value = ($id > 0) ? $row['ean_code'] : ""; ?>>
+                <?php echo $value = ($id > 0) ? $row['ean_code'] : ""; ?>
+                <!--input type="text" name="ean_code" value=<?//php echo $value = ($id > 0) ? $row['ean_code'] : ""; ?>-->
             </div>
         </div>
         <!-- ***************-->
@@ -115,7 +118,8 @@
               Category
             </div>
             <div class="col-75">
-              <input type="text" name="category" value=<?php echo $value = ($id > 0) ? $row['category'] : ""; ?>>
+                <?php echo $value = ($id > 0) ? $row['category'] : ""; ?>
+                <!--input type="text" name="category" value=<?//php echo $value = ($id > 0) ? $row['category'] : ""; ?>-->
             </div>
         </div>
         <!-- ***************-->
@@ -126,7 +130,8 @@
               Sub cat. 1
             </div>
             <div class="col-75">
-              <input type="text" name="subcat1" value=<?php echo $value = ($id > 0) ? $row['subcat1'] : ""; ?>>
+                <?php echo $value = ($id > 0) ? $row['subcat1'] : ""; ?>
+                <!--input type="text" name="subcat1" value=<?//php echo $value = ($id > 0) ? $row['subcat1'] : ""; ?>-->
             </div>
         </div>
         <!-- ***************-->
@@ -137,7 +142,8 @@
               Sub cat. 2
             </div>
             <div class="col-75">
-              <input type="text" name="subcat2" value=<?php echo $value = ($id > 0) ? $row['subcat2'] : ""; ?>>
+                <?php echo $value = ($id > 0) ? $row['subcat2'] : ""; ?>
+                <!--input type="text" name="subcat2" value=<?//php echo $value = ($id > 0) ? $row['subcat2'] : ""; ?>-->
             </div>
         </div>
         <!-- ***************-->
@@ -148,7 +154,8 @@
               Supplier price
             </div>
             <div class="col-75">
-              <input type="text" name="supplier_purchase_price" value=<?php echo $value = ($id > 0) ? $row['supplier_purchase_price'] : ""; ?>>
+                <?php echo $value = ($id > 0) ? $row['supplier_purchase_price'] : ""; ?>
+                <!--input type="text" name="supplier_purchase_price" value=<?//php echo $value = ($id > 0) ? $row['supplier_purchase_price'] : ""; ?>-->
             </div>
         </div>
         <!-- ***************-->
@@ -159,7 +166,8 @@
               New price
             </div>
             <div class="col-75">
-              <input type="text" name="new_purchase_price" value=<?php echo $value = ($id > 0) ? $row['new_purchase_price'] : ""; ?>>
+                <?php echo $value = ($id > 0) ? $row['new_purchase_price'] : ""; ?>
+                <!--input type="text" name="new_purchase_price" value=<?//php echo $value = ($id > 0) ? $row['new_purchase_price'] : ""; ?>-->
             </div>
         </div>
         <!-- ***************-->
@@ -170,7 +178,8 @@
               Sales price
             </div>
             <div class="col-75">
-              <input type="text" name="sales_price" value=<?php echo $value = ($id > 0) ? $row['sales_price'] : ""; ?>>
+                <?php echo $value = ($id > 0) ? $row['sales_price'] : ""; ?>
+                <!--input type="text" name="sales_price" value=<?//php echo $value = ($id > 0) ? $row['sales_price'] : ""; ?>-->
             </div>
         </div>
         <!-- ***************-->
@@ -178,10 +187,11 @@
         <!-- ***************-->
         <div class="row">
             <div class="col-25">
-              Groupin code
+              Grouping code
             </div>
             <div class="col-75">
-              <input type="text" name="grouping_code" value=<?php echo $value = ($id > 0) ? $row['grouping_code'] : ""; ?>>
+                <?php echo $value = ($id > 0) ? $row['grouping_code'] : ""; ?>
+                <!--input type="text" name="grouping_code" value=<?//php echo $value = ($id > 0) ? $row['grouping_code'] : ""; ?>-->
             </div>
         </div>
         <!-- ***************-->
@@ -192,7 +202,8 @@
               Price group
             </div>
             <div class="col-75">
-              <input type="text" name="price_group_code" value=<?php echo $value = ($id > 0) ? $row['price_group_code'] : ""; ?>>
+                <?php echo $value = ($id > 0) ? $row['price_group_code'] : ""; ?>
+                <!--input type="text" name="price_group_code" value=<?//php echo $value = ($id > 0) ? $row['price_group_code'] : ""; ?>-->
             </div>
         </div>
         <!-- ***************-->
@@ -200,13 +211,13 @@
         <!--div class="row"-->
           <div class="container-btn1">
                 <?php
-                if($mode=="1") {
-                echo "<input class='button button--add' onclick='return validateForm()' type='submit' name='add' value='Add'>";
-              } else {
-                echo "<input class='button button--update' onclick='return validateForm()' type='submit' name='update' value='Update'>";
-                echo "<input class='button button--delete' onclick='return confDelete()' type='submit' name='delete' value='Delete'>";
-              }
-              ?>
+                //if($mode=="1") {
+                //    echo "<input class='button button--add' onclick='return validateForm()' type='submit' name='add' value='Add'>";
+                //} else {
+                //    echo "<input class='button button--update' onclick='return validateForm()' type='submit' name='update' value='Update'>";
+                //    echo "<input class='button button--delete' onclick='return confDelete()' type='submit' name='delete' value='Delete'>";
+                //}
+                ?>
               <input class="button button--add" onclick="window.history.go(-1); return false;" type="submit" name="back" value="Cancel">
           </div>
         </div>
