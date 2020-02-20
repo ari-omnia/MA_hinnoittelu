@@ -8,6 +8,8 @@ body {
   margin: 0;
 }
 
+
+
 /* Input fields */
 input[type='text'], textarea {
   font-size: 14px;
@@ -21,6 +23,14 @@ input[type='password'], textarea {
   width: 250px;
   height: 30px;
   background-color: #e6e6e6
+}
+
+/* Style textareas */
+textarea {
+    font-size: 14px;
+    width: 100%;
+    height: 40px;
+    background-color: #e6e6e6
 }
 
 /* Input fields */
