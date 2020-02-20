@@ -25,8 +25,15 @@ id INT  AUTO_INCREMENT PRIMARY KEY,
 grouping_code varchar(16),
 grouping_desc varchar(16),
 price_group varchar(16),
+target_category mediumint(6),
 grouping_SQL_selection varchar(256),
-grouping_selection_other varchar(256)
+grouping_rule_manufacturer varchar(256),
+grouping_rule_product_code varchar(256),
+grouping_rule_product_desc varchar(256),
+grouping_rule_ean_code varchar(256),
+grouping_rule_category varchar(256),
+grouping_rule_subcat1 varchar(256),
+grouping_rule_subcat2 varchar(256)
 ) ENGINE=INNODB;
 
 

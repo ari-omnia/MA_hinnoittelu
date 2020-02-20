@@ -38,16 +38,29 @@ function onAdd() {
             var grouping_code = $("#grouping_code").val();
             var grouping_desc = $("#grouping_desc").val();
             var price_group = $("#price_group").val();
+            var target_category = $("#target_category").val();
             var grouping_SQL_selection = $("#grouping_SQL_selection").val();
-            var grouping_selection_other = $("#grouping_selection_other").val();
-
+            var grouping_rule_manufacturer = $("#grouping_rule_manufacturer").val();
+            var grouping_rule_product_code = $("#grouping_rule_product_code").val();
+            var grouping_rule_product_desc = $("#grouping_rule_product_desc").val();
+            var grouping_rule_ean_code = $("#grouping_rule_ean_code").val();
+            var grouping_rule_category = $("#grouping_rule_category").val();
+            var grouping_rule_subcat1 = $("#grouping_rule_subcat1").val();
+            var grouping_rule_subcat2 = $("#grouping_rule_subcat2").val();
             $(".form-message").load("groupingrule_chk.php", {
                 id: id,
                 grouping_code: grouping_code,
                 grouping_desc: grouping_desc,
                 price_group: price_group,
+                target_category: target_category,
                 grouping_SQL_selection: grouping_SQL_selection,
-                grouping_selection_other: grouping_selection_other,
+                grouping_rule_manufacturer: grouping_rule_manufacturer,
+                grouping_rule_product_code: grouping_rule_product_code,
+                grouping_rule_product_desc: grouping_rule_product_desc,
+                grouping_rule_ean_code: grouping_rule_ean_code,
+                grouping_rule_category: grouping_rule_category,
+                grouping_rule_subcat1: grouping_rule_subcat1,
+                grouping_rule_subcat2: grouping_rule_subcat2,
                 mode: mode
             });
         })
@@ -112,6 +125,17 @@ if ($id > 0) {
             </div>
         </div>
         <!-- ***************-->
+        <!-- TARGET CATEGORY      -->
+        <!-- ***************-->
+        <div class="row">
+            <div class="col-25">
+                Target category
+            </div>
+            <div class="col-75">
+                <input id="target_category" type="text" maxlength="6" name="target_category" value=<?php echo $value = ($id > 0) ? $row['target_category'] : ""; ?>>
+            </div>
+        </div>
+        <!-- ***************-->
         <!-- GROUPING RULE SELECTION SQL  -->
         <!-- ***************-->
         <div class="row">
@@ -119,22 +143,94 @@ if ($id > 0) {
                 Grouping rule selection
             </div>
             <div class="col-75">
-                <textarea id="grouping_SQL_selection" rows="4" cols="50" name="grouping_SQL_selection"><?php echo $value = ($id > 0) ? $row['grouping_SQL_selection'] : ""; ?>
+                <textarea id="grouping_SQL_selection" name="grouping_SQL_selection"><?php echo $value = ($id > 0) ? $row['grouping_SQL_selection'] : ""; ?>
                 </textarea>
             </div>
         </div>
         <!-- ***************-->
-        <!-- GROUPING RULE OTHER  -->
+        <!-- GROUPING RULE FOR MANUFACTURER  -->
         <!-- ***************-->
         <div class="row">
             <div class="col-25">
-                Group selection other
+                Rule Manufacturer
             </div>
             <div class="col-75">
-                <input id="grouping_selection_other" type="text" name="grouping_selection_other" maxlength="1" value=<?php echo $value = ($id > 0) ? $row['grouping_selection_other'] : ""; ?>>
+                <textarea id="grouping_rule_manufacturer" name="grouping_rule_manufacturer"><?php echo $value = ($id > 0) ? $row['grouping_rule_manufacturer'] : ""; ?>
+                </textarea>
             </div>
         </div>
-
+        <!-- ***************-->
+        <!-- GROUPING RULE FOR PRODUCT CODE  -->
+        <!-- ***************-->
+        <div class="row">
+            <div class="col-25">
+                Rule Supplier Product code
+            </div>
+            <div class="col-75">
+                <textarea id="grouping_rule_product_code" name="grouping_rule_product_code"><?php echo $value = ($id > 0) ? $row['grouping_rule_product_code'] : ""; ?>
+                </textarea>
+            </div>
+        </div>
+        <!-- ***************-->
+        <!-- GROUPING RULE FOR PRODUCT DESC  -->
+        <!-- ***************-->
+        <div class="row">
+            <div class="col-25">
+                Rule Product desc
+            </div>
+            <div class="col-75">
+                <textarea id="grouping_rule_product_desc" name="grouping_rule_product_desc"><?php echo $value = ($id > 0) ? $row['grouping_rule_product_desc'] : ""; ?>
+                </textarea>
+            </div>
+        </div>
+        <!-- ***************-->
+        <!-- GROUPING RULE FOR EAN CODE -->
+        <!-- ***************-->
+        <div class="row">
+            <div class="col-25">
+                Rule EAN code
+            </div>
+            <div class="col-75">
+                <textarea id="grouping_rule_ean_code" name="grouping_rule_ean_code"><?php echo $value = ($id > 0) ? $row['grouping_rule_ean_code'] : ""; ?>
+                </textarea>
+            </div>
+        </div>
+        <!-- ***************-->
+        <!-- GROUPING RULE CATEGORY  -->
+        <!-- ***************-->
+        <div class="row">
+            <div class="col-25">
+                Rule Category
+            </div>
+            <div class="col-75">
+                <textarea id="grouping_rule_category" name="grouping_rule_category"><?php echo $value = ($id > 0) ? $row['grouping_rule_category'] : ""; ?>
+                </textarea>
+            </div>
+        </div>
+        <!-- ***************-->
+        <!-- GROUPING RULE SUB CATEGORY 1 -->
+        <!-- ***************-->
+        <div class="row">
+            <div class="col-25">
+                Rule Sub category 1
+            </div>
+            <div class="col-75">
+                <textarea id="grouping_rule_subcat1" name="grouping_rule_subcat1"><?php echo $value = ($id > 0) ? $row['grouping_rule_subcat1'] : ""; ?>
+                </textarea>
+            </div>
+        </div>
+        <!-- ***************-->
+        <!-- GROUPING RULE SUB CATEGORY 2 -->
+        <!-- ***************-->
+        <div class="row">
+            <div class="col-25">
+                Rule Sub category 2
+            </div>
+            <div class="col-75">
+                <textarea id="grouping_rule_subcat2" name="grouping_rule_subcat2"><?php echo $value = ($id > 0) ? $row['grouping_rule_subcat2'] : ""; ?>
+                </textarea>
+            </div>
+        </div>
 
         <!-- ***************-->
         <!-- ***************-->
