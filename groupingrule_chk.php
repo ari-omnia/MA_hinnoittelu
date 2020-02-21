@@ -161,7 +161,7 @@ if ($mode != "errorissa" && $mode != "") {
             mysqli_close($conn);
             ?>
             <script>
-                goBack()
+                //goBack()
             </script>
             <?php
 
@@ -200,7 +200,7 @@ function itemDelete() {
 $("#grouping_code").removeClass("input-error");
 $("#grouping_desc").removeClass("input-error");
 $("#price_group").removeClass("input-error");
-$("#$target_category").removeClass("input-error");
+$("#target_category").removeClass("input-error");
 $("#grouping_SQL_selection").removeClass("input-error");
 $("#grouping_rule_manufacturer").removeClass("input-error");
 $("#grouping_rule_product_code").removeClass("input-error");

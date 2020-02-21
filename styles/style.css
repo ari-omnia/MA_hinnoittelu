@@ -1,5 +1,9 @@
+:root {
+    --main-font-size: 14px;
+}
 * {
   box-sizing: border-box;
+  font-size: var(--main-font-size);
 }
 
 /* Style the body */
@@ -12,14 +16,14 @@ body {
 
 /* Input fields */
 input[type='text'], textarea {
-  font-size: 14px;
+  font-size: var(--main-font-size);
   width: 250px;
   height: 30px;
   background-color: #e6e6e6
 }
 /* Input fields */
 input[type='password'], textarea {
-  font-size: 14px;
+  font-size: var(--main-font-size);
   width: 250px;
   height: 30px;
   background-color: #e6e6e6
@@ -27,20 +31,20 @@ input[type='password'], textarea {
 
 /* Style textareas */
 textarea {
-    font-size: 14px;
-    width: 100%;
+    font-size: var(--main-font-size);
+    width: 90%;
     height: 40px;
     background-color: #e6e6e6
 }
 
 /* Input fields */
 input[type='radio'] {
-  font-size: 14px;
+  font-size: var(--main-font-size);
   margin-top: 11px;
 }
 /* Input fields */
 input[type='date'] {
-  font-size: 14px;
+  font-size: var(--main-font-size);
   height: 30px;
   background-color: #e6e6e6
 }
@@ -102,7 +106,7 @@ input[type='date'] {
   border-radius: 4px;
   margin-left: 8px;
   font-family: arial;
-  font-size: 14px;
+  font-size: var(--main-font-size);
   line-height: 36px;
   color: #111;
   text-transform: uppercase;
@@ -110,7 +114,7 @@ input[type='date'] {
 }
 .login-status {
   text-align: center;
-  font-size: 26px;
+  font-size: var(--main-font-size);
   font-family: arial;
   color: #111;
 }
@@ -157,14 +161,16 @@ input[type='date'] {
 }
 /* Button types */
 .button {
-  font-size: 14px;
+  font-size: var(--main-font-size);
   width: 80px;
   background-color: #e0ebe2;
   color: white;
-  padding: 12px 20px;
+  /*padding: 12px 0px 12px 20px;*/
+  padding: 12px;
   border: none;
   border-radius: 30px;
   cursor: pointer;
+  text-align: center;
 }
 .button:hover {
   background-color: #4c7caf;
@@ -310,7 +316,7 @@ tr:nth-child(even) {
   padding: 10px;
 }
 .pagination-button {
-  font-size: 14px;
+  font-size: var(--main-font-size);
   width: 80px;
   background-color: #e3e3e3;
   color: white;
@@ -369,7 +375,7 @@ tr:nth-child(even) {
 
 /* Dropdown button */
 .dropdown .dropbtn {
-  font-size: 14px;
+  font-size: var(--main-font-size);
   border: none;
   outline: none;
   color: white;
@@ -415,7 +421,7 @@ tr:nth-child(even) {
 }
 
 .selection {
-  font-size: 14px;
+  font-size: var(--main-font-size);
 }
 
 .form-error {
@@ -428,6 +434,40 @@ tr:nth-child(even) {
 
 .input-error {
   box-shadow: 0 0 5px red;
+}
+/** Single record Column container styles**/
+.container2col {
+  background-color: #e3e3e3;
+  width: 1200px;
+  height: auto;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 10%;
+  margin-right: auto;
+}
+.col2-20 {
+  float: left;
+  width: 20%;
+  margin-top: 20px;
+}
+
+.col2-30 {
+  float: left;
+  width: 30%;
+  margin-top: 20px;
+}
+.col2-20 {
+  float: left;
+  width: 20%;
+  margin-top: 20px;
+}
+
+.col2-80 {
+  float: left;
+  width: 80%;
+  margin-top: 20px;
 }
 /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
 /*@media screen and (max-width: 700px) {
