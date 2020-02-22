@@ -47,32 +47,57 @@
             fgetcsv($handle, 0, $sep);
         }
         
-//            while(($data = fgetcsv($handle, 0, $sep)) !== false) // Uncomment this line to go through all lines in file.
-        for($i = 0; $i < 2; $i++)   // ... and remove this line...
+        while(($data = fgetcsv($handle, 0, $sep)) !== false) 
         {
-            $data = fgetcsv($handle, 0, $sep);  // ... and this.
+            $res = findEAN('unifiedlists', $data[$row['column_ean_code']]);
+            
+            // Check if the product is already in unifiedlists. If not insert to the table, if found then update the table.
+            if($res->num_rows == 0)
+            {
+                insertIntoUnifiedlistsTable($data, $row);
+            }
+            else
+            {
+                updateUnifiedlistsTable($data, $row);
+            }
+        }
+    }
 
-            // Suppress notices about NULL indexes in the next query.
-            error_reporting(E_ALL & ~E_NOTICE); 
+    function findEAN($table, $ean)
+    {
+        global $conn;
 
-            $ins = "INSERT INTO unifiedlists
-                                (
-                                    supplier_file,
-                                    manufacturer,
-                                    supplier_code,
-                                    product_code,
-                                    product_desc,
-                                    ean_code,
-                                    category,
-                                    subcat1,
-                                    subcat2,
-                                    supplier_purchase_price
-                                )
-                    VALUES 
+        $eanQuery = "SELECT ean_code FROM ".$table." WHERE ean_code = '".$ean."';";
+        $res = $conn->query($eanQuery);
+      
+        return $res;
+    }
+    
+    function insertIntoUnifiedlistsTable($data, $row)
+    {  
+        global $conn;
+        
+        // Suppress notices about NULL indexes in the next query.
+        error_reporting(E_ALL & ~E_NOTICE); 
+
+        $ins = "INSERT INTO unifiedlists 
+                            (
+                                supplier_file,
+                                manufacturer,
+                                supplier_code,
+                                product_code,
+                                product_desc,
+                                ean_code,
+                                category,
+                                subcat1,
+                                subcat2,
+                                supplier_purchase_price
+                            )
+                        VALUES 
                             (
                                 '".$row["supplier_file"]."', 
                                 '".$data[$row["column_manufacturer"]]."', 
-                                '".$data[$row["supplier_code"]]."',
+                                '".$row["supplier_code"]."',
                                 '".$data[$row["column_product_code"]]."',
                                 '".$data[$row["column_product_desc"]]."',
                                 '".$data[$row["column_ean_code"]]."',
@@ -82,9 +107,34 @@
                                 '".$data[$row["column_purchase_price"]]."'
                             )";
 
-            $conn->query($ins);
+        $conn->query($ins);
 
-            // Turn notices on again.
-            error_reporting(E_ALL); 
-        }
+        // Turn notices on again.
+        error_reporting(E_ALL); 
+    }
+    
+    function updateUnifiedlistsTable($data, $row)
+    {
+        global $conn;
+
+        // Suppress notices about NULL indexes in the next query.
+        error_reporting(E_ALL & ~E_NOTICE); 
+
+        $upd = "UPDATE unifiedlists 
+                SET
+                    supplier_file = '".$row["supplier_file"]."',
+                    manufacturer = '".$data[$row["column_manufacturer"]]."',
+                    supplier_code = '".$row["supplier_code"]."',
+                    product_code = '".$data[$row["column_product_code"]]."',
+                    product_desc = '".$data[$row["column_product_desc"]]."',
+                    category = '".$data[$row["column_category"]]."',
+                    subcat1 = '".$data[$row["column_subcat1"]]."',
+                    subcat2 = '".$data[$row["column_subcat2"]]."',
+                    supplier_purchase_price = '".$data[$row["column_purchase_price"]]."'
+                WHERE ean_code = '".$data[$row["column_ean_code"]]."';";
+  
+        $conn->query($upd);
+
+        // Turn notices on again.
+        error_reporting(E_ALL); 
     }
