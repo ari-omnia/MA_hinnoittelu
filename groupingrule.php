@@ -118,7 +118,12 @@ if ($id > 0) {
                 Price group
             </div>
             <div class="col2-30">
-                <input id="price_group" type="text" name="price_group" value=<?php echo $value = ($id > 0) ? $row['price_group'] : ""; ?>>
+                <!--input id="price_group" type="text" name="price_group" value=<?php //echo $value = ($id > 0) ? $row['price_group'] : ""; ?>-->
+                <select id="price_group" name='price_group'>
+
+                    <?php fillPricegroupOptions(); ?>
+
+                </select>
             </div>
 
             <div class="col2-20">
@@ -226,7 +231,6 @@ if ($id > 0) {
             <div class="col2-80">
                 <textarea id="grouping_rule_subcat2" name="grouping_rule_subcat2"><?php echo $value = ($id > 0) ? $row['grouping_rule_subcat2'] : ""; ?>
                 </textarea>
-                <input id="grouping_rule_subcat2" type="text" name="grouping_rule_subcat2" value=<?php echo $value = ($id > 0) ? $row['grouping_rule_subcat2']: ""; ?>>
 
             </div>
         </div>
@@ -261,6 +265,33 @@ if ($id > 0) {
 
 <?php
 
-    require "footer.php";
+require "footer.php";
 
+function fillPricegroupOptions() {
+    global $conn;
+    global $id;
+    // haettais ensin toiseen tauluun talletettu arvo
+        $sql = "SELECT * FROM groupingrules WHERE id = $id";
+        $result = mysqli_query($conn, $sql);
+        while($row = mysqli_fetch_assoc($result)) {
+            if (mysqli_num_rows($result) > 0) {
+                $savedselection = $row['price_group'];
+            } else {
+                echo "0 results";
+            }
+        }
+
+        echo "<option selected value='$savedselection'>".$savedselection."</option>";
+    //
+
+    $sql = "SELECT * FROM pricegroups";
+    $result = mysqli_query($conn, $sql);
+    while($row = mysqli_fetch_assoc($result)) {
+        if (mysqli_num_rows($result) > 0) {
+            echo "<option value='".$row['price_group_code']."'>".$row['price_group_code'].' '.$row['price_group_desc']."</option>";
+        } else {
+            echo "0 results";
+        }
+    }
+}
 ?>
