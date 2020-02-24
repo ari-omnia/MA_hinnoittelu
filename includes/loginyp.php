@@ -25,7 +25,7 @@ if (isset($_POST['login-submit'])) {
     // Next we need to get the password from the user in the database that has the same username as what the user typed in, and then we need to de-hash it and check if it matches the password the user typed into the login form.
 
     // We will connect to the database using prepared statements which work by us sending SQL to the database first, and then later we fill in the placeholders by sending the users data.
-    $sql = "SELECT * FROM users WHERE us_user=?;";
+    $sql = "SELECT * FROM users WHERE user=?;";
     // Here we initialize a new statement using the connection from the dbh.inc.php file.
     $stmt = mysqli_stmt_init($conn);
     // Then we prepare our SQL statement AND check if there are any errors with it.
@@ -50,13 +50,13 @@ if (isset($_POST['login-submit'])) {
       if ($row = mysqli_fetch_assoc($result)) {
         // Then we match the password from the database with the password the user submitted. The result is returned as a boolean.
         // ARI Poistettu toistaiseksi
-        $pwdCheck = password_verify($pword, $row['us_password']);
+        $pwdCheck = password_verify($pword, $row['password']);
         // If they don't match then we create an error message!
         // ARI Poistettu toistaiseksi
         if ($pwdCheck == false) {
       //  if ($salasana != $row['salasana']) {
           // If there is an error we send the user back to the signup page.
-          header("Location: ../index.php?error=wrongpwd. ON= ".$row['us_password']);
+          header("Location: ../index.php?error=wrongpwd. ON= ".$row['password']);
           exit();
         }
         // Then if they DO match, then we know it is the correct user that is trying to log in!
@@ -68,9 +68,9 @@ if (isset($_POST['login-submit'])) {
           // This means we NEED to start a session HERE to be able to create the variables!
           session_start();
           // And NOW we create the session variables.
-          $_SESSION['id'] = $row['us_id'];
-          $_SESSION['uid'] = $row['us_user'];
-          $_SESSION['email'] = $row['us_password'];
+          $_SESSION['id'] = $row['id'];
+          $_SESSION['uid'] = $row['user'];
+          $_SESSION['email'] = $row['password'];
           // Now the user is registered as logged in and we can now take them back to the front page! :)
           header("Location: ../index.php?login=success");
           exit();

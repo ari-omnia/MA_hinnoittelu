@@ -2,20 +2,18 @@
   Navigation/Function bar
 -->
     <div class="navbar">
+
       <div>
-        <a href="index.php">Home</a>
-      </div>
-      <div>
-        <a href="productfilesetup.php">Productfiles Setup</a>
+        <a href="supplierlists.php">Supplier Setup</a>
       </div>
       <div>
         <a href="groupingrules.php">Grouping Rules Setup</a>
       </div>
       <div>
-        <a href="groupingrules.php">Price Groups Setup</a>
+        <a href="pricegroups.php">Price Groups Setup</a>
       </div>
       <div>
-        <a href="pricing view.php">Pricing View</a>
+        <a href="pricings.php">Pricing View</a>
       </div>
       <div>
         <a href="settings.php">Settings</a>

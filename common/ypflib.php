@@ -40,16 +40,23 @@ function isValueNumeric ($nbr) {
 }
 
 function isRightDecimal ($nbr, $nbrOFDec) {
-  $whole = (int) $nbr;
-  $fraction = (int) $nbr - $whole;
-  if ($nbrOFDec == 0 )
-  {
-	  return ($fraction == 0);
-  }
-  else
-  {
-	return ($fraction == $nbrOFDec);
-  }
+    //$decimals = $nbr.substring($nbr.indexOf(".") + 1);
+    $decimals = substr($nbr, (strpos($nbr, ".",) + 1));
+    if (strlen((string)$decimals) > $nbrOFDec) {
+        return false;
+    }
+    return true;
+    /*
+    $whole = (int) $nbr;
+    $fraction = (int) $nbr - $whole;
+    if ($nbrOFDec == 0 )
+    {
+      return ($fraction == 0);
+    }
+    else
+    {
+    return ($fraction == $nbrOFDec);
+    }*/
 }
 //
 // CONVERT DATE VALUES
