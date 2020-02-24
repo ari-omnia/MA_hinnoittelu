@@ -36,7 +36,13 @@ textarea {
     height: 40px;
     background-color: #e6e6e6
 }
-
+/* Style select */
+select {
+    font-size: var(--main-font-size);
+    width: 250px;
+    height: 30px;
+    background-color: #e6e6e6
+}
 /* Input fields */
 input[type='radio'] {
   font-size: var(--main-font-size);
