@@ -39,12 +39,26 @@ function isValueNumeric ($nbr) {
 	return is_numeric($nbr);
 }
 
-function isRightDecimal ($nbr, $nbrOFDec) {
+/*function isRightDecimal ($nbr, $nbrOFDec) {
     $decimals = substr($nbr, (strpos($nbr, ".") + 1));
     if (strlen((string)$decimals) > $nbrOFDec) {
         return false;
     }
     return true;
+}*/
+function isRightDecimal ($nbr, $nbrOfDec) {
+    if (strpos($nbr, ".", 0) > 0) {
+        $decimals = substr($nbr, strpos($nbr, ".", 0)+1);
+
+        if (strlen((string)$decimals) > $nbrOfDec) {
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        return true;
+    }
+
 }
 //
 // CONVERT DATE VALUES

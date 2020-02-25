@@ -55,7 +55,7 @@ if ($mode != "errorissa" && $mode != "") {
     $column_ean_code = $_POST['column_ean_code'];
     $column_category = $_POST['column_category'];
     $column_subcat1 = $_POST['column_subcat1'];
-    $column_subcat2 = $_POST['column_subcat2 '];
+    $column_subcat2 = $_POST['column_subcat2'];
     $column_purchase_price = $_POST['column_purchase_price'];
 
     // If ADD, we first check if item already exists
@@ -112,12 +112,12 @@ if ($mode != "errorissa" && $mode != "") {
             $error_data_start_row = true;
             $error_form = true;
         } else {
-            if (!isValueNumeric($purchase_price_factor)) {
-                $error_purchase_price_factor = true;
+            if (!isValueNumeric($data_start_row)) {
+                $error_data_start_row = true;
                 $error_form = true;
             } else {
-                if (!isRightDecimal($purchase_price_factor, '0')) {
-                    $error_purchase_price_factor = true;
+                if (!isRightDecimal($data_start_row, '0')) {
+                    $error_data_start_row = true;
                     $error_form = true;
                 }
             }
