@@ -105,7 +105,7 @@ if ($id > 0) {
             </div>
             <div class="col-75">
                 <input id="supplier_code" type="text"  name="supplier_code" value=<?php echo $value = ($id > 0) ? $row['supplier_code'].' readonly="readonly"' : ""; ?>>
-                <input type='hidden' name='id' value=<?php echo $id?>></td>
+                <input id="id" type='hidden' name='id' value=<?php echo $id?>></td>
             </div>
         </div>
         <!-- ***************-->
