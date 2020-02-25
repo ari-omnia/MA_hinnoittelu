@@ -55,7 +55,7 @@ if ($mode != "errorissa" && $mode != "") {
     $column_ean_code = $_POST['column_ean_code'];
     $column_category = $_POST['column_category'];
     $column_subcat1 = $_POST['column_subcat1'];
-    $column_subcat2 = $_POST['column_subcat2 '];
+    $column_subcat2 = $_POST['column_subcat2'];
     $column_purchase_price = $_POST['column_purchase_price'];
 
     // If ADD, we first check if item already exists
@@ -116,7 +116,7 @@ if ($mode != "errorissa" && $mode != "") {
                 $error_purchase_price_factor = true;
                 $error_form = true;
             } else {
-                if (!isRightDecimal($purchase_price_factor, '0')) {
+                if (!isRightDecimal($purchase_price_factor, '2')) {
                     $error_purchase_price_factor = true;
                     $error_form = true;
                 }
@@ -482,7 +482,7 @@ if (error_column_subcat1 == true) {
 var error_column_subcat2 = "<?php echo $error_column_subcat2; ?>";
 if (error_column_subcat2 == true) {
     $("#column_subcat2").addClass("input-error");
-    alertText = alertText + "Check Sub-category 2 column\n";
+    alertText = alertText + "Check Sub-category 2 column\n" + "<?php echo $column_subcat2; ?>";
 }
 
 // Handle column_purchase_price errors
