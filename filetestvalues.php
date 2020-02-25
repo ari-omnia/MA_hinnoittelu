@@ -2,10 +2,10 @@
 require 'common/ypflib.php';
 
 
-$purchase_price_factor = "17.32";
+$purchase_price_factor = "0";
 
 // validate PURCHASE PRICE FACTOR
-if (empty($purchase_price_factor)) {
+if (empty($purchase_price_factor) && $purchase_price_factor != "0") {
     $error_purchase_price_factor = true;
     $error_form = true;
     echo "empty";
