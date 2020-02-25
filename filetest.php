@@ -5,7 +5,7 @@
         <title>filetest</title>
     </head>
     <body>
-        <form class="filetest" action="fileHand.php" method="post">
+        <form class="filetest" action="fileHandler.php" method="post">
 
             <input type='submit' value='Start file load'>
 
