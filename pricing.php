@@ -207,6 +207,18 @@
             </div>
         </div>
         <!-- ***************-->
+        <!-- TARGET CATEGORY      -->
+        <!-- ***************-->
+        <div class="row">
+            <div class="col-25">
+              Target category
+            </div>
+            <div class="col-75">
+                <?php echo $value = ($id > 0) ? $row['target_category'] : ""; ?>
+                <!--input type="text" name="price_group_code" value=<?//php echo $value = ($id > 0) ? $row['price_group_code'] : ""; ?>-->
+            </div>
+        </div>
+        <!-- ***************-->
         <!-- ***************-->
         <!--div class="row"-->
           <div class="container-btn1">

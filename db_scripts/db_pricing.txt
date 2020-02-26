@@ -62,6 +62,7 @@ new_purchase_price decimal(11,2),
 sales_price decimal(11,2),
 grouping_code varchar(16),
 price_group_code varchar(16),
+target_category mediumint(6),
 time_stamp timestamp
 ) ENGINE=INNODB;
 
