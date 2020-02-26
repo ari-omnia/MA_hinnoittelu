@@ -83,7 +83,7 @@ if ($id > 0) {
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
 }
-
+echo "mode / ".$mode;
 ?>
 
 <!-- <div style="width:450px; height:350px; border-radius: 25px; padding:20px; background-color:grey ; margin-top: 15px; margin-bottom: 15px;margin-left: 20%; margin-right: auto;"-->
@@ -133,10 +133,8 @@ if ($id > 0) {
                 <input id="target_category" type="text" maxlength="6" name="target_category" value=<?php echo $value = ($id > 0) ? $row['target_category'] : ""; ?>>
             </div>
         </div>
-    </form>
 </div>
 <div class="container2col">
-    <form>
         <!-- ***************-->
         <!-- GROUPING RULE SELECTION SQL  -->
         <!-- ***************-->
