@@ -32,7 +32,7 @@ function onAdd() {
 
 <script>
     $(document).ready(function() {
-        $("form").submit(function(event) {
+        $("#supplierlist").submit(function(event) {
             event.preventDefault();
             var id = $("#id").val();
             var supplier_code = $("#supplier_code").val();
@@ -94,7 +94,7 @@ if ($id > 0) {
 
 <!-- <div style="width:450px; height:350px; border-radius: 25px; padding:20px; background-color:grey ; margin-top: 15px; margin-bottom: 15px;margin-left: 20%; margin-right: auto;"-->
 <div class="container">
-    <form name="supplierlist" action="supplierlist_chk.php" method="post">
+    <form id="supplierlist" name="supplierlist" action="supplierlist_chk.php" method="post">
         <legend><?php echo $legend = ($mode == "1") ? "Add supplier file" : "Update"; ?></legend>
         <!-- ***************-->
         <!-- SUPLLIER       -->

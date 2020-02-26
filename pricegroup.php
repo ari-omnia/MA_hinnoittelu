@@ -32,7 +32,7 @@ function onAdd() {
 
 <script>
     $(document).ready(function() {
-        $("form").submit(function(event) {
+        $("#pricegroup").submit(function(event) {
             event.preventDefault();
             var id = $("#id").val();
             var price_group_code = $("#price_group_code").val();
@@ -79,7 +79,7 @@ if ($id > 0) {
 
 <!-- <div style="width:450px; height:350px; border-radius: 25px; padding:20px; background-color:grey ; margin-top: 15px; margin-bottom: 15px;margin-left: 20%; margin-right: auto;"-->
 <div class="container">
-    <form name="pricegroup" action="pricegroup_chk.php" method="post">
+    <form id="pricegroup" name="pricegroup" action="pricegroup_chk.php" method="post">
         <legend><?php echo $legend = ($mode == "1") ? "Add price group" : "Update"; ?></legend>
         <!-- ***************-->
         <!-- PRICE GROUP CODE       -->

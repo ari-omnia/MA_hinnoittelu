@@ -33,7 +33,7 @@ function onAdd() {
 
 <script>
     $(document).ready(function() {
-        $("form").submit(function(event) {
+        $("#groupingrule").submit(function(event) {
             event.preventDefault();
             var id = $("#id").val();
             var grouping_code = $("#grouping_code").val();
