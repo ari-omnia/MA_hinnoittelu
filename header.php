@@ -57,7 +57,6 @@ Header
         }
         else if (isset($_SESSION['id'])) {
           echo '<form action="includes/logoutyp.php" method="post">
-            <button type="submit" class="button button--login" formaction="omientietojenhallinta.php" name="user-submit">Profile</button>
             <button type="submit" class="button button--login" name="login-submit">Logout</button>
           </form>';
         }
