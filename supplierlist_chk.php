@@ -39,6 +39,7 @@ if ($mode != "errorissa" && $mode != "") {
     $error_column_subcat1 = false;
     $error_column_subcat2 = false;
     $error_column_purchase_price = false;
+    $error_column_used_more_that_once = false;
     $error_form = false;
 
     // Read fields from POST
@@ -263,6 +264,21 @@ if ($mode != "errorissa" && $mode != "") {
             }
         }
 
+        // validate COLUMNS USED ONLY ONCE
+
+        $columns = array($column_manufacturer, $column_product_code, $column_product_desc, $column_ean_code,
+        $column_category, $column_subcat1, $column_subcat2, $column_purchase_price);
+        //print_r(array_count_values($columns));
+
+        $count = array_count_values($columns);
+
+        foreach ($count as $col => $val) {
+            //echo "<br>"."$col = $val"."<br>";
+            if ($col != "0" && $val > "1") {
+                $error_column_used_more_that_once = true;
+                $error_form = true;
+            }
+        }
 
     } // END field validations
 
@@ -490,6 +506,13 @@ var error_column_purchase_price = "<?php echo $error_column_purchase_price; ?>";
 if (error_column_purchase_price == true) {
     $("#column_purchase_price").addClass("input-error");
     alertText = alertText + "Check Purchase price column\n";
+}
+
+// Handle $error_column_used_more_that_once errors
+var error_column_used_more_that_once = "<?php echo $error_column_used_more_that_once; ?>";
+if (error_column_used_more_that_once == true) {
+    //$("#column_purchase_price").addClass("input-error");
+    alertText = alertText + "Some columns used more than once!\n";
 }
 
 
