@@ -10,7 +10,10 @@ var_dump($conn);
 echo "<br>";
 echo "kutsutaan fetchAllFiles";
 echo "<br>";
-$fetch = fetchAllFiles();
+
+arrangeFile("test.csv");
+
+/*$fetch = fetchAllFiles();
 
 if(!fetchAllFiles()) {
     echo "ei onnistu";
@@ -18,6 +21,6 @@ if(!fetchAllFiles()) {
 } else {
     echo "onnistui";
     echo "<br>";
-}
+}*/
 
 ?>
