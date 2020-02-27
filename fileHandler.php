@@ -35,7 +35,7 @@
             }
         }
     }
-    
+
     /*
      * Arrange one supplier's file to the unified data table.
      * If $row is empty we have to get the single record (row) from
@@ -45,7 +45,7 @@
     {
         global $conn;
         echo "<br>.arrangeFile /";
-        var_dump($res);
+        var_dump($row);
 
         if($row == '')
         {
@@ -55,7 +55,7 @@
         }
 
         fixColumns($row);
-        
+
         $handle = fopen($row['file_path'].'/'.$file, 'r');
 
         if($row['file_column_separator'] == "t" || $row['file_column_separator'] == "T")
@@ -119,9 +119,9 @@
                     {
                         $prod['manufacturer'] = $data[$row[$k]];
                     }
-                    
+
                     break;
-                    
+
                 case 'column_product_code':
                     if($v < 0)
                     {
@@ -131,9 +131,9 @@
                     {
                         $prod['product_code'] = $data[$row[$k]];
                     }
-                    
+
                     break;
-                    
+
                 case 'column_product_desc':
                     if($v < 0)
                     {
@@ -143,9 +143,9 @@
                     {
                         $prod['product_desc'] = $data[$row[$k]];
                     }
-                    
+
                     break;
-                    
+
                 case 'column_ean_code':
                     if($v < 0)
                     {
@@ -155,9 +155,9 @@
                     {
                         $prod['ean_code'] = $data[$row[$k]];
                     }
-                    
+
                     break;
-                    
+
                 case 'column_category':
                     if($v < 0)
                     {
@@ -167,9 +167,9 @@
                     {
                         $prod['category'] = $data[$row[$k]];
                     }
-                    
+
                     break;
-                    
+
                 case 'column_subcat1':
                     if($v < 0)
                     {
@@ -179,9 +179,9 @@
                     {
                         $prod['subcat1'] = $data[$row[$k]];
                     }
-                    
+
                     break;
-                    
+
                 case 'column_subcat2':
                     if($v < 0)
                     {
@@ -191,9 +191,9 @@
                     {
                         $prod['subcat2'] = $data[$row[$k]];
                     }
-                    
+
                     break;
-                    
+
                 case 'column_purchase_price':
                     if($v < 0)
                     {
@@ -203,16 +203,16 @@
                     {
                         $prod['purchase_price'] = $data[$row[$k]];
                     }
-                    
+
                     break;
             }
         }
 
         return $prod;
     }
-    
+
     function insertIntoUnifiedlistsTable($product)
-    {  
+    {
         global $conn;
 
         $ins = "INSERT INTO unifiedlists
@@ -230,8 +230,8 @@
                             )
                         VALUES
                             (
-                                '".$product["supplier_file"]."', 
-                                '".$product["manufacturer"]."', 
+                                '".$product["supplier_file"]."',
+                                '".$product["manufacturer"]."',
                                 '".$product["supplier_code"]."',
                                 '".$product["product_code"]."',
                                 '".$product["product_desc"]."',
@@ -244,12 +244,12 @@
 
         $conn->query($ins);
     }
-    
+
     function updateUnifiedlistsTable($product)
     {
         global $conn;
 
-        $upd = "UPDATE unifiedlists 
+        $upd = "UPDATE unifiedlists
                 SET
                     supplier_file = '".$product["supplier_file"]."',
                     manufacturer = '".$product["manufacturer"]."',

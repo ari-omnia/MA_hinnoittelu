@@ -2,9 +2,10 @@
 <?php
 echo "getting in";
 echo "<br>";
-
-require "db/db.php";
-require "fileHandler.php";
+echo "require db<br>";
+require "../db/db.php";
+echo "db ok<br>";
+require "../fileHandler.php";
 
 var_dump($conn);
 echo "<br>";
