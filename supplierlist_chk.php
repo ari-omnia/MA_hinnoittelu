@@ -498,7 +498,7 @@ if (error_column_subcat1 == true) {
 var error_column_subcat2 = "<?php echo $error_column_subcat2; ?>";
 if (error_column_subcat2 == true) {
     $("#column_subcat2").addClass("input-error");
-    alertText = alertText + "Check Sub-category 2 column\n";
+    alertText = alertText + "Check Sub-category 2 column\n" + "<?php echo $column_subcat2; ?>";
 }
 
 // Handle column_purchase_price errors

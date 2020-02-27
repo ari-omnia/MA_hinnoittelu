@@ -5,9 +5,12 @@
     function fetchAllFiles()
     {
         global $conn;
-        
-        $res = $conn->query("SELECT * FROM supplierlists");
+        echo "<br>";
+        var_dump($conn);
 
+        $res = $conn->query("SELECT * FROM supplierlists");
+        echo "<br>";
+        var_dump($res);
         while($row = $res->fetch_assoc())
         {
             arrangeFile($row['supplier_file'], $row);
@@ -36,12 +39,14 @@
     /*
      * Arrange one supplier's file to the unified data table.
      * If $row is empty we have to get the single record (row) from
-     * supplierlists table based on the file name. 
+     * supplierlists table based on the file name.
      */
     function arrangeFile($file, $row = '')
     {
         global $conn;
-        
+        echo "<br>.arrangeFile /";
+        var_dump($res);
+
         if($row == '')
         {
             $res = $conn->query("SELECT * FROM supplierlists WHERE supplier_file = '".$file."';");
@@ -67,14 +72,14 @@
         {
             fgetcsv($handle, 0, $sep);
         }
-        
-        while(($data = fgetcsv($handle, 0, $sep)) !== false) 
+
+        while(($data = fgetcsv($handle, 0, $sep)) !== false)
         {
             $res = findEAN('unifiedlists', $data[$row['column_ean_code']]);
 
             $product = collectData($data, $row);
-            
-            // Check if the product is already in unifiedlists. If not insert to the table, if found then update the table.
+
+          // Check if the product is already in unifiedlists. If not insert to the table, if found then update the table.
             if($res->num_rows == 0)
             {
                 insertIntoUnifiedlistsTable($product);
@@ -92,7 +97,7 @@
 
         $eanQuery = "SELECT ean_code FROM ".$table." WHERE ean_code = '".$ean."';";
         $res = $conn->query($eanQuery);
-      
+
         return $res;
     }
 
@@ -210,7 +215,7 @@
     {  
         global $conn;
 
-        $ins = "INSERT INTO unifiedlists 
+        $ins = "INSERT INTO unifiedlists
                             (
                                 supplier_file,
                                 manufacturer,
@@ -223,7 +228,7 @@
                                 subcat2,
                                 supplier_purchase_price
                             )
-                        VALUES 
+                        VALUES
                             (
                                 '".$product["supplier_file"]."', 
                                 '".$product["manufacturer"]."', 
