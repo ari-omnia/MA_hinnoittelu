@@ -81,6 +81,11 @@ if ($mode != "errorissa" && $mode != "") {
                 if (!isRightDecimal($sales_price_factor, '2')) {
                     $error_sales_price_factor = true;
                     $error_form = true;
+                } else {
+                    if ($sales_price_factor < "1" || $sales_price_factor > "1.99") {
+                        $error_sales_price_factor = true;
+                        $error_form = true;
+                    }
                 }
             }
         }
@@ -228,7 +233,7 @@ if (error_price_group_desc == true) {
 var error_sales_price_factor = "<?php echo $error_sales_price_factor; ?>";
 if (error_sales_price_factor == true) {
     $("#sales_price_factor").addClass("input-error");
-    alertText = alertText + "Check Sales price factor is a number\n";
+    alertText = alertText + "Check Sales price factor is a number or in correct format\n";
 }
 
 // Handle sales_price_factor error

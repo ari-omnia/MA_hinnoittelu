@@ -98,7 +98,13 @@ if ($mode != "errorissa" && $mode != "") {
                 if (!isRightDecimal($purchase_price_factor, '2')) {
                     $error_purchase_price_factor = true;
                     $error_form = true;
+                } else {
+                    if ($purchase_price_factor < "1" || $purchase_price_factor > "1.99") {
+                        $error_purchase_price_factor = true;
+                        $error_form = true;
+                    }
                 }
+
             }
         }
 
@@ -421,7 +427,7 @@ if (error_supplier_name == true) {
 var error_purchase_price_factor = "<?php echo $error_purchase_price_factor; ?>";
 if (error_purchase_price_factor == true) {
     $("#purchase_price_factor").addClass("input-error");
-    alertText = alertText + "Check Purchase price factor is a number\n";
+    alertText = alertText + "Check Purchase price factor is a number or in correct format\n";
 }
 
 // Handle supplier_file error
