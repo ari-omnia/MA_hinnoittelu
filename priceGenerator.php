@@ -93,7 +93,8 @@
                                 new_purchase_price,
                                 sales_price,
                                 grouping_code,
-                                price_group_code
+                                price_group_code,
+                                target_category
                             )
                 VALUES 
                         (
@@ -110,7 +111,8 @@
                             '".$newSupplierPrice."',
                             '".$salesPrice."',
                             '".$groupingRule['grouping_code']."',
-                            '".$groupingRule['price_group']."'
+                            '".$groupingRule['price_group']."',
+                            '".$groupingRule['target_category']."'
                         )";
  
         $conn->query($ins);

@@ -29,12 +29,17 @@ if ($mode != "errorissa" && $mode != "") {
     $error_sales_price_factor = false;
     $error_fixed_sum_to_price = false;
     $error_form = false;
+    // Reset validation notification fields
+    $notify_sales_price_factor_change = false;
+    $notify_fixed_sum_to_price_change = false;
 
     // Read fields from POST
     $price_group_code = $_POST['price_group_code'];
     $price_group_desc = $_POST['price_group_desc'];
     $sales_price_factor = $_POST['sales_price_factor'];
+    $old_sales_price_factor = $_POST['old_sales_price_factor'];
     $fixed_sum_to_price = $_POST['fixed_sum_to_price'];
+    $old_fixed_sum_to_price = $_POST['old_fixed_sum_to_price'];
 
     // If ADD, we first check if item already exists
     if ($mode == 'add') {
@@ -96,6 +101,18 @@ if ($mode != "errorissa" && $mode != "") {
                 }
             }
         }
+
+        if (priceGroupUsed($price_group_code)) {
+            // CHECK IF SALES PRICE FACTOR CHANGE AND USE IN OTHER GROUP RULES. NOTIFY USER
+            if ($sales_price_factor != $old_sales_price_factor) {
+                $notify_sales_price_factor_change = true;
+            }
+            // CHECK IF FIXED SUM TO PRICE CHANGE USE IN OTHER GROUP RULES. NOTIFY USER
+            if ($fixed_sum_to_price != $old_fixed_sum_to_price) {
+                $notify_fixed_sum_to_price_change = true;
+            }
+        }
+
     } // END field validations
 
     // if no errors prepare SQL statements accordin ADD or UPDATE
@@ -166,6 +183,17 @@ function itemDelete() {
     return $sql;
 }
 
+function priceGroupUsed($price_group_code) {
+    $sql = "SELECT * FROM groupingrules WHERE price_group='$price_group_code'";
+    global $conn;
+    $result = mysqli_query($conn, $sql);
+
+    if($result->num_rows > 1) {
+        return true;
+    }
+    return false;
+}
+
 ?>
 
 <script>
@@ -174,6 +202,7 @@ $("#price_group_desc").removeClass("input-error");
 $("#sales_price_factor").removeClass("input-error");
 $("#fixed_sum_to_price").removeClass("input-error");
 var alertText = "";
+var confirmText = "";
 
 // Handle record exists error
 var error_item_exits = "<?php echo $error_item_exits; ?>";
@@ -212,6 +241,22 @@ if (error_fixed_sum_to_price == true) {
 // ALERT MAIN MESSAGE WITH ALL ERRORS
 if (alertText != "") {
     alert(alertText);
+}
+// OTHER NOTIFICATIONS
+// Handle sales_price_factor notification about change
+var notify_sales_price_factor_change = "<?php echo $notify_sales_price_factor_change; ?>";
+if (notify_sales_price_factor_change == true) {
+    confirmText = confirmText + "Please notify, Sales Price change affects to several Grouping rules.\n";
+}
+
+// Handle fixed_sum_to_price notification about change
+var notify_fixed_sum_to_price_change = "<?php echo $notify_fixed_sum_to_price_change; ?>";
+if (notify_fixed_sum_to_price_change == true) {
+    confirmText = confirmText + "Please notify, Fixed sum to price affects to several Grouping rules.\n";
+}
+
+if (confirmText != "") {
+    alert(confirmText);
 }
 
 </script>

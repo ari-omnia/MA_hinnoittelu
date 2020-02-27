@@ -39,6 +39,7 @@ if ($mode != "errorissa" && $mode != "") {
     $error_column_subcat1 = false;
     $error_column_subcat2 = false;
     $error_column_purchase_price = false;
+    $error_column_used_more_that_once = false;
     $error_form = false;
 
     // Read fields from POST
@@ -112,12 +113,12 @@ if ($mode != "errorissa" && $mode != "") {
             $error_data_start_row = true;
             $error_form = true;
         } else {
-            if (!isValueNumeric($purchase_price_factor)) {
-                $error_purchase_price_factor = true;
+            if (!isValueNumeric($data_start_row)) {
+                $error_data_start_row = true;
                 $error_form = true;
             } else {
-                if (!isRightDecimal($purchase_price_factor, '2')) {
-                    $error_purchase_price_factor = true;
+                if (!isRightDecimal($data_start_row, '0')) {
+                    $error_data_start_row = true;
                     $error_form = true;
                 }
             }
@@ -136,7 +137,7 @@ if ($mode != "errorissa" && $mode != "") {
         }
 
         // validate COLUMN MANUFACTURER
-        if (empty($column_manufacturer)) {
+        if (empty($column_manufacturer) && $column_manufacturer != "0") {
             $error_column_manufacturer = true;
             $error_form = true;
         } else {
@@ -152,7 +153,7 @@ if ($mode != "errorissa" && $mode != "") {
         }
 
         // validate COLUMN PRODUCT CODE
-        if (empty($column_product_code)) {
+        if (empty($column_product_code) && $column_product_code != "0") {
             $error_column_product_code = true;
             $error_form = true;
         } else {
@@ -168,7 +169,7 @@ if ($mode != "errorissa" && $mode != "") {
         }
 
         // validate COLUMN PRODUCT DESC
-        if (empty($column_product_desc)) {
+        if (empty($column_product_desc) && $column_product_desc != "0") {
             $error_column_product_desc = true;
             $error_form = true;
         } else {
@@ -184,7 +185,7 @@ if ($mode != "errorissa" && $mode != "") {
         }
 
         // validate COLUMN EAN CODE
-        if (empty($column_ean_code)) {
+        if (empty($column_ean_code) && $column_ean_code != "0") {
             $error_column_ean_code = true;
             $error_form = true;
         } else {
@@ -200,7 +201,7 @@ if ($mode != "errorissa" && $mode != "") {
         }
 
         // validate COLUMN Category
-        if (empty($column_category)) {
+        if (empty($column_category) && $column_category != "0") {
             $error_column_category = true;
             $error_form = true;
         } else {
@@ -216,7 +217,7 @@ if ($mode != "errorissa" && $mode != "") {
         }
 
         // validate COLUMN SUB Category1
-        if (empty($column_subcat1)) {
+        if (empty($column_subcat1) && $column_subcat1 != "0") {
             $error_column_subcat1 = true;
             $error_form = true;
         } else {
@@ -232,7 +233,7 @@ if ($mode != "errorissa" && $mode != "") {
         }
 
         // validate COLUMN SUB Category2
-        if (empty($column_subcat2)) {
+        if (empty($column_subcat2) && $column_subcat2 != "0") {
             $error_column_subcat2 = true;
             $error_form = true;
         } else {
@@ -248,7 +249,7 @@ if ($mode != "errorissa" && $mode != "") {
         }
 
         // validate COLUMN PURCHASE PRICE
-        if (empty($column_purchase_price)) {
+        if (empty($column_purchase_price) && $column_purchase_price != "0") {
             $error_column_purchase_price = true;
             $error_form = true;
         } else {
@@ -263,6 +264,21 @@ if ($mode != "errorissa" && $mode != "") {
             }
         }
 
+        // validate COLUMNS USED ONLY ONCE
+
+        $columns = array($column_manufacturer, $column_product_code, $column_product_desc, $column_ean_code,
+        $column_category, $column_subcat1, $column_subcat2, $column_purchase_price);
+        //print_r(array_count_values($columns));
+
+        $count = array_count_values($columns);
+
+        foreach ($count as $col => $val) {
+            //echo "<br>"."$col = $val"."<br>";
+            if ($col != "0" && $val > "1") {
+                $error_column_used_more_that_once = true;
+                $error_form = true;
+            }
+        }
 
     } // END field validations
 
@@ -490,6 +506,13 @@ var error_column_purchase_price = "<?php echo $error_column_purchase_price; ?>";
 if (error_column_purchase_price == true) {
     $("#column_purchase_price").addClass("input-error");
     alertText = alertText + "Check Purchase price column\n";
+}
+
+// Handle $error_column_used_more_that_once errors
+var error_column_used_more_that_once = "<?php echo $error_column_used_more_that_once; ?>";
+if (error_column_used_more_that_once == true) {
+    //$("#column_purchase_price").addClass("input-error");
+    alertText = alertText + "Some columns used more than once!\n";
 }
 
 
