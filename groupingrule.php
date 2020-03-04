@@ -41,13 +41,14 @@ function onAdd() {
             var price_group = $("#price_group").val();
             var target_category = $("#target_category").val();
             var grouping_SQL_selection = $("#grouping_SQL_selection").val();
-            var grouping_rule_manufacturer = $("#grouping_rule_manufacturer").val();
-            var grouping_rule_product_code = $("#grouping_rule_product_code").val();
-            var grouping_rule_product_desc = $("#grouping_rule_product_desc").val();
-            var grouping_rule_ean_code = $("#grouping_rule_ean_code").val();
-            var grouping_rule_category = $("#grouping_rule_category").val();
-            var grouping_rule_subcat1 = $("#grouping_rule_subcat1").val();
-            var grouping_rule_subcat2 = $("#grouping_rule_subcat2").val();
+            var fields1 = $("#fields1").val();
+            var comp1 = $("#comp1").val();
+            var selection1 = $("#selection1").val();
+            var oper1 = $("#oper1").val();
+            var fields2 = $("#fields2").val();
+            var comp2 = $("#comp2").val();
+            var selection2 = $("#selection2").val();
+
             $(".form-message").load("groupingrule_chk.php", {
                 id: id,
                 grouping_code: grouping_code,
@@ -55,13 +56,13 @@ function onAdd() {
                 price_group: price_group,
                 target_category: target_category,
                 grouping_SQL_selection: grouping_SQL_selection,
-                grouping_rule_manufacturer: grouping_rule_manufacturer,
-                grouping_rule_product_code: grouping_rule_product_code,
-                grouping_rule_product_desc: grouping_rule_product_desc,
-                grouping_rule_ean_code: grouping_rule_ean_code,
-                grouping_rule_category: grouping_rule_category,
-                grouping_rule_subcat1: grouping_rule_subcat1,
-                grouping_rule_subcat2: grouping_rule_subcat2,
+                fields1: fields1,
+                comp1: comp1,
+                selection1: selection1,
+                oper1: oper1,
+                fields2: fields2,
+                comp2: comp2,
+                selection2: selection2,
                 mode: mode
             });
         })
@@ -83,7 +84,7 @@ if ($id > 0) {
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
 }
-echo "mode / ".$mode;
+
 ?>
 
 <!-- <div style="width:450px; height:350px; border-radius: 25px; padding:20px; background-color:grey ; margin-top: 15px; margin-bottom: 15px;margin-left: 20%; margin-right: auto;"-->
@@ -148,90 +149,118 @@ echo "mode / ".$mode;
             </div>
         </div>
         <!-- ***************-->
-        <!-- GROUPING RULE FOR MANUFACTURER  -->
+        <!-- FIELD SELECTIOSN FOR SQL  -->
         <!-- ***************-->
         <div class="row">
             <div class="col2-20">
-                Rule Manufacturer
-            </div>
-            <div class="col2-80">
-                <textarea id="grouping_rule_manufacturer" name="grouping_rule_manufacturer"><?php echo $value = ($id > 0) ? $row['grouping_rule_manufacturer'] : ""; ?>
-                </textarea>
-            </div>
-        </div>
-        <!-- ***************-->
-        <!-- GROUPING RULE FOR PRODUCT CODE  -->
-        <!-- ***************-->
-        <div class="row">
-            <div class="col2-20">
-                Rule Supplier Product code
-            </div>
-            <div class="col2-80">
-                <textarea id="grouping_rule_product_code" name="grouping_rule_product_code"><?php echo $value = ($id > 0) ? $row['grouping_rule_product_code'] : ""; ?>
-                </textarea>
-            </div>
-        </div>
-        <!-- ***************-->
-        <!-- GROUPING RULE FOR PRODUCT DESC  -->
-        <!-- ***************-->
-        <div class="row">
-            <div class="col2-20">
-                Rule Product desc
-            </div>
-            <div class="col2-80">
-                <textarea id="grouping_rule_product_desc" name="grouping_rule_product_desc"><?php echo $value = ($id > 0) ? $row['grouping_rule_product_desc'] : ""; ?>
-                </textarea>
-            </div>
-        </div>
-        <!-- ***************-->
-        <!-- GROUPING RULE FOR EAN CODE -->
-        <!-- ***************-->
-        <div class="row">
-            <div class="col2-20">
-                Rule EAN code
-            </div>
-            <div class="col2-80">
-                <textarea id="grouping_rule_ean_code" name="grouping_rule_ean_code"><?php echo $value = ($id > 0) ? $row['grouping_rule_ean_code'] : ""; ?>
-                </textarea>
-            </div>
-        </div>
-        <!-- ***************-->
-        <!-- GROUPING RULE CATEGORY  -->
-        <!-- ***************-->
-        <div class="row">
-            <div class="col2-20">
-                Rule Category
-            </div>
-            <div class="col2-80">
-                <textarea id="grouping_rule_category" name="grouping_rule_category"><?php echo $value = ($id > 0) ? $row['grouping_rule_category'] : ""; ?>
-                </textarea>
-            </div>
-        </div>
-        <!-- ***************-->
-        <!-- GROUPING RULE SUB CATEGORY 1 -->
-        <!-- ***************-->
-        <div class="row">
-            <div class="col2-20">
-                Rule Sub category 1
-            </div>
-            <div class="col2-80">
-                <textarea id="grouping_rule_subcat1" name="grouping_rule_subcat1"><?php echo $value = ($id > 0) ? $row['grouping_rule_subcat1'] : ""; ?>
-                </textarea>
-            </div>
-        </div>
-        <!-- ***************-->
-        <!-- GROUPING RULE SUB CATEGORY 2 -->
-        <!-- ***************-->
-        <div class="row">
-            <div class="col2-20">
-                Rule Sub category 2
-            </div>
-            <div class="col2-80">
-                <textarea id="grouping_rule_subcat2" name="grouping_rule_subcat2"><?php echo $value = ($id > 0) ? $row['grouping_rule_subcat2'] : ""; ?>
-                </textarea>
 
             </div>
+            <div class="col2-80">
+                <table>
+                    <!-- ROW ONE HEADER 1-->
+                    <tr class="tr-grouping">
+                        <th><label for="fields1">Choose a field 1</label></th>
+                        <th><label for="comp1">Compare 1</label></th>
+                        <th><label for="selection1">Selection 1</label></th>
+                    </tr>
+                    <!-- ROW TWO DATA 1 -->
+                    <tr class="tr-grouping">
+                        <td>
+                            <select id="fields1" name="fields1">
+                                <option value=""></option>
+                                <option value="supplier_code" <?php echo $val = ($row['fields1'] == 'supplier_code') ? 'selected' : ' ';?>>Supplier</option>
+                                <option value="manufacturer" <?php echo $val = ($row['fields1'] == 'manufacturer') ? 'selected' : ' ';?>>Manufacturer</option>
+                                <option value="product_code" <?php echo $val = ($row['fields1'] == 'product_code') ? 'selected' : ' ';?>>Product code</option>
+                                <option value="product_desc" <?php echo $val = ($row['fields1'] == 'product_desc') ? 'selected' : ' ';?>>Product description</option>
+                                <option value="ean_code" <?php echo $val = ($row['fields1'] == 'ean_code') ? 'selected' : ' ';?>>EAN code</option>
+                                <option value="category" <?php echo $val = ($row['fields1'] == 'category') ? 'selected' : ' ';?>>Category</option>
+                                <option value="subcat1" <?php echo $val = ($row['fields1'] == 'subcat1') ? 'selected' : ' ';?>>Sub category 1</option>
+                                <option value="subcat2" <?php echo $val = ($row['fields1'] == 'subcat2') ? 'selected' : ' ';?>>Sub category 2</option>
+                                <option value="supplier_purchase_price <?php echo $val = ($row['fields1'] == 'supplier_purchase_price') ? 'selected' : ' ';?>">Supplier purchase price</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select id="comp1" name="comp1">
+                                <option value="=" <?php echo $val = ($row['comp1'] == '=') ? 'selected' : ' ';?>>equals</option>
+                                <option value=">" <?php echo $val = ($row['comp1'] == '>') ? 'selected' : ' ';?>>greater</option>
+                                <option value="<" <?php echo $val = ($row['comp1'] == '<') ? 'selected' : ' ';?>>less</option>
+                                <option value=">=" <?php echo $val = ($row['comp1'] == '>=') ? 'selected' : ' ';?>>greater or equal</option>
+                                <option value="<=" <?php echo $val = ($row['comp1'] == '<=') ? 'selected' : ' ';?>>less or equal</option>
+                                <option value="<>" <?php echo $val = ($row['comp1'] == '<>') ? 'selected' : ' ';?>>not equal</option>
+                                <option value="BETWEEN" <?php echo $val = ($row['comp1'] == 'BETWEEN') ? 'selected' : ' ';?>>BETWEEN</option>
+                                <option value="IN" <?php echo $val = ($row['comp1'] == 'IN') ? 'selected' : ' ';?>>IN</option>
+                                <option value="LIKE" <?php echo $val = ($row['comp1'] == 'LIKE') ? 'selected' : ' ';?>>LIKE</option>
+                                <option value="NOT BETWEEN" <?php echo $val = ($row['comp1'] == 'NOT BETWEEN') ? 'selected' : ' ';?>>NOT BETWEEN</option>
+                                <option value="NOT IN" <?php echo $val = ($row['comp1'] == 'NOT IN') ? 'selected' : ' ';?>>NOT IN</option>
+                                <option value="NOT LIKE" <?php echo $val = ($row['comp1'] == 'NOT LIKE') ? 'selected' : ' ';?>>NOT LIKE</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="selection1" id="selection1" value=<?php echo $value = ($id > 0) ? $row['selection1'] : ""; ?>>
+                        </td>
+                    </tr>
+                    <tr class="tr-grouping">
+
+                        <td>
+                        </td>
+                        <td>
+                            <select id="oper1" name="oper1">
+                                <option value="AND" <?php echo $val = ($row['oper1'] == 'AND') ? 'selected' : ' ';?>>AND</option>
+                                <option value="OR" <?php echo $val = ($row['oper1'] == 'OR') ? 'selected' : ' ';?>>OR</option>
+                            </select>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <!-- ROW ONE HEADER 1-->
+                    <tr class="tr-grouping">
+                        <th><label for="fields2">Choose a field 2</label></th>
+                        <th><label for="comp2">Compare 2</label></th>
+                        <th><label for="selection2">Selection 2</label></th>
+                    </tr>
+                    <!-- ROW TWO DATA 1 -->
+                    <tr class="tr-grouping">
+                        <td>
+                            <select id="fields2" name="fields2">
+                                <option value=""></option>
+                                <option value="supplier_code" <?php echo $val = ($row['fields2'] == 'supplier_code') ? 'selected' : ' ';?>>Supplier</option>
+                                <option value="manufacturer" <?php echo $val = ($row['fields2'] == 'manufacturer') ? 'selected' : ' ';?>>Manufacturer</option>
+                                <option value="product_code" <?php echo $val = ($row['fields2'] == 'product_code') ? 'selected' : ' ';?>>Product code</option>
+                                <option value="product_desc" <?php echo $val = ($row['fields2'] == 'product_desc') ? 'selected' : ' ';?>>Product description</option>
+                                <option value="ean_code" <?php echo $val = ($row['fields2'] == 'ean_code') ? 'selected' : ' ';?>>EAN code</option>
+                                <option value="category" <?php echo $val = ($row['fields2'] == 'category') ? 'selected' : ' ';?>>Category</option>
+                                <option value="subcat1" <?php echo $val = ($row['fields2'] == 'subcat1') ? 'selected' : ' ';?>>Sub category 1</option>
+                                <option value="subcat2" <?php echo $val = ($row['fields2'] == 'subcat2') ? 'selected' : ' ';?>>Sub category 2</option>
+                                <option value="supplier_purchase_price <?php echo $val = ($row['fields2'] == 'supplier_purchase_price') ? 'selected' : ' ';?>">Supplier purchase price</option>
+
+                            </select>
+                        </td>
+                        <td>
+                            <select id="comp2" name="comp2">
+                                <option value="=" <?php echo $val = ($row['comp2'] == '=') ? 'selected' : ' ';?>>equals</option>
+                                <option value=">" <?php echo $val = ($row['comp2'] == '>') ? 'selected' : ' ';?>>greater</option>
+                                <option value="<" <?php echo $val = ($row['comp2'] == '<') ? 'selected' : ' ';?>>less</option>
+                                <option value=">=" <?php echo $val = ($row['comp2'] == '>=') ? 'selected' : ' ';?>>greater or equal</option>
+                                <option value="<=" <?php echo $val = ($row['comp2'] == '<=') ? 'selected' : ' ';?>>less or equal</option>
+                                <option value="<>" <?php echo $val = ($row['comp2'] == '<>') ? 'selected' : ' ';?>>not equal</option>
+                                <option value="BETWEEN" <?php echo $val = ($row['comp2'] == 'BETWEEN') ? 'selected' : ' ';?>>BETWEEN</option>
+                                <option value="IN" <?php echo $val = ($row['comp2'] == 'IN') ? 'selected' : ' ';?>>IN</option>
+                                <option value="LIKE" <?php echo $val = ($row['comp1'] == 'LIKE') ? 'selected' : ' ';?>>LIKE</option>
+                                <option value="NOT BETWEEN" <?php echo $val = ($row['comp2'] == 'NOT BETWEEN') ? 'selected' : ' ';?>>NOT BETWEEN</option>
+                                <option value="NOT IN" <?php echo $val = ($row['comp2'] == 'NOT IN') ? 'selected' : ' ';?>>NOT IN</option>
+                                <option value="NOT LIKE" <?php echo $val = ($row['comp2'] == 'NOT LIKE') ? 'selected' : ' ';?>>NOT LIKE</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="selection2" id="selection2" value=<?php echo $value = ($id > 0) ? $row['selection2'] : ""; ?>>
+                        </td>
+                    </tr>
+
+
+                </table>
+            </div>
         </div>
+
 
         <!-- ***************-->
         <!-- ***************-->
@@ -292,4 +321,5 @@ function fillPricegroupOptions() {
         }
     }
 }
+
 ?>
