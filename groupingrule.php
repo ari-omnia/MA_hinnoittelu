@@ -48,6 +48,14 @@ function onAdd() {
             var fields2 = $("#fields2").val();
             var comp2 = $("#comp2").val();
             var selection2 = $("#selection2").val();
+            var oper2 = $("#oper2").val();
+            var fields3 = $("#fields3").val();
+            var comp3 = $("#comp3").val();
+            var selection3 = $("#selection3").val();
+            var oper3 = $("#oper3").val();
+            var fields4 = $("#fields4").val();
+            var comp4 = $("#comp4").val();
+            var selection4 = $("#selection4").val();
 
             $(".form-message").load("groupingrule_chk.php", {
                 id: id,
@@ -63,6 +71,14 @@ function onAdd() {
                 fields2: fields2,
                 comp2: comp2,
                 selection2: selection2,
+                oper2: oper2,
+                fields3: fields3,
+                comp3: comp3,
+                selection3: selection3,
+                oper3: oper3,
+                fields4: fields4,
+                comp4: comp4,
+                selection4: selection4,
                 mode: mode
             });
         })
@@ -200,7 +216,6 @@ if ($id > 0) {
                         </td>
                     </tr>
                     <tr class="tr-grouping">
-
                         <td>
                         </td>
                         <td>
@@ -212,13 +227,8 @@ if ($id > 0) {
                         <td>
                         </td>
                     </tr>
-                    <!-- ROW ONE HEADER 1-->
-                    <tr class="tr-grouping">
-                        <th><label for="fields2">Choose a field 2</label></th>
-                        <th><label for="comp2">Compare 2</label></th>
-                        <th><label for="selection2">Selection 2</label></th>
-                    </tr>
-                    <!-- ROW TWO DATA 1 -->
+
+                    <!-- ROW THREE DATA 1 -->
                     <tr class="tr-grouping">
                         <td>
                             <select id="fields2" name="fields2">
@@ -245,7 +255,7 @@ if ($id > 0) {
                                 <option value="<>" <?php echo $val = ($row['comp2'] == '<>') ? 'selected' : ' ';?>>not equal</option>
                                 <option value="BETWEEN" <?php echo $val = ($row['comp2'] == 'BETWEEN') ? 'selected' : ' ';?>>BETWEEN</option>
                                 <option value="IN" <?php echo $val = ($row['comp2'] == 'IN') ? 'selected' : ' ';?>>IN</option>
-                                <option value="LIKE" <?php echo $val = ($row['comp1'] == 'LIKE') ? 'selected' : ' ';?>>LIKE</option>
+                                <option value="LIKE" <?php echo $val = ($row['comp2'] == 'LIKE') ? 'selected' : ' ';?>>LIKE</option>
                                 <option value="NOT BETWEEN" <?php echo $val = ($row['comp2'] == 'NOT BETWEEN') ? 'selected' : ' ';?>>NOT BETWEEN</option>
                                 <option value="NOT IN" <?php echo $val = ($row['comp2'] == 'NOT IN') ? 'selected' : ' ';?>>NOT IN</option>
                                 <option value="NOT LIKE" <?php echo $val = ($row['comp2'] == 'NOT LIKE') ? 'selected' : ' ';?>>NOT LIKE</option>
@@ -255,7 +265,104 @@ if ($id > 0) {
                             <input type="text" name="selection2" id="selection2" value=<?php echo $value = ($id > 0) ? $row['selection2'] : ""; ?>>
                         </td>
                     </tr>
+                    <tr class="tr-grouping">
+                        <td>
+                        </td>
+                        <td>
+                            <select id="oper2" name="oper2">
+                                <option value="AND" <?php echo $val = ($row['oper2'] == 'AND') ? 'selected' : ' ';?>>AND</option>
+                                <option value="OR" <?php echo $val = ($row['oper2'] == 'OR') ? 'selected' : ' ';?>>OR</option>
+                            </select>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <!-- ROW FOUR DATA 1 -->
+                    <tr class="tr-grouping">
+                        <td>
+                            <select id="fields3" name="fields3">
+                                <option value=""></option>
+                                <option value="supplier_code" <?php echo $val = ($row['fields3'] == 'supplier_code') ? 'selected' : ' ';?>>Supplier</option>
+                                <option value="manufacturer" <?php echo $val = ($row['fields3'] == 'manufacturer') ? 'selected' : ' ';?>>Manufacturer</option>
+                                <option value="product_code" <?php echo $val = ($row['fields3'] == 'product_code') ? 'selected' : ' ';?>>Product code</option>
+                                <option value="product_desc" <?php echo $val = ($row['fields3'] == 'product_desc') ? 'selected' : ' ';?>>Product description</option>
+                                <option value="ean_code" <?php echo $val = ($row['fields3'] == 'ean_code') ? 'selected' : ' ';?>>EAN code</option>
+                                <option value="category" <?php echo $val = ($row['fields3'] == 'category') ? 'selected' : ' ';?>>Category</option>
+                                <option value="subcat1" <?php echo $val = ($row['fields3'] == 'subcat1') ? 'selected' : ' ';?>>Sub category 1</option>
+                                <option value="subcat2" <?php echo $val = ($row['fields3'] == 'subcat2') ? 'selected' : ' ';?>>Sub category 2</option>
+                                <option value="supplier_purchase_price <?php echo $val = ($row['fields3'] == 'supplier_purchase_price') ? 'selected' : ' ';?>">Supplier purchase price</option>
 
+                            </select>
+                        </td>
+                        <td>
+                            <select id="comp3" name="comp3">
+                                <option value="=" <?php echo $val = ($row['comp3'] == '=') ? 'selected' : ' ';?>>equals</option>
+                                <option value=">" <?php echo $val = ($row['comp3'] == '>') ? 'selected' : ' ';?>>greater</option>
+                                <option value="<" <?php echo $val = ($row['comp3'] == '<') ? 'selected' : ' ';?>>less</option>
+                                <option value=">=" <?php echo $val = ($row['comp3'] == '>=') ? 'selected' : ' ';?>>greater or equal</option>
+                                <option value="<=" <?php echo $val = ($row['comp3'] == '<=') ? 'selected' : ' ';?>>less or equal</option>
+                                <option value="<>" <?php echo $val = ($row['comp3'] == '<>') ? 'selected' : ' ';?>>not equal</option>
+                                <option value="BETWEEN" <?php echo $val = ($row['comp3'] == 'BETWEEN') ? 'selected' : ' ';?>>BETWEEN</option>
+                                <option value="IN" <?php echo $val = ($row['comp3'] == 'IN') ? 'selected' : ' ';?>>IN</option>
+                                <option value="LIKE" <?php echo $val = ($row['comp3'] == 'LIKE') ? 'selected' : ' ';?>>LIKE</option>
+                                <option value="NOT BETWEEN" <?php echo $val = ($row['comp3'] == 'NOT BETWEEN') ? 'selected' : ' ';?>>NOT BETWEEN</option>
+                                <option value="NOT IN" <?php echo $val = ($row['comp3'] == 'NOT IN') ? 'selected' : ' ';?>>NOT IN</option>
+                                <option value="NOT LIKE" <?php echo $val = ($row['comp3'] == 'NOT LIKE') ? 'selected' : ' ';?>>NOT LIKE</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="selection3" id="selection3" value=<?php echo $value = ($id > 0) ? $row['selection3'] : ""; ?>>
+                        </td>
+                    </tr>
+                    <tr class="tr-grouping">
+                        <td>
+                        </td>
+                        <td>
+                            <select id="oper3" name="oper3">
+                                <option value="AND" <?php echo $val = ($row['oper3'] == 'AND') ? 'selected' : ' ';?>>AND</option>
+                                <option value="OR" <?php echo $val = ($row['oper3'] == 'OR') ? 'selected' : ' ';?>>OR</option>
+                            </select>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <!-- ROW FIVE DATA 1 -->
+                    <tr class="tr-grouping">
+                        <td>
+                            <select id="fields4" name="fields4">
+                                <option value=""></option>
+                                <option value="supplier_code" <?php echo $val = ($row['fields4'] == 'supplier_code') ? 'selected' : ' ';?>>Supplier</option>
+                                <option value="manufacturer" <?php echo $val = ($row['fields4'] == 'manufacturer') ? 'selected' : ' ';?>>Manufacturer</option>
+                                <option value="product_code" <?php echo $val = ($row['fields4'] == 'product_code') ? 'selected' : ' ';?>>Product code</option>
+                                <option value="product_desc" <?php echo $val = ($row['fields4'] == 'product_desc') ? 'selected' : ' ';?>>Product description</option>
+                                <option value="ean_code" <?php echo $val = ($row['fields4'] == 'ean_code') ? 'selected' : ' ';?>>EAN code</option>
+                                <option value="category" <?php echo $val = ($row['fields4'] == 'category') ? 'selected' : ' ';?>>Category</option>
+                                <option value="subcat1" <?php echo $val = ($row['fields4'] == 'subcat1') ? 'selected' : ' ';?>>Sub category 1</option>
+                                <option value="subcat2" <?php echo $val = ($row['fields4'] == 'subcat2') ? 'selected' : ' ';?>>Sub category 2</option>
+                                <option value="supplier_purchase_price <?php echo $val = ($row['fields4'] == 'supplier_purchase_price') ? 'selected' : ' ';?>">Supplier purchase price</option>
+
+                            </select>
+                        </td>
+                        <td>
+                            <select id="comp4" name="comp4">
+                                <option value="=" <?php echo $val = ($row['comp4'] == '=') ? 'selected' : ' ';?>>equals</option>
+                                <option value=">" <?php echo $val = ($row['comp4'] == '>') ? 'selected' : ' ';?>>greater</option>
+                                <option value="<" <?php echo $val = ($row['comp4'] == '<') ? 'selected' : ' ';?>>less</option>
+                                <option value=">=" <?php echo $val = ($row['comp4'] == '>=') ? 'selected' : ' ';?>>greater or equal</option>
+                                <option value="<=" <?php echo $val = ($row['comp4'] == '<=') ? 'selected' : ' ';?>>less or equal</option>
+                                <option value="<>" <?php echo $val = ($row['comp4'] == '<>') ? 'selected' : ' ';?>>not equal</option>
+                                <option value="BETWEEN" <?php echo $val = ($row['comp4'] == 'BETWEEN') ? 'selected' : ' ';?>>BETWEEN</option>
+                                <option value="IN" <?php echo $val = ($row['comp4'] == 'IN') ? 'selected' : ' ';?>>IN</option>
+                                <option value="LIKE" <?php echo $val = ($row['comp4'] == 'LIKE') ? 'selected' : ' ';?>>LIKE</option>
+                                <option value="NOT BETWEEN" <?php echo $val = ($row['comp4'] == 'NOT BETWEEN') ? 'selected' : ' ';?>>NOT BETWEEN</option>
+                                <option value="NOT IN" <?php echo $val = ($row['comp4'] == 'NOT IN') ? 'selected' : ' ';?>>NOT IN</option>
+                                <option value="NOT LIKE" <?php echo $val = ($row['comp4'] == 'NOT LIKE') ? 'selected' : ' ';?>>NOT LIKE</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="selection4" id="selection4" value=<?php echo $value = ($id > 0) ? $row['selection4'] : ""; ?>>
+                        </td>
+                    </tr>
 
                 </table>
             </div>
