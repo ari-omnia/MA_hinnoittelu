@@ -10,7 +10,13 @@
             <input type='submit' value='Start file load'>
 
         </form>
+        <br>
+        <br>
+        <form action="filetestgroup.php" method="post">
 
+            <input type='submit' value='Start grouping'>
+
+        </form>
 
     </body>
 </html>
