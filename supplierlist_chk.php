@@ -296,12 +296,6 @@ if ($mode != "errorissa" && $mode != "") {
         $kentat = implode(",",$kentat);
         $id = $_POST['id'];
 
-        // Strip tags from text fields
-        $supplier_code = strip_tags($supplier_code);
-        $supplier_name = strip_tags($supplier_name);
-        $supplier_file = strip_tags($supplier_file);
-        $file_path = strip_tags($file_path);
-
         // ADD or UPDATE
         if ($mode == 'add') {
             $sql = "INSERT INTO supplierlists($kentat) VALUES  (
