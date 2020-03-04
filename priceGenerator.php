@@ -201,7 +201,7 @@
             
             if($res === FALSE)
             {
-                throw new Exception('Inserting data into pricing table failed. '.$sql.'<br>', 1);
+                throw new Exception('Inserting data into pricing table failed.<br>', 1);
             }
             else
             {
@@ -233,7 +233,7 @@
             
             if($res === FALSE)
             {
-                throw new Exception('Updating data to pricing table failed. '.$sql.'<br>', 1);
+                throw new Exception('Updating data to pricing table failed.<br>', 1);
             }
             else
             {

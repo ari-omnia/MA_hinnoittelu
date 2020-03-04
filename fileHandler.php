@@ -258,7 +258,7 @@
             
             if($res === FALSE)
             {
-                throw new Exception('Inserting data into unifiedlists table failed. '.$sql.'<br>', 1);
+                throw new Exception('Inserting data into unifiedlists table failed.<br>', 1);
             }
             else
             {
@@ -294,7 +294,7 @@
             
             if($res === FALSE)
             {
-                throw new Exception('Updating data to unifiedlists table failed. '.$sql.'<br>', 1);
+                throw new Exception('Updating data to unifiedlists table failed.<br>', 1);
             }
             else
             {
