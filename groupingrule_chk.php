@@ -37,14 +37,25 @@ if ($mode != "errorissa" && $mode != "") {
     $price_group = $_POST['price_group'];
     $target_category = $_POST['target_category'];
     $grouping_SQL_selection = $_POST['grouping_SQL_selection'];
+
     $fields1 = $_POST['fields1'];
     $comp1 = $_POST['comp1'];
     $selection1 = $_POST['selection1'];
-
     $oper1 = $_POST['oper1'];
+
     $fields2 = $_POST['fields2'];
     $comp2 = $_POST['comp2'];
     $selection2 = $_POST['selection2'];
+    $oper2 = $_POST['oper2'];
+
+    $fields3 = $_POST['fields3'];
+    $comp3 = $_POST['comp3'];
+    $selection3 = $_POST['selection3'];
+    $oper3 = $_POST['oper3'];
+
+    $fields4 = $_POST['fields4'];
+    $comp4 = $_POST['comp4'];
+    $selection4 = $_POST['selection4'];
 
     // If ADD, we first check if item already exists
     if ($mode == 'add') {
@@ -90,7 +101,10 @@ if ($mode != "errorissa" && $mode != "") {
     // if no errors prepare SQL statements accordin ADD or UPDATE
     if (!$error_form) {
         $kentat = array ('grouping_code', 'grouping_desc', 'price_group', 'target_category', 'grouping_SQL_selection',
-            'fields1', 'comp1', 'selection1', 'oper1', 'fields2', 'comp2', 'selection2');
+            'fields1', 'comp1', 'selection1', 'oper1',
+            'fields2', 'comp2', 'selection2', 'oper2',
+            'fields3', 'comp3', 'selection3', 'oper3',
+            'fields4', 'comp4', 'selection4');
         $kentat = implode(",",$kentat);
         $id = $_POST['id'];
 
@@ -104,10 +118,16 @@ if ($mode != "errorissa" && $mode != "") {
             $clause1 = $fields1." ".$comp1." "."\"$selection1\"";
             if (!empty($fields2)) {
                 $clause2 = " ".$oper1." ".$fields2." ".$comp2." "."\"$selection2\"";
+                if (!empty($fields3)) {
+                    $clause3 = " ".$oper2." ".$fields3." ".$comp3." "."\"$selection3\"";
+                    if (!empty($fields4)) {
+                        $clause4 = " ".$oper3." ".$fields4." ".$comp4." "."\"$selection4\"";
+                    }
+                }
             }
 
             $grouping_SQL_selection = "SELECT * FROM unifiedlists WHERE ";
-            $grouping_SQL_selection .= "$clause1"."$clause2";
+            $grouping_SQL_selection .= "$clause1"."$clause2"."$clause3"."$clause4";
         }
 
         // ADD or UPDATE
@@ -124,7 +144,15 @@ if ($mode != "errorissa" && $mode != "") {
                 '$oper1',
                 '$fields2',
                 '$comp2',
-                '$selection2'
+                '$selection2',
+                '$oper2',
+                '$fields3',
+                '$comp3',
+                '$selection3',
+                '$oper3',
+                '$fields4',
+                '$comp4',
+                '$selection4'
                 )";
 
         } elseif ($mode == 'update') {
@@ -140,7 +168,15 @@ if ($mode != "errorissa" && $mode != "") {
             oper1 = '$oper1',
             fields2 = '$fields2',
             comp2 = '$comp2',
-            selection2 = '$selection2'
+            selection2 = '$selection2',
+            oper2 = '$oper2',
+            fields3 = '$fields3',
+            comp3 = '$comp3',
+            selection3 = '$selection3',
+            oper3 = '$oper3',
+            fields4 = '$fields4',
+            comp4 = '$comp4',
+            selection4 = '$selection4'
             WHERE id = $id";
         }
 
