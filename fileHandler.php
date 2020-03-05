@@ -5,12 +5,28 @@
     function fetchAllFiles()
     {
         global $conn;
-        echo "<br>";
-        var_dump($conn);
 
-        $res = $conn->query("SELECT * FROM supplierlists");
-        echo "<br>";
-        var_dump($res);
+        try
+        {
+            $res = $conn->query("SELECT * FROM supplierlists");
+            
+            if($res->num_rows == 0)
+            {
+                throw new Exception('Getting data from supplierlists table failed.<br>', 1);
+            }
+            else
+            {
+                throw new Exception('Getting data from supplierlists table successful.<br>');
+            }
+        } 
+        catch(Exception $ex) 
+        {
+            echo $ex->getMessage();
+
+            if($ex->getCode() > 0)
+                return;
+        }
+
         while($row = $res->fetch_assoc())
         {
             arrangeFile($row['supplier_file'], $row);
@@ -44,9 +60,26 @@
     function arrangeFile($file, $row = '')
     {
         global $conn;
-        echo "<br>.arrangeFile /";
-        var_dump($row);
 
+        try
+        {
+            if(!file_exists($row['file_path'].'/'.$file))
+            {
+                throw new Exception('File '.$file.' not found.<br>', 1);
+            }
+            else
+            {
+                throw new Exception('File '.$file.' found.<br>');
+            }
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex->getMessage();
+            
+            if($ex->getCode() > 0)
+                return;
+        }
+        
         if($row == '')
         {
             $res = $conn->query("SELECT * FROM supplierlists WHERE supplier_file = '".$file."';");
@@ -56,8 +89,27 @@
 
         fixColumns($row);
 
-        $handle = fopen($row['file_path'].'/'.$file, 'r');
+        try
+        {
+            $handle = fopen($row['file_path'].'/'.$file, 'r');
+            
+            if(!$handle)
+            {
+                throw new Exception('Could not open file '.$row['file_path'].'/'.$file.'<br>', 1);
+            }
+            else
+            {
+                throw new Exception('File open successful.<br>');
+            }
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex->getMessage();
 
+            if($ex->getCode() > 0)
+                return;
+        }
+        
         if($row['file_column_separator'] == "t" || $row['file_column_separator'] == "T")
         {
             $sep = "\t";    // Separator char is tab.
@@ -89,15 +141,17 @@
                 updateUnifiedlistsTable($product);
             }
         }
+        
+        fclose($handle);
     }
 
     function findEAN($table, $ean)
     {
         global $conn;
 
-        $eanQuery = "SELECT ean_code FROM ".$table." WHERE ean_code = '".$ean."';";
-        $res = $conn->query($eanQuery);
-
+        $sql = "SELECT ean_code FROM ".$table." WHERE ean_code = '".$ean."';";
+        $res = $conn->query($sql);
+        
         return $res;
     }
 
@@ -111,111 +165,67 @@
             switch($k)
             {
                 case 'column_manufacturer':
-                    if($v < 0)
-                    {
-                        $prod['manufacturer'] = NULL;
-                    }
-                    else
-                    {
-                        $prod['manufacturer'] = $data[$row[$k]];
-                    }
+                    transferData($data, $row, 'manufacturer', $v, $k, $prod);
 
                     break;
 
                 case 'column_product_code':
-                    if($v < 0)
-                    {
-                        $prod['product_code'] = NULL;
-                    }
-                    else
-                    {
-                        $prod['product_code'] = $data[$row[$k]];
-                    }
+                    transferData($data, $row, 'product_code', $v, $k, $prod);
 
                     break;
 
                 case 'column_product_desc':
-                    if($v < 0)
-                    {
-                        $prod['product_desc'] = NULL;
-                    }
-                    else
-                    {
-                        $prod['product_desc'] = $data[$row[$k]];
-                    }
+                    transferData($data, $row, 'product_desc', $v, $k, $prod);
 
                     break;
 
                 case 'column_ean_code':
-                    if($v < 0)
-                    {
-                        $prod['ean_code'] = NULL;
-                    }
-                    else
-                    {
-                        $prod['ean_code'] = $data[$row[$k]];
-                    }
+                    transferData($data, $row, 'ean_code', $v, $k, $prod);
 
                     break;
 
                 case 'column_category':
-                    if($v < 0)
-                    {
-                        $prod['category'] = NULL;
-                    }
-                    else
-                    {
-                        $prod['category'] = $data[$row[$k]];
-                    }
+                    transferData($data, $row, 'category', $v, $k, $prod);
 
                     break;
 
                 case 'column_subcat1':
-                    if($v < 0)
-                    {
-                        $prod['subcat1'] = NULL;
-                    }
-                    else
-                    {
-                        $prod['subcat1'] = $data[$row[$k]];
-                    }
+                    transferData($data, $row, 'subcat1', $v, $k, $prod);
 
                     break;
 
                 case 'column_subcat2':
-                    if($v < 0)
-                    {
-                        $prod['subcat2'] = NULL;
-                    }
-                    else
-                    {
-                        $prod['subcat2'] = $data[$row[$k]];
-                    }
+                    transferData($data, $row, 'subcat2', $v, $k, $prod);
 
                     break;
 
                 case 'column_purchase_price':
-                    if($v < 0)
-                    {
-                        $prod['purchase_price'] = NULL;
-                    }
-                    else
-                    {
-                        $prod['purchase_price'] = $data[$row[$k]];
-                    }
-
+                    transferData($data, $row, 'purchase_price', $v, $k, $prod);
+                    
                     break;
+                }
             }
-        }
-
+        
         return $prod;
     }
-
+    
+    function transferData($data, $row, $columnName, $value, $k, &$prod)
+    {
+        if($value < 0)
+        {
+            $prod[$columnName] = NULL;
+        }
+        else
+        {
+            $prod[$columnName] = $data[$row[$k]];
+        }
+    }
+    
     function insertIntoUnifiedlistsTable($product)
     {
         global $conn;
 
-        $ins = "INSERT INTO unifiedlists
+        $sql = "INSERT INTO unifiedlists
                             (
                                 supplier_file,
                                 manufacturer,
@@ -242,14 +252,30 @@
                                 '".$product["purchase_price"]."'
                             )";
 
-        $conn->query($ins);
+        try
+        {
+            $res = $conn->query($sql);
+            
+            if($res === FALSE)
+            {
+                throw new Exception('Inserting data into unifiedlists table failed. '.$sql.'<br>', 1);
+            }
+            else
+            {
+                throw new Exception('Inserting data into unifiedlists table successful.<br>');
+            }
+        } 
+        catch(Exception $ex) 
+        {
+            echo $ex->getMessage();
+        }
     }
 
     function updateUnifiedlistsTable($product)
     {
         global $conn;
 
-        $upd = "UPDATE unifiedlists
+        $sql = "UPDATE unifiedlists
                 SET
                     supplier_file = '".$product["supplier_file"]."',
                     manufacturer = '".$product["manufacturer"]."',
@@ -262,5 +288,21 @@
                     supplier_purchase_price = '".$product["purchase_price"]."'
                 WHERE ean_code = '".$product["ean_code"]."';";
 
-        $conn->query($upd);
+        try
+        {
+            $res = $conn->query($sql);
+            
+            if($res === FALSE)
+            {
+                throw new Exception('Updating data to unifiedlists table failed. '.$sql.'<br>', 1);
+            }
+            else
+            {
+                throw new Exception('Updating data to unifiedlists table successful.<br>');
+            }
+        } 
+        catch(Exception $ex) 
+        {
+            echo $ex->getMessage();
+        }
     }

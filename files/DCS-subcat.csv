@@ -1,0 +1,39 @@
+Varenummer;Varegruppenavn;Varenavn;Beholdning;Vaegt;Modelbetegnelse;Undergruppenavn;Antal dage fra fjernlager;Antal på fjernlager;Pris;Producentnavn
+15107;Hardware;CORSAIR Value Select DDR2  1GB 533MHz;2;0.03;VS1GB533D2;DDR2 DIMM;;;15.13;Corsair
+16677;Hardware;G.Skill NT Series DDR3  8GB 1600MHz CL11;1;0.025;F3-1600C11S-8GNT;DDR3 DIMM;7;17;26.91;G.Skill
+16862;Hardware;Kingston DataTraveler G4 8GB;50;0.01;DTIG4/8GB;USB 3.0;4;50;3.35;Kingston Technology
+17116;Hardware;CORSAIR DDR3  4GB 1333MHz CL9   SO-DIMM  204-PIN;1;0.026666;CMSO4GX3M1A1333C9;DDR3 SO-DIMM;5;20;17;Corsair
+18557;Hardware;Seagate Hybrid harddisk Desktop SSHD 2TB 3.5 SATA-600;0;0.63;ST2000DX001;Intern Harddisk;3;26;67.41;Seagate
+22244;Hardware;Apple USB SuperDrive DVD±RW (±R DL) drev;2;0.34;MD564ZM/A;Ekstern DVD-drev;4;15;64.27;Apple
+27802;Hardware;Logitech Z-120 Højttalere;50;1.5;980-000513;Portable;6;50;11.38;Logitech
+27851;Hardware;Logitech S-120 Sort Højttalere;12;0.25;980-000010;Højttalersæt;4;50;10.98;Logitech
+28071;Hardware;APC Replacement Battery Cartridge #55 UPS-batteri;0;24.3;RBC55;UPS batterier;4;50;330.64;APC
+46082;Hardware;Intel PRO/1000 PCI Netværksadapter 1Gbps;0;0.12;PWLA8391GTBLK;Gigabit adaptere;4;50;20.87;Intel
+55362;Hardware;HP 645A Magenta 12000 sider;0;0.2;C9733A;HP Laser;3;12;290.02;Hewlett-Packard
+55414;Hardware;HP 309A Gul 4000 sider;0;1;Q2672A;HP Laser;5;50;69.09;Hewlett-Packard
+55512;Hardware;Canon CLI 521Y Gul 500 sider;50;0.041428;2936B001;Blæktanke;4;50;8.97;Canon
+55558;Hardware;Brother TN 11 Magenta 6000 sider;0;0.1;HGE261V5;Rullepapir;7;4;75.84;Brother
+55870;Hardware;Brother Innobella Premium  BP71GA4 Fotopapir A4 (210 x 297 mm) 20ark;14;0.3;BP71GA4;Papir;5;50;6.43;Brother
+55946;Hardware;Brother TN135M - Højtydende - magenta - original - tonerpatron - for Brother DCP-9040, 9042, 9045, MFC-9420, 9440, 9450, 9840  HL-4040, 4050, 4070;0;1.147142;TN135M;Printerforbrugsvarer;4;11;88.21;Brother
+55932;Hardware;Brother LC 1240 Value-Pack Sort Gul Cyan Magenta 600 sider;50;0.5;LC1240VALBPDR;Brother Blæk;4;5;46.86;Brother
+56020;Hardware;Epson T0795 Lys cyan 540 sider;0;0.3;C13T07954010;Epson Blæk;5;50;12.99;Epson
+55957;Hardware;Brother LC 970C Cyan 300 sider;0;0.2;LC970C;Brother Blæk;5;13;7.78;Brother
+56309;Hardware;OKI Gul 2500 sider;0;0.234;43459329;Øvrige;7;4;84.22;OKI
+56479;Hardware;Brother TN230BK - Sort - original - tonerpatron - for Brother DCP-9010CN, MFC-9120CN, MFC-9320CN, MFC-9320CW  HL-3040CN, 3040CW, 3070CW;31;0.765;TN230BK;Printerforbrugsvarer;5;30;51.55;Brother
+56640;Hardware;Brother TN 320Y Gul 1500 sider;2;0.814285;TN320Y;Brother Laser;5;50;57.84;Brother
+56899;Hardware;Xerox Phaser 8560MFP Gul 3400 sider ;0;0.113333;108R00725;Fast blæk;5;9;117.83;Xerox
+56985;Hardware;Canon 731 C Cyan 1500 sider;24;0.791666;6271B002;Canon Laser;7;50;47.53;Canon
+57023;Hardware;Canon C-EXV 22 Sort 48000 sider;0;2.95;1872B002;Canon Laser;7;9;71.9;Canon
+61208;Hardware;Canon MP 101 Fotopapir A3 (297 x 420 mm) 40ark;0;0.4;7981A008;Papir;5;10;15.4;Canon
+62236;Hardware;SteelSeries QcK mini;10;0.5;63005;Skrivebordsorganisation;5;50;7.36;SteelSeries
+62717;Hardware;Logitech M510 Laser Trådløs Sort;50;0.1;910-001826;Trådløs mus;5;50;26.11;Logitech
+62788;Hardware;Logitech M235 Optisk Trådløs Rød;32;0.1;910-002496;Trådløs mus;4;31;14.19;Logitech
+62992;Hardware;Razer Anansi Expert MMO Gaming Keyboard Tastatur Kabling Nordisk;27;0.825;RZ03-00550600-R3N1;Kabel tastatur;;;33.34;Razer USA
+67689;Mobiler, Telefoni & Navigation;Lenco SCD-38 USB Boombox Pink;0;1.23;SCD38USBRO;Ghettoblastere;5;10;38.59;Lenco
+70642;Hardware;LogiLink USB Line Extender - USB-forlængerkabel - op til 60 m;15;0.51;UA0021D;Kobbertransceivere;7;4;9.24;2direct
+70711;Hardware;LogiLink USB 2.0 Hub 4-Port;0;0.1;UA0086;4-5 Porte;7;7;7.36;2direct
+71004;Hardware;LogiLink Netværksadapter USB 3Mbps Trådløs;5;0;BT0015;USB adaptere;4;50;6.56;2direct
+71125;Hardware;LogiLink Optisk Kabling Sort;10;0.12;ID0011;Kabel mus;4;50;3.62;2direct
+75340;Hardware;Toshiba Harddisk DT01ACA100 1TB 3.5 SATA-600 7200rpm;13;0.45;DT01ACA100;Intern Harddisk;4;50;31.47;Toshiba
+75584;Hardware;Noctua NH-U14S Processor-køler;17;0.94;NH-U14S;Processorkøler;7;8;55.03;Noctua
+81188;Hardware;HP 364 Foto-sort 130 sider;0;0.04;CB317EE#ABB;HP Blæk;5;50;15.26;Hewlett-Packard

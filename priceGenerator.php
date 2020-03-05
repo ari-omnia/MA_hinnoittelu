@@ -8,17 +8,57 @@
     {
         global $conn;
         
-        $res = $conn->query("SELECT * FROM groupingrules");
+        try
+        {
+            $res = $conn->query("SELECT * FROM groupingrules");
+            
+            if($res->num_rows == 0)
+            {
+                throw new Exception('Getting data from groupingrules table failed.<br>', 1);
+            }
+            else
+            {
+                throw new Exception('Getting data from groupingrules table successful.<br>');
+            }
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex->getMessage();
+
+            if($ex->getCode() > 0)
+                return;
+        }
 
         while($groupingRule = $res->fetch_assoc())
         {
-            $query = $groupingRule['grouping_SQL_selection'];
+            $sql = $groupingRule['grouping_SQL_selection'];
             
-            if($query != NULL)
+            if($sql != NULL)
             {
                 // grouping_SQL_selection is not NULL so we can use SQL expression to group products.
                 
-                $products = $conn->query($query);   // Get products from unifiedlists table according to the query.
+                try
+                {
+                    $products = $conn->query($sql);   // Get products from unifiedlists table according to the query.
+
+                    if($products->num_rows == 0)
+                    {
+                        throw new Exception('No items found with grouping rule '.$sql.' <br>', 1);
+                    }
+                    else
+                    {
+                        throw new Exception('Groupingrule '.$sql.' successful.<br>');
+                    }
+                } 
+                catch (Exception $ex) 
+                {
+                    echo $ex->getMessage();
+
+                    if($ex->getCode() > 0)
+                    {
+                        continue;
+                    }
+                }
             }
             else
             {
@@ -36,14 +76,54 @@
     {
         global $conn;
         
-        $query = "SELECT purchase_price_factor FROM supplierlists WHERE supplier_code = '".$product['supplier_code']."';";
+        $sql = "SELECT purchase_price_factor FROM supplierlists WHERE supplier_code = '".$product['supplier_code']."';";
         
-        $res = $conn->query($query);
+        try
+        {
+            $res = $conn->query($sql);
+
+            if($res->num_rows == 0)
+            {
+                throw new Exception('Getting purchase price factor with supplier code '.$product['supplier_code'].' from supplierlists table failed.<br>', 1);
+            }
+            else
+            {
+                throw new Exception('Getting purchase price factor with supplier code '.$product['supplier_code'].' successful.<br>');
+            }
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex->getMessage();
+
+            if($ex->getCode() > 0)
+                return;
+        }
+        
         $supplierPriceFactor = $res->fetch_assoc();
 
-        $query = "SELECT * FROM pricegroups WHERE price_group_code = '".$groupingRule['price_group']."';";
+        $sql = "SELECT * FROM pricegroups WHERE price_group_code = '".$groupingRule['price_group']."';";
         
-        $res = $conn->query($query);
+        try
+        {
+            $res = $conn->query($sql);
+
+            if($res->num_rows == 0)
+            {
+                throw new Exception('Getting data from pricegroups table with price group code '.$groupingRule['price_group'].' failed.<br>', 1);
+            }
+            else
+            {
+                throw new Exception('Getting data from pricegroups table with price group code '.$groupingRule['price_group'].' successful.<br>');
+            }
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex->getMessage();
+
+            if($ex->getCode() > 0)
+                return;
+        }
+
         $pricingRule = $res->fetch_assoc();
 
         // If supplier based purchase price factor > 0, multiply supplier price by purchase price factor.
@@ -78,7 +158,7 @@
     {
         global $conn;
         
-        $ins = "INSERT INTO pricing
+        $sql = "INSERT INTO pricing
                             (
                                 supplier_file,
                                 manufacturer,
@@ -115,14 +195,30 @@
                             '".$groupingRule['target_category']."'
                         )";
  
-        $conn->query($ins);
+        try
+        {
+            $res = $conn->query($sql);
+            
+            if($res === FALSE)
+            {
+                throw new Exception('Inserting data into pricing table failed. '.$sql.'<br>', 1);
+            }
+            else
+            {
+                throw new Exception('Inserting data into pricing table successful.<br>');
+            }
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex->getMessage();
+        }
     }
     
     function updatePricingTable($prod, $groupingRule, $newSupplierPrice, $salesPrice)
     {
         global $conn;
 
-        $upd = "UPDATE pricing 
+        $sql = "UPDATE pricing 
                 SET
                     supplier_purchase_price = '".$prod['supplier_purchase_price']."',
                     new_purchase_price = '".$newSupplierPrice."',
@@ -130,6 +226,22 @@
                     grouping_code = '".$groupingRule['grouping_code']."',
                     price_group_code = '".$groupingRule['price_group']."'
                 WHERE ean_code = '".$prod['ean_code']."';";
-  
-        $conn->query($upd);
+ 
+        try
+        {
+            $res = $conn->query($sql);
+            
+            if($res === FALSE)
+            {
+                throw new Exception('Updating data to pricing table failed. '.$sql.'<br>', 1);
+            }
+            else
+            {
+                throw new Exception('Updating data to pricing table successful.<br>');
+            }
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex->getMessage();
+        }
     }

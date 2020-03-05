@@ -10,11 +10,11 @@ require "../priceGenerator.php";
 
 //var_dump($conn);
 echo "<br>";
-echo "kutsutaan fetchAllFiles";
+echo "kutsutaan groupProducts";
 echo "<br>";
 
 //arrangeFile("test.csv");
-fetchAllFiles();
+groupProducts();
 //groupProducts();
 /*$fetch = fetchAllFiles();
 
