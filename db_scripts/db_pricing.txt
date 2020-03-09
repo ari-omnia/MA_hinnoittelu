@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS priceupdate;
 
 CREATE TABLE IF NOT EXISTS  priceupdate.supplierlists (
 id INT  AUTO_INCREMENT PRIMARY KEY,
-supplier_code int,
+supplier_code int(11),
 supplier_name varchar(64),
 purchase_price_factor decimal(3,2),
 supplier_file varchar(32),
@@ -91,3 +91,32 @@ firstname VARCHAR(16) NOT NULL,
 email VARCHAR(64) NOT NULL,
 phone VARCHAR(32) NOT NULL
 ) ENGINE=INNODB;
+
+ALTER TABLE `groupingrules` MODIFY `grouping_desc` VARCHAR(32);
+
+ALTER TABLE `groupingrules` drop column grouping_rule_manufacturer;
+ALTER TABLE `groupingrules` drop column grouping_rule_product_code;
+ALTER TABLE `groupingrules` drop column grouping_rule_product_desc;
+ALTER TABLE `groupingrules` drop column grouping_rule_ean_code;
+ALTER TABLE `groupingrules` drop column grouping_rule_category;
+ALTER TABLE `groupingrules` drop column grouping_rule_subcat1;
+ALTER TABLE `groupingrules` drop column grouping_rule_subcat2;
+
+ALTER TABLE `pricing` ADD COLUMN new_product tinyint(1);
+ALTER TABLE `supplierlists` ADD COLUMN new_products_totalsum int(5);
+
+ALTER TABLE `groupingrules` ADD COLUMN `fields1` VARCHAR(128) NULL;
+ALTER TABLE `groupingrules` ADD COLUMN `comp1` VARCHAR(128) NULL;
+ALTER TABLE `groupingrules` ADD COLUMN `selection1` VARCHAR(128) NULL;
+ALTER TABLE `groupingrules` ADD COLUMN `oper1` VARCHAR(128) NULL;
+ALTER TABLE `groupingrules` ADD COLUMN `fields2` VARCHAR(128) NULL;
+ALTER TABLE `groupingrules` ADD COLUMN `comp2` VARCHAR(128) NULL;
+ALTER TABLE `groupingrules` ADD COLUMN `selection2` VARCHAR(128) NULL;
+ALTER TABLE `groupingrules` ADD COLUMN `oper2` VARCHAR(128) NULL;
+ALTER TABLE `groupingrules` ADD COLUMN `fields3` VARCHAR(128) NULL;
+ALTER TABLE `groupingrules` ADD COLUMN `comp3` VARCHAR(128) NULL;
+ALTER TABLE `groupingrules` ADD COLUMN `selection3` VARCHAR(128) NULL;
+ALTER TABLE `groupingrules` ADD COLUMN `oper3` VARCHAR(128) NULL;
+ALTER TABLE `groupingrules` ADD COLUMN `fields4` VARCHAR(128) NULL;
+ALTER TABLE `groupingrules` ADD COLUMN `comp4` VARCHAR(128) NULL;
+ALTER TABLE `groupingrules` ADD COLUMN `selection4` VARCHAR(128) NULL;
