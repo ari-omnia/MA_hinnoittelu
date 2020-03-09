@@ -29,7 +29,7 @@
 		$conn = @mysqli_connect($servername, $uname, $pword, $dbname);
 	}
 
-		// LOCAL CONNECTION 3 FREE
+        // LOCAL CONNECTION 3 FREE
 	if(!$conn) {
 		$servername = "localhost:50205";
 		$uname = "root";
