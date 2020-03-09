@@ -96,6 +96,19 @@ if ($mode != "errorissa" && $mode != "") {
             $error_form = true;
         }
 
+        // validate SQL CLAUSE. No 'INSERT, DELETE, UPDATE allowed'
+        if (!empty($grouping_SQL_selection) && (empty($fields1))) {
+            $countDelete = substr_count(strtoupper($grouping_SQL_selection),"DELETE");
+            $countInsert = substr_count(strtoupper($grouping_SQL_selection),"INSERT");
+            $countUpdate = substr_count(strtoupper($grouping_SQL_selection),"UPDATE");
+
+            if (($countDelete + $countInsert + $countUpdate) > 0) {
+                $error_grouping_SQL_selection = true;
+                $error_form = true;
+            }
+
+        }
+
     } // END field validations
 
     // if no errors prepare SQL statements accordin ADD or UPDATE
@@ -261,7 +274,7 @@ if ($error_target_category == true) {
 var error_grouping_SQL_selection = "<?php echo $error_grouping_SQL_selection; ?>";
 if (error_grouping_SQL_selection == true) {
     $("#grouping_SQL_selection").addClass("input-error");
-    alertText = alertText + "SQL selection is mandatory\n";
+    alertText = alertText + "Check SQL selection syntax. Only SELECT is allowed\n";
 }
 
 
