@@ -13,8 +13,8 @@ echo "<br>";
 echo "kutsutaan fetchAllFiles";
 echo "<br>";
 
-//arrangeFile("test.csv");
-fetchAllFiles();
+arrangeFile("koe.txt");
+//fetchAllFiles();
 //groupProducts();
 /*$fetch = fetchAllFiles();
 
