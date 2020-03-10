@@ -2,6 +2,7 @@
 require "header.php";
 require "includes/logged.php";
 
+
   //!! define how many results you want per page
   $results_per_page = 10;
   // find out the number of results stored in database
@@ -26,6 +27,14 @@ require "includes/logged.php";
     <section class="function-container">
       <div>
         <!--input class="button button--add" type="submit" value="Add" onclick="window.location.href='pricing.php?mode=1'"-->
+        <input type="text" id="searchGroupRule" onkeyup="searchGroupRule()" placeholder="Search for group rules..." title="Type in a name">
+    </div>
+    <div style="flex-basis:820px">
+    </div>
+    <div>
+        <form id="pricingpresta" name="pricingpresta" action="prestaupdate.php" method="post">
+            <input class="button button--presta" type="submit" value="Presta update">
+        </form>
         <?php
 		if(isset($_GET['return']))
         {
@@ -55,7 +64,7 @@ require "includes/logged.php";
               $result = mysqli_query($conn, $sql);
               if(mysqli_num_rows($result) > 0) {
                 // output data columns
-            		echo "<table class='listtable'>
+            		echo "<table class='listtable' id='myTable'>
                     <thead><tr>
     					<th>Val</th>
                         <th>Id</th>
@@ -67,6 +76,7 @@ require "includes/logged.php";
                         <th>Sub cat. 1</th>
                         <th>Sub cat. 2</th>
                         <th>Pur. price</th>
+                        <th>Grouping rule</th>
                   </tr></thead>";
                 // output data of each row
             		while($row = mysqli_fetch_assoc($result)) {
@@ -84,6 +94,7 @@ require "includes/logged.php";
                             <td>".$row["subcat1"]."</td>
                             <td>".$row["subcat2"]."</td>
                             <td>".$row["price_group_code"]."</td>
+                            <td>".$row["grouping_code"]."</td>
           				  </form>
                   </tr>";
             		}
@@ -120,3 +131,24 @@ require "includes/logged.php";
 <?php
   require "footer.php";
 ?>
+
+<script>
+function searchGroupRule() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("searchGroupRule");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[10];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>

@@ -29,13 +29,6 @@ if ($mode != "errorissa" && $mode != "") {
     $error_price_group = false;
     $error_target_category = false;
     $error_grouping_SQL_selection = false;
-    $error_grouping_rule_manufacturer = false;
-    $error_grouping_rule_product_code = false;
-    $error_grouping_rule_product_desc = false;
-    $error_grouping_rule_ean_code = false;
-    $error_grouping_rule_category = false;
-    $error_grouping_rule_subcat1 = false;
-    $error_grouping_rule_subcat2 = false;
     $error_form = false;
 
     // Read fields from POST
@@ -44,13 +37,25 @@ if ($mode != "errorissa" && $mode != "") {
     $price_group = $_POST['price_group'];
     $target_category = $_POST['target_category'];
     $grouping_SQL_selection = $_POST['grouping_SQL_selection'];
-    $grouping_rule_manufacturer = $_POST['grouping_rule_manufacturer'];
-    $grouping_rule_product_code = $_POST['grouping_rule_product_code'];
-    $grouping_rule_product_desc = $_POST['grouping_rule_product_desc'];
-    $grouping_rule_ean_code = $_POST['grouping_rule_ean_code'];
-    $grouping_rule_category = $_POST['grouping_rule_category'];
-    $grouping_rule_subcat1 = $_POST['grouping_rule_subcat1'];
-    $grouping_rule_subcat2 = $_POST['grouping_rule_subcat2'];
+
+    $fields1 = $_POST['fields1'];
+    $comp1 = $_POST['comp1'];
+    $selection1 = $_POST['selection1'];
+    $oper1 = $_POST['oper1'];
+
+    $fields2 = $_POST['fields2'];
+    $comp2 = $_POST['comp2'];
+    $selection2 = $_POST['selection2'];
+    $oper2 = $_POST['oper2'];
+
+    $fields3 = $_POST['fields3'];
+    $comp3 = $_POST['comp3'];
+    $selection3 = $_POST['selection3'];
+    $oper3 = $_POST['oper3'];
+
+    $fields4 = $_POST['fields4'];
+    $comp4 = $_POST['comp4'];
+    $selection4 = $_POST['selection4'];
 
     // If ADD, we first check if item already exists
     if ($mode == 'add') {
@@ -91,18 +96,28 @@ if ($mode != "errorissa" && $mode != "") {
             $error_form = true;
         }
 
-        // !!!HERE WE NEED TO ADD SOME CHECKINGS FOR SQL-clause and FIELD SQL-clauses
-        // !!
-        // !!
+        // validate SQL CLAUSE. No 'INSERT, DELETE, UPDATE allowed'
+        if (!empty($grouping_SQL_selection) && (empty($fields1))) {
+            $countDelete = substr_count(strtoupper($grouping_SQL_selection),"DELETE");
+            $countInsert = substr_count(strtoupper($grouping_SQL_selection),"INSERT");
+            $countUpdate = substr_count(strtoupper($grouping_SQL_selection),"UPDATE");
+
+            if (($countDelete + $countInsert + $countUpdate) > 0) {
+                $error_grouping_SQL_selection = true;
+                $error_form = true;
+            }
+
+        }
 
     } // END field validations
 
     // if no errors prepare SQL statements accordin ADD or UPDATE
     if (!$error_form) {
         $kentat = array ('grouping_code', 'grouping_desc', 'price_group', 'target_category', 'grouping_SQL_selection',
-            'grouping_rule_manufacturer', 'grouping_rule_product_code',
-            'grouping_rule_product_desc', 'grouping_rule_ean_code', 'grouping_rule_category', 'grouping_rule_subcat1',
-            'grouping_rule_subcat2');
+            'fields1', 'comp1', 'selection1', 'oper1',
+            'fields2', 'comp2', 'selection2', 'oper2',
+            'fields3', 'comp3', 'selection3', 'oper3',
+            'fields4', 'comp4', 'selection4');
         $kentat = implode(",",$kentat);
         $id = $_POST['id'];
 
@@ -111,14 +126,22 @@ if ($mode != "errorissa" && $mode != "") {
         $group_desc = strip_tags($group_desc);
         $price_group = strip_tags($price_group);
         $target_category = strip_tags($target_category);
-        $grouping_SQL_selection = strip_tags($grouping_SQL_selection);
-        $grouping_rule_manufacturer = strip_tags($grouping_rule_manufacturer);
-        $grouping_rule_product_code = strip_tags($grouping_rule_product_code);
-        $grouping_rule_product_desc = strip_tags($grouping_rule_product_desc);
-        $grouping_rule_ean_code = strip_tags($grouping_rule_ean_code);
-        $grouping_rule_category = strip_tags($grouping_rule_category);
-        $grouping_rule_subcat1 = strip_tags($grouping_rule_subcat1);
-        $grouping_rule_subcat2 = strip_tags($grouping_rule_subcat2);
+
+        if (!empty($fields1)) {
+            $clause1 = $fields1." ".$comp1." "."\"$selection1\"";
+            if (!empty($fields2)) {
+                $clause2 = " ".$oper1." ".$fields2." ".$comp2." "."\"$selection2\"";
+                if (!empty($fields3)) {
+                    $clause3 = " ".$oper2." ".$fields3." ".$comp3." "."\"$selection3\"";
+                    if (!empty($fields4)) {
+                        $clause4 = " ".$oper3." ".$fields4." ".$comp4." "."\"$selection4\"";
+                    }
+                }
+            }
+
+            $grouping_SQL_selection = "SELECT * FROM unifiedlists WHERE ";
+            $grouping_SQL_selection .= "$clause1"."$clause2"."$clause3"."$clause4";
+        }
 
         // ADD or UPDATE
         if ($mode == 'add') {
@@ -128,13 +151,21 @@ if ($mode != "errorissa" && $mode != "") {
                 '$price_group',
                 $target_category,
                 '$grouping_SQL_selection',
-                '$grouping_rule_manufacturer',
-                '$grouping_rule_product_code',
-                '$grouping_rule_product_desc',
-                '$grouping_rule_ean_code',
-                '$grouping_rule_category',
-                '$grouping_rule_subcat1',
-                '$grouping_rule_subcat2'
+                '$fields1',
+                '$comp1',
+                '$selection1',
+                '$oper1',
+                '$fields2',
+                '$comp2',
+                '$selection2',
+                '$oper2',
+                '$fields3',
+                '$comp3',
+                '$selection3',
+                '$oper3',
+                '$fields4',
+                '$comp4',
+                '$selection4'
                 )";
 
         } elseif ($mode == 'update') {
@@ -144,13 +175,21 @@ if ($mode != "errorissa" && $mode != "") {
             price_group = '$price_group',
             target_category = $target_category,
             grouping_SQL_selection = '$grouping_SQL_selection',
-            grouping_rule_manufacturer = '$grouping_rule_manufacturer',
-            grouping_rule_product_code = '$grouping_rule_product_code',
-            grouping_rule_product_desc = '$grouping_rule_product_desc',
-            grouping_rule_ean_code = '$grouping_rule_ean_code',
-            grouping_rule_category = '$grouping_rule_category',
-            grouping_rule_subcat1 = '$grouping_rule_subcat1',
-            grouping_rule_subcat2 = '$grouping_rule_subcat2'
+            fields1 = '$fields1',
+            comp1 = '$comp1',
+            selection1 = '$selection1',
+            oper1 = '$oper1',
+            fields2 = '$fields2',
+            comp2 = '$comp2',
+            selection2 = '$selection2',
+            oper2 = '$oper2',
+            fields3 = '$fields3',
+            comp3 = '$comp3',
+            selection3 = '$selection3',
+            oper3 = '$oper3',
+            fields4 = '$fields4',
+            comp4 = '$comp4',
+            selection4 = '$selection4'
             WHERE id = $id";
         }
 
@@ -186,7 +225,6 @@ if ($error_form) {
 // PROGRAM PHP FUNCTIONS
 //
 
-
 //  DELETE
 function itemDelete() {
     $id = $_POST['id'];
@@ -202,13 +240,7 @@ $("#grouping_desc").removeClass("input-error");
 $("#price_group").removeClass("input-error");
 $("#target_category").removeClass("input-error");
 $("#grouping_SQL_selection").removeClass("input-error");
-$("#grouping_rule_manufacturer").removeClass("input-error");
-$("#grouping_rule_product_code").removeClass("input-error");
-$("#grouping_rule_product_desc").removeClass("input-error");
-$("#grouping_rule_ean_code").removeClass("input-error");
-$("#grouping_rule_category").removeClass("input-error");
-$("#grouping_rule_subcat1").removeClass("input-error");
-$("#grouping_rule_subcat2").removeClass("input-error");
+
 var alertText = "";
 
 // Handle record exists error
@@ -242,55 +274,7 @@ if ($error_target_category == true) {
 var error_grouping_SQL_selection = "<?php echo $error_grouping_SQL_selection; ?>";
 if (error_grouping_SQL_selection == true) {
     $("#grouping_SQL_selection").addClass("input-error");
-    alertText = alertText + "SQL selection is mandatory\n";
-}
-
-// Handle Group rule Manufacturer error
-var error_grouping_rule_manufacturer = "<?php echo $error_grouping_rule_manufacturer; ?>";
-if (error_grouping_rule_manufacturer == true) {
-    $("#grouping_rule_manufacturer").addClass("input-error");
-    alertText = alertText + "Error in Manufacturer rule\n";
-}
-
-// Handle Group rule Product codr error
-var error_grouping_rule_product_code = "<?php echo $error_grouping_rule_product_code; ?>";
-if (error_grouping_rule_product_code == true) {
-    $("#grouping_rule_product_code").addClass("input-error");
-    alertText = alertText + "Error in Product code rule\n";
-}
-
-// Handle Group rule Product desc error
-var error_grouping_rule_product_desc = "<?php echo $error_grouping_rule_product_desc; ?>";
-if (error_grouping_rule_product_desc == true) {
-    $("#grouping_rule_product_desc").addClass("input-error");
-    alertText = alertText + "Error in Product desc rule\n";
-}
-
-// Handle Group rule ean code error
-var error_grouping_rule_ean_code = "<?php echo $error_grouping_rule_ean_code; ?>";
-if (error_grouping_rule_ean_code == true) {
-    $("#grouping_rule_ean_code").addClass("input-error");
-    alertText = alertText + "Error in EAN rule\n";
-}
-
-// Handle Group rule ean code error
-var error_grouping_rule_category = "<?php echo $error_grouping_rule_category; ?>";
-if (error_grouping_rule_category == true) {
-    $("#grouping_rule_category").addClass("input-error");
-    alertText = alertText + "Error in Category rule\n";
-}
-
-// Handle Group rule ean code error
-var error_grouping_rule_subcat1 = "<?php echo $error_grouping_rule_subcat1; ?>";
-if (error_grouping_rule_subcat1 == true) {
-    $("#grouping_rule_subcat1").addClass("input-error");
-    alertText = alertText + "Error in Sub category 1 rule\n";
-}
-// Handle Group rule ean code error
-var error_grouping_rule_subcat2 = "<?php echo $error_grouping_rule_subcat2; ?>";
-if (error_grouping_rule_subcat2 == true) {
-    $("#grouping_rule_subcat2").addClass("input-error");
-    alertText = alertText + "Error in Sub category 2 rule\n";
+    alertText = alertText + "Check SQL selection syntax. Only SELECT is allowed\n";
 }
 
 
@@ -298,5 +282,10 @@ if (error_grouping_rule_subcat2 == true) {
 if (alertText != "") {
     alert(alertText);
 }
+
+// UPDATE FIELD FOR SQL CLAUSE
+var element = document.getElementById("grouping_SQL_selection");
+  var groupSQL = '<?php echo $grouping_SQL_selection; ?>';
+  element.innerHTML = groupSQL;
 
 </script>

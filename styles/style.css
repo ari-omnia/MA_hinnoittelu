@@ -154,6 +154,7 @@ input[type='date'] {
 /* Function containetr */
 .function-container {
   display: flex;
+  flex-direction: row;
   background-color: #e3e3e3;
   /*width: 1350px;*/
   width: 95%;
@@ -204,7 +205,10 @@ input[type='date'] {
   border-radius: 0px;
   padding: 0px 0px;
 }
-
+.button--presta {
+  background-color: #bb1120;
+  width: 130px;
+}
 /** List View  container styles**/
 .listcontainer {
   display: flex;
@@ -256,6 +260,10 @@ td {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+
+.tr-grouping:nth-child(1n+1) {
+  background-color: #ffffff;
+}
 /** Single record Column container styles**/
 .container {
   background-color: #e3e3e3;
@@ -304,6 +312,12 @@ tr:nth-child(even) {
   display: table;
   clear: both;
 }
+
+.pricing-flex {
+  display: flex;
+  flex-direction: row;
+}
+
 /* Column container */
 /*.row {
   display: flex;
