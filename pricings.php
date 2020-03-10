@@ -2,6 +2,7 @@
 require "header.php";
 require "includes/logged.php";
 
+
   //!! define how many results you want per page
   $results_per_page = 10;
   // find out the number of results stored in database
@@ -27,6 +28,13 @@ require "includes/logged.php";
       <div>
         <!--input class="button button--add" type="submit" value="Add" onclick="window.location.href='pricing.php?mode=1'"-->
         <input type="text" id="searchGroupRule" onkeyup="searchGroupRule()" placeholder="Search for group rules..." title="Type in a name">
+    </div>
+    <div style="flex-basis:820px">
+    </div>
+    <div>
+        <form id="pricingpresta" name="pricingpresta" action="prestaupdate.php" method="post">
+            <input class="button button--presta" type="submit" value="Presta update">
+        </form>
         <?php
 		if(isset($_GET['return']))
         {
