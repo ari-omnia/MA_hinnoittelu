@@ -1,4 +1,7 @@
 <?php
+    set_error_handler('handleError');
+    set_exception_handler('handleException');
+
     /*
      * Fetch all supplier files.
      */
@@ -61,6 +64,32 @@
     {
         global $conn;
 
+        if($row == '')
+        {
+            try
+            {
+                $res = $conn->query("SELECT * FROM supplierlists WHERE supplier_file = '".$file."';");
+
+                if($res->num_rows == 0)
+                {
+                    throw new Exception('Getting data from supplierlists table with file '.$file.' failed.<br>', 1);
+                }
+                else
+                {
+                    throw new Exception('Getting data from supplierlists table successful.<br>');
+                }
+            } 
+            catch(Exception $ex) 
+            {
+                echo $ex->getMessage();
+
+                if($ex->getCode() > 0)
+                    return;
+            }
+
+            $row = $res->fetch_assoc();
+        }
+
         try
         {
             if(!file_exists($row['file_path'].'/'.$file))
@@ -80,13 +109,6 @@
                 return;
         }
         
-        if($row == '')
-        {
-            $res = $conn->query("SELECT * FROM supplierlists WHERE supplier_file = '".$file."';");
-
-            $row = $res->fetch_assoc();
-        }
-
         fixColumns($row);
 
         try
@@ -306,3 +328,19 @@
             echo $ex->getMessage();
         }
     }
+
+    /*
+     * Handle uncaught errors.
+     */
+    function handleError($errno, $errstr)
+    {
+        echo "<b>Error:</b> ".$errstr."<br>";
+    }
+    
+    /*
+     * Handle uncaught exceptions.
+     */
+    function handleException($ex)
+    {
+        echo "<b>Exception:</b> ".$ex."<br>";
+    }    

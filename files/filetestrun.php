@@ -16,7 +16,9 @@ echo "<br>";
 echo "kutsutaan fetchAllFiles";
 echo "<br>";
 
+
 //arrangeFile("test.csv");
+
 //fetchAllFiles();
 //groupProducts();
 startTransfer();
