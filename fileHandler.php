@@ -8,14 +8,14 @@
     function fetchAllFiles()
     {
         global $conn;
-
+        
         try
         {
-            $res = $conn->query("SELECT * FROM supplierlists");
+            $res = mysqli_query($conn, "SELECT * FROM supplierlists");
             
-            if($res->num_rows == 0)
+            if(mysqli_num_rows($res) == 0)
             {
-                throw new Exception('Getting data from supplierlists table failed.<br>', 1);
+                throw new Exception('Getting data from supplierlists table failed. <br>', 1);
             }
             else
             {
@@ -30,7 +30,7 @@
                 return;
         }
 
-        while($row = $res->fetch_assoc())
+        while($row = mysqli_fetch_assoc($res))
         {
             arrangeFile($row['supplier_file'], $row);
         }
@@ -64,13 +64,15 @@
     {
         global $conn;
 
+        $fileRowNum = 0;
+        
         if($row == '')
         {
             try
             {
-                $res = $conn->query("SELECT * FROM supplierlists WHERE supplier_file = '".$file."';");
+                $res = mysqli_query($conn, "SELECT * FROM supplierlists WHERE supplier_file = '".$file."';");
 
-                if($res->num_rows == 0)
+                if(mysqli_num_rows($res) == 0)
                 {
                     throw new Exception('Getting data from supplierlists table with file '.$file.' failed.<br>', 1);
                 }
@@ -87,7 +89,7 @@
                     return;
             }
 
-            $row = $res->fetch_assoc();
+            $row = mysqli_fetch_assoc($res);
         }
 
         try
@@ -149,18 +151,20 @@
 
         while(($data = fgetcsv($handle, 0, $sep)) !== false)
         {
+            $fileRowNum++;
+            
             $res = findEAN('unifiedlists', $data[$row['column_ean_code']]);
 
             $product = collectData($data, $row);
 
-          // Check if the product is already in unifiedlists. If not insert to the table, if found then update the table.
-            if($res->num_rows == 0)
+            // Check if the product is already in unifiedlists. If not insert to the table, if found then update the table.
+            if(mysqli_num_rows($res) == 0)
             {
-                insertIntoUnifiedlistsTable($product);
+                insertIntoUnifiedlistsTable($product, $file, $fileRowNum);
             }
             else
             {
-                updateUnifiedlistsTable($product);
+                updateUnifiedlistsTable($product, $file, $fileRowNum);
             }
         }
         
@@ -172,7 +176,7 @@
         global $conn;
 
         $sql = "SELECT ean_code FROM ".$table." WHERE ean_code = '".$ean."';";
-        $res = $conn->query($sql);
+        $res = mysqli_query($conn, $sql);
         
         return $res;
     }
@@ -243,7 +247,7 @@
         }
     }
     
-    function insertIntoUnifiedlistsTable($product)
+    function insertIntoUnifiedlistsTable($product, $file, $fileRowNum)
     {
         global $conn;
 
@@ -276,11 +280,11 @@
 
         try
         {
-            $res = $conn->query($sql);
+            $res = mysqli_query($conn, $sql);
             
             if($res === FALSE)
             {
-                throw new Exception('Inserting data into unifiedlists table failed. '.$sql.'<br>', 1);
+                throw new Exception('Inserting data into unifiedlists table failed. Row '.$fileRowNum.' in file '.$file.'.<br> '. mysqli_error($conn).' '.$sql.'<br>', 1);
             }
             else
             {
@@ -293,7 +297,7 @@
         }
     }
 
-    function updateUnifiedlistsTable($product)
+    function updateUnifiedlistsTable($product, $file, $fileRowNum)
     {
         global $conn;
 
@@ -312,11 +316,11 @@
 
         try
         {
-            $res = $conn->query($sql);
+            $res = mysqli_query($conn, $sql);
             
             if($res === FALSE)
             {
-                throw new Exception('Updating data to unifiedlists table failed. '.$sql.'<br>', 1);
+                throw new Exception('Updating data to unifiedlists table failed. Row '.$fileRowNum.' in file '.$file.'.<br> '. mysqli_error($conn).' '.$sql.'<br>', 1);
             }
             else
             {
