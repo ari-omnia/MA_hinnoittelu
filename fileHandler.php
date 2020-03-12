@@ -284,11 +284,11 @@
             
             if($res === FALSE)
             {
-                throw new Exception('Inserting data into unifiedlists table failed. Row '.$fileRowNum.' in file '.$file.'.<br> '. mysqli_error($conn).' '.$sql.'<br>', 1);
+                throw new Exception('Row '.$fileRowNum.': inserting data into unifiedlists table failed in file '.$file.'.<br> '. mysqli_error($conn).' '.$sql.'<br>', 1);
             }
             else
             {
-                throw new Exception('Inserting data into unifiedlists table successful.<br>');
+                throw new Exception('Row '.$fileRowNum.': inserting data into unifiedlists table successful.<br>');
             }
         } 
         catch(Exception $ex) 
@@ -320,11 +320,11 @@
             
             if($res === FALSE)
             {
-                throw new Exception('Updating data to unifiedlists table failed. Row '.$fileRowNum.' in file '.$file.'.<br> '. mysqli_error($conn).' '.$sql.'<br>', 1);
+                throw new Exception('Row '.$fileRowNum.': updating data to unifiedlists table failed in file '.$file.'.<br> '. mysqli_error($conn).' '.$sql.'<br>', 1);
             }
             else
             {
-                throw new Exception('Updating data to unifiedlists table successful.<br>');
+                throw new Exception('Row '.$fileRowNum.': updating data to unifiedlists table successful.<br>');
             }
         } 
         catch(Exception $ex) 
