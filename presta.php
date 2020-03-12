@@ -78,10 +78,11 @@
 
         try
         {
-            $sql = "INSERT INTO ps_product (date_add, id_category_default, price, wholesale_price)
+            $sql = "INSERT INTO ps_product (date_add, id_category_default, ean13, price, wholesale_price)
                     VALUES (
                             '".$time."',
                             '".$product['target_category']."',
+                            '".$product['ean_code']."',
                             '".$product['sales_price']."', 
                             '".$product['supplier_purchase_price']."'
                            );";
