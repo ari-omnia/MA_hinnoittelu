@@ -160,7 +160,7 @@ if ($id > 0) {
                 File location
             </div>
             <div class="col-75">
-                <input id="file_path" type="text" name="file_path"  value=<?php echo $value = ($id > 0) ? $row['file_path'] : ""; ?>>
+                <input style="width: 500px" id="file_path" type="text" name="file_path"  value=<?php echo $value = ($id > 0) ? $row['file_path'] : ""; ?>>
             </div>
         </div>
         <!-- ***************-->
