@@ -1,8 +1,8 @@
 <?php
     $servername = "localhost:3306";
     $uname = "root";  // tämä on tietokannan käyttäjä, ei tekemäsi järjestelmän
-    $pword = "";
-    $dbname = "test";
+    $pword = "root";
+    $dbname = "sbox";
     $prestaconn = @mysqli_connect($servername, $uname, $pword, $dbname);
 
     if (!$prestaconn) {
@@ -11,4 +11,3 @@
     }
 
     $prestaconn->set_charset("utf8");
-        
