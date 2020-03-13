@@ -155,18 +155,18 @@
 
             try {
 
-                if (!empty($data[$row['column_ean_code']]) && $data[$row['column_ean_code']] !== '9999999999999')
+                if (!empty(trim($data[$row['column_ean_code']])) && $data[$row['column_ean_code']] !== '9999999999999')
                 {
                     $res = findEAN('unifiedlists', $data[$row['column_ean_code']]);
 
                     $product = collectData($data, $row);
-                    
+
                     // Check for commas in purchase price.
                     if(strpos($product['purchase_price'], ',') !== false)
                     {
                         $product['purchase_price'] = str_replace(',', '.', $product['purchase_price']);
                     }
-                    
+
                     // Check if the product is already in unifiedlists. If not insert to the table, if found then update the table.
                     if(mysqli_num_rows($res) == 0)
                     {
@@ -179,7 +179,7 @@
                 }
                 else
                 {
-                    throw new Exception('Row '.$fileRowNum.': Empty EAN-code not handled.<br>');
+                    throw new Exception('Row '.$fileRowNum.': Non valid EAN-code not handled.<br>');
                 }
             }
 
