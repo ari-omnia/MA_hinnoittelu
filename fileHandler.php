@@ -26,6 +26,8 @@
         {
             echo $ex->getMessage();
 
+            writeLog($ex->getMessage());
+            
             if($ex->getCode() > 0)
                 return;
         }
@@ -85,6 +87,8 @@
             {
                 echo $ex->getMessage();
 
+                writeLog($ex->getMessage());
+    
                 if($ex->getCode() > 0)
                     return;
             }
@@ -106,6 +110,8 @@
         catch (Exception $ex)
         {
             echo $ex->getMessage();
+            
+            writeLog($ex->getMessage());
 
             if($ex->getCode() > 0)
                 return;
@@ -129,6 +135,8 @@
         catch (Exception $ex)
         {
             echo $ex->getMessage();
+
+            writeLog($ex->getMessage());
 
             if($ex->getCode() > 0)
                 return;
@@ -315,6 +323,8 @@
         catch(Exception $ex)
         {
             echo $ex->getMessage();
+
+            writeLog($ex->getMessage());
         }
     }
 
@@ -351,6 +361,8 @@
         catch(Exception $ex)
         {
             echo $ex->getMessage();
+
+            writeLog($ex->getMessage());
         }
     }
 
@@ -359,7 +371,11 @@
      */
     function handleError($errno, $errstr)
     {
-        echo "<b>Error:</b> ".$errstr."<br>";
+        $txt = "<b>Error:</b> ".$errstr."<br>";
+        
+        echo $txt;
+        
+        writeLog($txt);
     }
 
     /*
@@ -367,5 +383,26 @@
      */
     function handleException($ex)
     {
+        $txt = "<b>Exception:</b> ".$ex."<br>";
+        
+        echo $txt;
+
+        writeLog($txt);
+    }
+    
+    function writeLog($msg)
+    {
+        date_default_timezone_set('Europe/Helsinki');
+
+        $h = fopen('errorlog.txt', 'a');
+
+        $time = date("Y-m-d H:i:s");
+
+        $txt = "$time $msg \n";
+        
+        fwrite($h, $txt);
+        
+        fclose($h);
+
         echo "<b>Exception:</b> ".$ex."<br>";
     }

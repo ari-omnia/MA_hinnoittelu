@@ -41,6 +41,8 @@
         {
             echo $ex->getMessage();
 
+            writeLog($ex->getMessage());
+
             if($ex->getCode() > 0)
                 return false;
         }
@@ -102,6 +104,8 @@
         {
             echo $ex->getMessage();
             
+            writeLog($ex->getMessage());
+
             if($ex->getCode() > 0)
                 return false;
         }
@@ -134,6 +138,8 @@
         {
             echo $ex->getMessage();
             
+            writeLog($ex->getMessage());
+
             if($ex->getCode() > 0)
                 return false;
         }
@@ -179,6 +185,8 @@
         {
             echo $ex->getMessage();
 
+            writeLog($ex->getMessage());
+
             if($ex->getCode() > 0)
                 return false;
         }
@@ -204,10 +212,11 @@
             {
                 throw new Exception('Deleting item from pricing table with EAN code '.$ean.' successful.<br>');
             }
-}
+        }
         catch(Exception $ex) 
         {
             echo $ex->getMessage();
+
         }
     }
     
