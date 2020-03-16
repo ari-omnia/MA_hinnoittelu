@@ -10,7 +10,7 @@
             return;
         }
         
-        while($row = $result->fetch_assoc())
+        while($row = mysqli_fetch_assoc($result))
         {
             moveData($row);
         }
@@ -26,11 +26,11 @@
 
         try
         {
-            $res = $conn->query("SELECT * FROM pricing");
+            $res = mysqli_query($conn, "SELECT * FROM pricing");
             
-            if($res->num_rows == 0)
+            if(mysqli_num_rows($res) == 0)
             {
-                throw new Exception('Getting data from pricing table failed.<br>', 1);
+                throw new Exception('Getting data from pricing table failed. Table empty?<br>', 1);
             }
             else
             {
@@ -55,15 +55,20 @@
         global $prestaconn;
 
         $sql = "SELECT id_product FROM ps_product WHERE ean13 = '".$product['ean_code']."';";
-        $id = $prestaconn->query($sql);
+        $id = mysqli_query($prestaconn, $sql);
 
-        if($id->num_rows == 0)
+        if(mysqli_num_rows($id) == 0)
         {
-            insertIntoPresta($product);
+            $result = insertIntoPresta($product);
         }
         else
         {
-            updatePresta($product, $id);
+            $result = updatePresta($product, $id);
+        }
+        
+        if($result)
+        {
+            deleteFromPricing($product['ean_code']);
         }
     }
     
@@ -75,20 +80,20 @@
 
         try
         {
-            $sql = "INSERT INTO ps_product (date_add, ean13, id_category_default, price, wholesale_price)
+            $sql = "INSERT INTO ps_product (date_add, id_category_default, ean13, price, wholesale_price)
                     VALUES (
                             '".$time."',
-                            '".$product['ean_code']."',
                             '".$product['target_category']."',
+                            '".$product['ean_code']."',
                             '".$product['sales_price']."', 
                             '".$product['supplier_purchase_price']."'
                            );";
-
-            $res = $prestaconn->query($sql);
+            
+            $res = mysqli_query($prestaconn, $sql);
             
             if($res === FALSE)
             {
-                throw new Exception('Inserting data to ps_product table failed. '.$sql.'<br>', 1);
+                throw new Exception('Inserting data to ps_product table failed. '.$sql.'<br> '.mysqli_error($prestaconn).'<br>', 1);
             }
             else
             {
@@ -102,30 +107,27 @@
             writeLog($ex->getMessage());
 
             if($ex->getCode() > 0)
-                return;
+                return false;
         }
         
-        $sql = "SELECT id_product FROM ps_product WHERE ean13 = '".$product['ean_code']."';";
-
-        $res = $prestaconn->query($sql);
-        $id = $res->fetch_assoc();
+        $last_id = mysqli_insert_id($prestaconn);
 
         try
         {
             $sql = "INSERT INTO ps_product_shop (id_product, date_add, id_category_default, price, wholesale_price)
                     VALUES (
-                            '".$id['id_product']."',
+                            '".$last_id."',
                             '".$time."',
                             '".$product['target_category']."',
                             '".$product['sales_price']."', 
                             '".$product['supplier_purchase_price']."'
                            );";
             
-            $res = $prestaconn->query($sql);
+            $res = mysqli_query($prestaconn, $sql);
             
             if($res === FALSE)
             {
-                throw new Exception('Inserting data to ps_product_shop table failed. '.$sql.'<br>', 1);
+                throw new Exception('Inserting data to ps_product_shop table failed. '.$sql.'<br> '.mysqli_error($prestaconn).'<br>', 1);
             }
             else
             {
@@ -139,8 +141,10 @@
             writeLog($ex->getMessage());
 
             if($ex->getCode() > 0)
-                return;
+                return false;
         }
+        
+        return true;
     }
 
     function updatePresta($product, $id)
@@ -149,7 +153,7 @@
 
         $time = date("Y-m-d H:i:s");
         
-        $prestaId = $id->fetch_assoc();
+        $prestaId = mysqli_fetch_assoc($id);
         
         $sql = "UPDATE ps_product, ps_product_shop
                 SET
@@ -166,15 +170,15 @@
 
         try
         {
-            $res = $prestaconn->query($sql);
+            $res = mysqli_query($prestaconn, $sql);
             
             if($res === FALSE)
             {
-                throw new Exception('Updating data to ps_product and ps_product_shop table failed. '.$sql.'<br>', 1);
+                throw new Exception('Updating data to ps_product and ps_product_shop tables failed. '.$sql.'<br> '.mysqli_error($prestaconn).'<br>', 1);
             }
             else
             {
-                throw new Exception('Updating data to ps_product and ps_product_shop table successful.<br>');
+                throw new Exception('Updating data to ps_product and ps_product_shop tables successful.<br>');
             }
         } 
         catch(Exception $ex) 
@@ -182,6 +186,38 @@
             echo $ex->getMessage();
 
             writeLog($ex->getMessage());
+
+            if($ex->getCode() > 0)
+                return false;
+        }
+        
+        return true;
+    }
+
+    function deleteFromPricing($ean)
+    {
+        global $conn;
+        
+        $sql = "DELETE FROM pricing WHERE ean_code = '".$ean."';";
+        
+        try
+        {
+            $res = mysqli_query($conn, $sql);
+
+            if($res === FALSE)
+            {
+                throw new Exception('Deleting item from pricing table with EAN code '.$ean.' failed. <br> '.mysqli_error($conn).'<br>', 1);
+            }
+            else
+            {
+                throw new Exception('Deleting item from pricing table with EAN code '.$ean.' successful.<br>');
+            }
+        }
+        catch(Exception $ex) 
+        {
+            echo $ex->getMessage();
+
         }
     }
+    
     

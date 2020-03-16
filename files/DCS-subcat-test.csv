@@ -1,0 +1,46 @@
+Varenummer;Varegruppenavn;Varenavn;Beholdning;Vaegt;Modelbetegnelse;Undergruppenavn;Antal dage fra fjernlager;Antal på fjernlager;Pris;Producentnavn
+15414;Hardware;G.Skill SNIPER Series DDR3  8GB kit 1866MHz CL9  Ikke-ECC;0;0.12;F3-14900CL9D-8GBSR;DDR3 DIMM;5;4;46.33;G.Skill
+16677;Hardware;G.Skill NT Series DDR3  8GB 1600MHz CL11  Ikke-ECC   ;0;0.025;F3-1600C11S-8GNT;DDR3 DIMM;4;50;28.87;G.Skill
+17116;Hardware;CORSAIR DDR3  4GB 1333MHz CL9  Ikke-ECC SO-DIMM  204-PIN;0;0.026666;CMSO4GX3M1A1333C9;DDR3 SO-DIMM;5;5;18.64;Corsair
+22244;Hardware;Apple USB SuperDrive DVD±RW (±R DL) drev;3;0.34;MD564ZM/A;Ekstern DVD-drev;4;50;62.77;Apple
+27802;Hardware;Logitech Z-120 Højttalere;49;1.5;980-000513;Portable;8;50;11.38;Logitech
+27851;Hardware;Logitech S-120 Sort Højttalere;36;0.25;980-000010;Højttalersæt;4;8;11.91;Logitech
+28071;Hardware;APC Replacement Battery Cartridge #55 UPS-batteri;0;24.3;RBC55;UPS batterier;4;18;321.45;APC
+55362;Hardware;HP 645A Magenta 12000 sider;0;0.2;C9733A;HP Laser;5;20;358.03;Hewlett-Packard
+55414;Hardware;HP 309A Gul 4000 sider;0;1;Q2672A;HP Laser;5;50;40.02;Hewlett-Packard
+55512;Hardware;Canon CLI 521Y Gul 500 sider;50;0.041428;2936B001;Blæktanke;5;50;8.97;Canon
+55558;Hardware;Brother TN 11 Magenta 6000 sider;0;0.1;HGE261V5;Rullepapir;7;3;75.81;Brother
+55870;Hardware;Brother Innobella Premium  BP71GA4 Fotopapir A4 (210 x 297 mm) 20ark;13;0.3;BP71GA4;Papir;5;50;6.83;Brother
+55946;Hardware;Brother TN135M - Højtydende - magenta - original - tonerpatron - for Brother DCP-9040, 9042, 9045, MFC-9420, 9440, 9450, 9840  HL-4040, 4050, 4070;0;1.147142;TN135M;Printerforbrugsvarer;4;8;93.69;Brother
+55932;Hardware;Brother LC 1240 Value-Pack Sort Gul Cyan Magenta 600 sider;50;0.5;LC1240VALBPDR;Brother Blæk;0;20;46.85;Brother
+56020;Hardware;Epson T0795 Lys cyan 540 sider;0;0.3;C13T07954010;Epson Blæk;5;8;13.52;Epson
+55957;Hardware;Brother LC 970C Cyan 300 sider;16;0.2;LC970C;Brother Blæk;5;20;7.36;Brother
+56309;Hardware;OKI Gul 2500 sider;0;0.234;43459329;Øvrige;3;4;90.61;OKI
+56479;Hardware;Brother TN230BK - Sort - original - tonerpatron - for Brother DCP-9010CN, MFC-9120CN, MFC-9320CN, MFC-9320CW  HL-3040CN, 3040CW, 3070CW;26;0.765;TN230BK;Printerforbrugsvarer;5;16;51.53;Brother
+56640;Hardware;Brother TN 320Y Gul 1500 sider;13;0.814285;TN320Y;Brother Laser;5;22;57.82;Brother
+56899;Hardware;Xerox Phaser 8560MFP Gul 3400 sider ;0;0.113333;108R00725;Fast blæk;3;13;114.03;Xerox
+56985;Hardware;Canon 731 C Cyan 1500 sider;10;0.791666;6271B002;Canon Laser;5;50;47.51;Canon
+57023;Hardware;Canon C-EXV 22 Sort 48000 sider;0;2.95;1872B002;Canon Laser;-49;10;83.12;Canon
+61208;Hardware;Canon MP 101 Fotopapir A3 (297 x 420 mm) 40ark;0;0.4;7981A008;Papir;4;4;15.12;Canon
+62236;Hardware;SteelSeries QcK mini;16;0.5;63005;Skrivebordsorganisation;-1;25;7.36;SteelSeries
+62717;Hardware;Logitech M510 Laser Trådløs Sort;50;0.1;910-001826;Trådløs mus;9;45;23.96;Logitech
+62788;Hardware;Logitech M235 Optisk Trådløs Rød;42;0.1;910-002496;Trådløs mus;7;50;14.05;Logitech
+67689;Mobiler, Telefoni & Navigation;Lenco SCD-38 USB Boombox Pink;0;1.23;SCD38USBRO;Ghettoblastere;5;5;38.57;Lenco
+70642;Hardware;LogiLink USB Line Extender - USB-forlængerkabel - op til 60 m;10;0.51;UA0021D;Kobbertransceivere;7;19;11.91;2direct
+70711;Hardware;LogiLink USB 2.0 Hub 4-Port;0;0.1;UA0086;4-5 Porte;7;8;7.36;2direct
+71004;Hardware;LogiLink Netværksadapter USB 3Mbps Trådløs;7;0;BT0015;USB adaptere;5;20;6.56;2direct
+71125;Hardware;LogiLink Optisk Kabling Sort;6;0.12;ID0011;Kabel mus;8;50;3.61;2direct
+75340;Hardware;Toshiba Harddisk DT01ACA100 1TB 3.5 SATA-600 7200rpm;15;0.45;DT01ACA100;Intern Harddisk;3;50;30.92;Toshiba
+75584;Hardware;Noctua NH-U14S Processor-køler;9;0.94;NH-U14S;Processorkøler;7;9;53.4;Noctua
+81204;Hardware;HP 90A Sort 10000 sider;0;0.5;CE390A;HP Laser;5;3;146.02;Hewlett-Packard
+81211;Hardware;Canon CLI 8M Magenta 565 sider;31;0.045;0622B001;Blæktanke;4;26;9.77;Canon
+81216;Hardware;Canon CLI 8PC Fotocyan 450 sider;12;0.045;0624B001;Blæktanke;8;4;9.9;Canon
+82433;Hardware;Canon CLI 551M XL Magenta 660 sider;50;0.051666;6445B001;Blæktanke;5;36;11.91;Canon
+82544;Hardware;HP 727  fotosort;0;0.197;B3P23A;HP Blæk;5;50;62.1;Hewlett-Packard
+82595;Hardware;Canon PG 545 Sort 180 sider;0;0.07;8287B004;Canon Blæk;5;50;11.51;Canon
+82568;Hardware;Epson T692300 Magenta;1;0.353;C13T692300;Epson Blæk;5;22;50.59;Epson
+83187;Hardware;Targus Bæretaske  16 Polyester Sort;30;0.55;CN31;Tasker;7;50;10.71;Targus
+83616;Hardware;Dell EURO2 Advanced E-Port II Portreplikator;0;1.82;452-11419;Dockingstation;3;20;146.89;Dell
+85080;Hardware;WD Elements Portable Harddisk WDBUZG0010BBK 1TB USB 3.0;21;0.13;WDBUZG0010BBK-EESN;Interne Harddiske;1;50;44.03;Western Digital
+85217;Hardware;Everki Rygsæk  18.4;0;2.01;EKP120;Rygsække;5;4;154.83;
+94743;Hardware;TRENDnet TEW AO14D;1;0.45;TEW-AO14D;Netværksantenner;4;15;23.56;TRENDnet

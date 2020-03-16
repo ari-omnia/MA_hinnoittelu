@@ -1,7 +1,7 @@
 <?php
     $servername = "localhost:3306";
-    $uname = "root";  // tämä on tietokannan käyttäjä, ei tekemäsi järjestelmän
-    $pword = "root";
+    $uname = "omnia";
+	$pword = "A7t#Jg6M";
     $dbname = "sbox";
     $prestaconn = @mysqli_connect($servername, $uname, $pword, $dbname);
 

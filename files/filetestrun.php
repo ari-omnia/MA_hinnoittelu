@@ -19,9 +19,9 @@ echo "<br>";
 
 //arrangeFile("test.csv");
 
-//fetchAllFiles();
+fetchAllFiles();
 //groupProducts();
-startTransfer();
+//startTransfer();
 
 /*$fetch = fetchAllFiles();
 

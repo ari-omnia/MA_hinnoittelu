@@ -8,11 +8,11 @@
     function fetchAllFiles()
     {
         global $conn;
-        
+
         try
         {
             $res = mysqli_query($conn, "SELECT * FROM supplierlists");
-            
+
             if(mysqli_num_rows($res) == 0)
             {
                 throw new Exception('Getting data from supplierlists table failed. <br>', 1);
@@ -21,8 +21,8 @@
             {
                 throw new Exception('Getting data from supplierlists table successful.<br>');
             }
-        } 
-        catch(Exception $ex) 
+        }
+        catch(Exception $ex)
         {
             echo $ex->getMessage();
 
@@ -67,7 +67,7 @@
         global $conn;
 
         $fileRowNum = 0;
-        
+
         if($row == '')
         {
             try
@@ -82,8 +82,8 @@
                 {
                     throw new Exception('Getting data from supplierlists table successful.<br>');
                 }
-            } 
-            catch(Exception $ex) 
+            }
+            catch(Exception $ex)
             {
                 echo $ex->getMessage();
 
@@ -106,8 +106,8 @@
             {
                 throw new Exception('File '.$file.' found.<br>');
             }
-        } 
-        catch (Exception $ex) 
+        }
+        catch (Exception $ex)
         {
             echo $ex->getMessage();
             
@@ -116,13 +116,13 @@
             if($ex->getCode() > 0)
                 return;
         }
-        
+
         fixColumns($row);
 
         try
         {
             $handle = fopen($row['file_path'].'/'.$file, 'r');
-            
+
             if(!$handle)
             {
                 throw new Exception('Could not open file '.$row['file_path'].'/'.$file.'<br>', 1);
@@ -131,8 +131,8 @@
             {
                 throw new Exception('File open successful.<br>');
             }
-        } 
-        catch (Exception $ex) 
+        }
+        catch (Exception $ex)
         {
             echo $ex->getMessage();
 
@@ -141,7 +141,7 @@
             if($ex->getCode() > 0)
                 return;
         }
-        
+
         if($row['file_column_separator'] == "t" || $row['file_column_separator'] == "T")
         {
             $sep = "\t";    // Separator char is tab.
@@ -160,22 +160,43 @@
         while(($data = fgetcsv($handle, 0, $sep)) !== false)
         {
             $fileRowNum++;
-            
-            $res = findEAN('unifiedlists', $data[$row['column_ean_code']]);
 
-            $product = collectData($data, $row);
+            try {
 
-            // Check if the product is already in unifiedlists. If not insert to the table, if found then update the table.
-            if(mysqli_num_rows($res) == 0)
-            {
-                insertIntoUnifiedlistsTable($product, $file, $fileRowNum);
+                if (!empty(trim($data[$row['column_ean_code']])) && $data[$row['column_ean_code']] !== '9999999999999')
+                {
+                    $res = findEAN('unifiedlists', $data[$row['column_ean_code']]);
+
+                    $product = collectData($data, $row);
+
+                    // Check for commas in purchase price.
+                    if(strpos($product['purchase_price'], ',') !== false)
+                    {
+                        $product['purchase_price'] = str_replace(',', '.', $product['purchase_price']);
+                    }
+
+                    // Check if the product is already in unifiedlists. If not insert to the table, if found then update the table.
+                    if(mysqli_num_rows($res) == 0)
+                    {
+                        insertIntoUnifiedlistsTable($product, $file, $fileRowNum);
+                    }
+                    else
+                    {
+                        updateUnifiedlistsTable($product, $file, $fileRowNum);
+                    }
+                }
+                else
+                {
+                    throw new Exception('Row '.$fileRowNum.': Non valid EAN-code not handled.<br>');
+                }
             }
-            else
+
+            catch(Exception $ex)
             {
-                updateUnifiedlistsTable($product, $file, $fileRowNum);
+                echo $ex->getMessage();
             }
         }
-        
+
         fclose($handle);
     }
 
@@ -185,7 +206,7 @@
 
         $sql = "SELECT ean_code FROM ".$table." WHERE ean_code = '".$ean."';";
         $res = mysqli_query($conn, $sql);
-        
+
         return $res;
     }
 
@@ -235,14 +256,14 @@
 
                 case 'column_purchase_price':
                     transferData($data, $row, 'purchase_price', $v, $k, $prod);
-                    
+
                     break;
                 }
             }
-        
+
         return $prod;
     }
-    
+
     function transferData($data, $row, $columnName, $value, $k, &$prod)
     {
         if($value < 0)
@@ -254,7 +275,7 @@
             $prod[$columnName] = $data[$row[$k]];
         }
     }
-    
+
     function insertIntoUnifiedlistsTable($product, $file, $fileRowNum)
     {
         global $conn;
@@ -289,7 +310,7 @@
         try
         {
             $res = mysqli_query($conn, $sql);
-            
+
             if($res === FALSE)
             {
                 throw new Exception('Row '.$fileRowNum.': inserting data into unifiedlists table failed in file '.$file.'.<br> '. mysqli_error($conn).' '.$sql.'<br>', 1);
@@ -298,8 +319,8 @@
             {
                 throw new Exception('Row '.$fileRowNum.': inserting data into unifiedlists table successful.<br>');
             }
-        } 
-        catch(Exception $ex) 
+        }
+        catch(Exception $ex)
         {
             echo $ex->getMessage();
 
@@ -327,7 +348,7 @@
         try
         {
             $res = mysqli_query($conn, $sql);
-            
+
             if($res === FALSE)
             {
                 throw new Exception('Row '.$fileRowNum.': updating data to unifiedlists table failed in file '.$file.'.<br> '. mysqli_error($conn).' '.$sql.'<br>', 1);
@@ -336,8 +357,8 @@
             {
                 throw new Exception('Row '.$fileRowNum.': updating data to unifiedlists table successful.<br>');
             }
-        } 
-        catch(Exception $ex) 
+        }
+        catch(Exception $ex)
         {
             echo $ex->getMessage();
 
@@ -356,7 +377,7 @@
         
         writeLog($txt);
     }
-    
+
     /*
      * Handle uncaught exceptions.
      */
@@ -382,4 +403,6 @@
         fwrite($h, $txt);
         
         fclose($h);
+
+        echo "<b>Exception:</b> ".$ex."<br>";
     }

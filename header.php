@@ -11,6 +11,7 @@
 <html lang="en" dir="ltr">
   <head>
     <title>Mikro-Aitta Pricing</title>
+    <link rel="icon" href="img/logo[1].png" type="image/png" sizes="16x16">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
@@ -24,11 +25,11 @@ Header
     <header class="header-flex-container">
       <div>
         <a class="header-logo" href="index.php">
-          <img src="img/logo.png">
+          <img src="img/logo[1].png" style="width:60px;height:40px;">
         </a>
       </div>
       <div style="flex-grow: 12">
-        My Website
+        Mikro-Aitta
       </div>
       <!--div style="flex-grow: 1">
         Notifications
