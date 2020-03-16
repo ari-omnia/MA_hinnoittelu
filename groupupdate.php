@@ -41,21 +41,25 @@ else
         }
     }
 
-
-
     // Rerun GROUPING
     echo "pöö";
-    groupProducts();
+    groupProducts($grouping_code);
 }
 
 if ($error_form) {
     echo "<span class = 'form-groupupdate-error'>There are no records to be updated!</span>";
 } else {
-    echo "<span class = 'form-groupupdate-error'>Updated!</span>";
+    echo "<span class = 'form-groupupdate-error'>Updated Again!</span>";
 }
 
 if ($error_delete) {
     echo "<span class = 'form-groupupdate-error'>Something wrong in delete!</span>";
+} else {
+    echo "<span class = 'form-groupupdate-error'>Deleted Again!</span>";
+}
+
+if ($error_subtract_total) {
+    echo "<span class = 'form-groupupdate-error'>Something wrong when subtracking!</span>";
 }
 
 
@@ -76,15 +80,19 @@ function subtrackNewProductsTotal($supplier_file) {
     $sql = "SELECT FROM supplierlists WHERE supplier_file = $supplier_file";
     $result = mysqli_query($conn, $sql);
 
-    $new_total = $result['new_products_total'] -= 1;
+    $new_total = $result['new_products_totalsum'] - 1;
+    if ($new_total < 0) {
+        $new_total = 0;
+    }
+    
     $sql = "UPDATE supplierlists
-        SET new_products_total = $new_total
-        WHERE supplier_file = $supplier_file";
+        SET new_products_totalsum = $new_total
+        WHERE supplier_file = '$supplier_file'";
+
     if (mysqli_query($conn, $sql)) {
         return true;
     } else {
         return false;
     }
-    echo "subtrackNewProductsTotal";
 }
 ?>

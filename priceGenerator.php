@@ -157,11 +157,13 @@
 
         if($res->num_rows == 0)
         {
-            insertIntoPricingTable($product, $groupingRule, $newSupplierPrice, $salesPrice);
             // If not in Presta, update New Products Totalsum
+            $presta = false;
             if (!existsPresta($product['ean_code'])) {
                 updateNewProductsTotalAdd($supplierlistRow['id'], $supplierlistRow['new_products_totalsum']);
+                $presta = true;
             }
+            insertIntoPricingTable($product, $groupingRule, $newSupplierPrice, $salesPrice, $presta);
         }
         else
         {
@@ -169,7 +171,7 @@
         }
     }
 
-    function insertIntoPricingTable($prod, $groupingRule, $newSupplierPrice, $salesPrice)
+    function insertIntoPricingTable($prod, $groupingRule, $newSupplierPrice, $salesPrice, $presta)
     {
         global $conn;
 
@@ -189,7 +191,8 @@
                                 sales_price,
                                 grouping_code,
                                 price_group_code,
-                                target_category
+                                target_category,
+                                new_product
                             )
                 VALUES
                         (
@@ -207,7 +210,8 @@
                             '".$salesPrice."',
                             '".$groupingRule['grouping_code']."',
                             '".$groupingRule['price_group']."',
-                            '".$groupingRule['target_category']."'
+                            '".$groupingRule['target_category']."',
+                            '$presta'
                         )";
 
         try

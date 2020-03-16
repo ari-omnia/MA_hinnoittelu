@@ -121,7 +121,7 @@ if ($id > 0) {
 <div class="container2col">
     <form id="groupupdate" name="groupupdate" action="groupupdate.php" method="post" target="_parent">
         <input id='grouping_code' type='hidden' name='grouping_code' value=<?php echo $row['grouping_code'];?>>
-        <input type="submit" value="Submit">
+        <input class= "button button--groupupdate" type="submit" value="Regroup!">
         <p class="form-groupupdate-message"></p>
     </form>
     <form id="groupingrule" name="groupingrule" action="groupingrule_chk.php" method="post">
