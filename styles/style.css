@@ -39,7 +39,7 @@ input[type='password'], textarea {
 /* Style textareas */
 textarea {
     font-size: var(--main-font-size);
-    width: 90%;
+    width: 86%;
     height: 40px;
     background-color: #e6e6e6
 }
@@ -218,6 +218,16 @@ input[type='date'] {
 .button--presta {
   background-color: #bb1120;
   width: 130px;
+}
+
+.button--groupupdate {
+  background-color: #bb1120;
+  width: 130px;
+  align-self: flex-end;
+  height: 30px;
+  align-content: center;
+  padding: 5px;
+  
 }
 /** List View  container styles**/
 .listcontainer {
