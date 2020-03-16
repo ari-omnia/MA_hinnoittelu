@@ -1,4 +1,6 @@
 <?php
+    require_once 'fileHandler.php';
+    
     function startTransfer()
     {
         date_default_timezone_set('Europe/Helsinki');

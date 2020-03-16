@@ -2,6 +2,12 @@
     set_error_handler('handleError');
     set_exception_handler('handleException');
 
+    $sh = fopen("../db/settings.txt", 'r');
+    
+    $logpath = fgets($sh);
+    
+    fclose($sh);
+    
     /*
      * Fetch all supplier files.
      */
@@ -23,7 +29,7 @@
             }
         }
         catch(Exception $ex)
-        {
+       {
             echo $ex->getMessage();
 
             writeLog($ex->getMessage());
@@ -392,9 +398,11 @@
     
     function writeLog($msg)
     {
+        global $logpath;
+        
         date_default_timezone_set('Europe/Helsinki');
 
-        $h = fopen('errorlog.txt', 'a');
+        $h = fopen($logpath."/errorlog.txt", "a");
 
         $time = date("Y-m-d H:i:s");
 
@@ -403,6 +411,4 @@
         fwrite($h, $txt);
         
         fclose($h);
-
-        echo "<b>Exception:</b> ".$ex."<br>";
     }
