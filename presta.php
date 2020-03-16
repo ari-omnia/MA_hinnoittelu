@@ -41,6 +41,8 @@
         {
             echo $ex->getMessage();
 
+            writeLog($ex->getMessage());
+
             if($ex->getCode() > 0)
                 return false;
         }
@@ -97,6 +99,8 @@
         {
             echo $ex->getMessage();
             
+            writeLog($ex->getMessage());
+
             if($ex->getCode() > 0)
                 return;
         }
@@ -132,6 +136,8 @@
         {
             echo $ex->getMessage();
             
+            writeLog($ex->getMessage());
+
             if($ex->getCode() > 0)
                 return;
         }
@@ -174,6 +180,8 @@
         catch(Exception $ex) 
         {
             echo $ex->getMessage();
+
+            writeLog($ex->getMessage());
         }
     }
     
