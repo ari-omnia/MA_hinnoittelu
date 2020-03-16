@@ -4,14 +4,21 @@
      * which can be found from groupingrules table. Go through every
      * record in groupinrules table.
      */
-    function groupProducts()
+    function groupProducts($groupingCode = '')
     {
         global $conn;
         
         try
         {
-            $res = $conn->query("SELECT * FROM groupingrules");
-            
+            if($groupingCode == '')
+            {
+                $res = $conn->query("SELECT * FROM groupingrules");
+            }
+            else
+            {
+                $res = $conn->query("SELECT * FROM groupingrules WHERE grouping_code = '$groupingCode'");
+            }
+
             if($res->num_rows == 0)
             {
                 throw new Exception('Getting data from groupingrules table failed.<br>', 1);
@@ -32,7 +39,7 @@
         while($groupingRule = $res->fetch_assoc())
         {
             $sql = $groupingRule['grouping_SQL_selection'];
-            
+
             if($sql != NULL)
             {
                 // grouping_SQL_selection is not NULL so we can use SQL expression to group products.
