@@ -1,5 +1,5 @@
 <?php
-    /* 
+    /*
      * Get products from unifiedlists table based on SQL-queries
      * which can be found from groupingrules table. Go through every
      * record in groupinrules table.
@@ -7,11 +7,11 @@
     function groupProducts()
     {
         global $conn;
-        
+
         try
         {
             $res = $conn->query("SELECT * FROM groupingrules");
-            
+
             if($res->num_rows == 0)
             {
                 throw new Exception('Getting data from groupingrules table failed.<br>', 1);
@@ -20,8 +20,8 @@
             {
                 throw new Exception('Getting data from groupingrules table successful.<br>');
             }
-        } 
-        catch (Exception $ex) 
+        }
+        catch (Exception $ex)
         {
             echo $ex->getMessage();
 
@@ -32,11 +32,11 @@
         while($groupingRule = $res->fetch_assoc())
         {
             $sql = $groupingRule['grouping_SQL_selection'];
-            
+
             if($sql != NULL)
             {
                 // grouping_SQL_selection is not NULL so we can use SQL expression to group products.
-                
+
                 try
                 {
                     $products = $conn->query($sql);   // Get products from unifiedlists table according to the query.
@@ -49,8 +49,8 @@
                     {
                         throw new Exception('Groupingrule '.$sql.' successful.<br>');
                     }
-                } 
-                catch (Exception $ex) 
+                }
+                catch (Exception $ex)
                 {
                     echo $ex->getMessage();
 
@@ -64,7 +64,7 @@
             {
                 echo 'TODO: Combine query from separate qrouping rules';
             }
-            
+
             while($p = $products->fetch_assoc())
             {
                 calculatePrice($p, $groupingRule);
@@ -75,9 +75,10 @@
     function calculatePrice($product, $groupingRule)
     {
         global $conn;
-        
-        $sql = "SELECT purchase_price_factor FROM supplierlists WHERE supplier_code = '".$product['supplier_code']."';";
-        
+
+        //$sql = "SELECT purchase_price_factor FROM supplierlists WHERE supplier_code = '".$product['supplier_code']."';";
+        $sql = "SELECT purchase_price_factor, id, new_products_totalsum FROM supplierlists WHERE supplier_code = '".$product['supplier_code']."';";
+
         try
         {
             $res = $conn->query($sql);
@@ -90,19 +91,20 @@
             {
                 throw new Exception('Getting purchase price factor with supplier code '.$product['supplier_code'].' successful.<br>');
             }
-        } 
-        catch (Exception $ex) 
+        }
+        catch (Exception $ex)
         {
             echo $ex->getMessage();
 
             if($ex->getCode() > 0)
                 return;
         }
-        
-        $supplierPriceFactor = $res->fetch_assoc();
+
+        //$supplierPriceFactor = $res->fetch_assoc();
+        $supplierlistRow = $res->fetch_assoc();
 
         $sql = "SELECT * FROM pricegroups WHERE price_group_code = '".$groupingRule['price_group']."';";
-        
+
         try
         {
             $res = $conn->query($sql);
@@ -115,8 +117,8 @@
             {
                 throw new Exception('Getting data from pricegroups table with price group code '.$groupingRule['price_group'].' successful.<br>');
             }
-        } 
-        catch (Exception $ex) 
+        }
+        catch (Exception $ex)
         {
             echo $ex->getMessage();
 
@@ -127,12 +129,12 @@
         $pricingRule = $res->fetch_assoc();
 
         // If supplier based purchase price factor > 0, multiply supplier price by purchase price factor.
-        if($supplierPriceFactor['purchase_price_factor'] > 0)
+        if($supplierlistRow['purchase_price_factor'] > 0)
         {
             // newSupplierPrice = unifiedlists.supplier_purchase_price * supplierlists.purchase_price_factor
-            $newSupplierPrice = $product['supplier_purchase_price'] * $supplierPriceFactor['purchase_price_factor'];
+            $newSupplierPrice = $product['supplier_purchase_price'] * $supplierlistRow['purchase_price_factor'];
         }
-        else 
+        else
         {
             $newSupplierPrice = $product['supplier_purchase_price'];
         }
@@ -143,10 +145,14 @@
         $salesPrice = round($salesPrice, 1);
 
         $res = findEAN('pricing', $product['ean_code']);
-        
+
         if($res->num_rows == 0)
         {
             insertIntoPricingTable($product, $groupingRule, $newSupplierPrice, $salesPrice);
+            // If not in Presta, update New Products Totalsum
+            if (!existsPresta($product['ean_code'])) {
+                updateNewProductsTotalAdd($supplierlistRow['id'], $supplierlistRow['new_products_totalsum']);
+            }
         }
         else
         {
@@ -157,7 +163,7 @@
     function insertIntoPricingTable($prod, $groupingRule, $newSupplierPrice, $salesPrice)
     {
         global $conn;
-        
+
         $sql = "INSERT INTO pricing
                             (
                                 supplier_file,
@@ -176,10 +182,10 @@
                                 price_group_code,
                                 target_category
                             )
-                VALUES 
+                VALUES
                         (
-                            '".$prod['supplier_file']."', 
-                            '".$prod['manufacturer']."', 
+                            '".$prod['supplier_file']."',
+                            '".$prod['manufacturer']."',
                             '".$prod['supplier_code']."',
                             '".$prod['product_code']."',
                             '".$prod['product_desc']."',
@@ -194,11 +200,11 @@
                             '".$groupingRule['price_group']."',
                             '".$groupingRule['target_category']."'
                         )";
- 
+
         try
         {
             $res = $conn->query($sql);
-            
+
             if($res === FALSE)
             {
                 throw new Exception('Inserting data into pricing table failed. '.$sql.'<br>', 1);
@@ -207,18 +213,18 @@
             {
                 throw new Exception('Inserting data into pricing table successful.<br>');
             }
-        } 
-        catch (Exception $ex) 
+        }
+        catch (Exception $ex)
         {
             echo $ex->getMessage();
         }
     }
-    
+
     function updatePricingTable($prod, $groupingRule, $newSupplierPrice, $salesPrice)
     {
         global $conn;
 
-        $sql = "UPDATE pricing 
+        $sql = "UPDATE pricing
                 SET
                     supplier_purchase_price = '".$prod['supplier_purchase_price']."',
                     new_purchase_price = '".$newSupplierPrice."',
@@ -226,11 +232,11 @@
                     grouping_code = '".$groupingRule['grouping_code']."',
                     price_group_code = '".$groupingRule['price_group']."'
                 WHERE ean_code = '".$prod['ean_code']."';";
- 
+
         try
         {
             $res = $conn->query($sql);
-            
+
             if($res === FALSE)
             {
                 throw new Exception('Updating data to pricing table failed. '.$sql.'<br>', 1);
@@ -239,9 +245,54 @@
             {
                 throw new Exception('Updating data to pricing table successful.<br>');
             }
-        } 
-        catch (Exception $ex) 
+        }
+        catch (Exception $ex)
         {
             echo $ex->getMessage();
+        }
+    }
+
+    function updateNewProductsTotalAdd($id, $new_products_totalsum)
+    {
+            global $conn;
+
+            $sql = "UPDATE supplierlists
+                    SET
+                        new_products_totalsum = ($new_products_totalsum + 1)
+                    WHERE id = $id;";
+
+            try
+            {
+                $res = $conn->query($sql);
+
+                if($res === FALSE)
+                {
+                    throw new Exception('Updating new products totalsum to supplierlists table failed. '.$sql.'<br>', 1);
+                }
+                else
+                {
+                    throw new Exception('Updating new products totalsum to supplierlists table successful.<br>');
+                }
+            }
+            catch (Exception $ex)
+            {
+                echo $ex->getMessage();
+            }
+    }
+
+    function existsPresta($ean_code)
+    {
+        require 'db/db_presta.php';
+
+        $sql = "SELECT id_product FROM ps_product WHERE ean13 = $ean_code;";
+        $id = mysqli_query($prestaconn, $sql);
+
+        if(mysqli_num_rows($id) == 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
