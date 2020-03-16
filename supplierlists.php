@@ -37,7 +37,8 @@ if (!isset($_GET['page'])) {
         <div class="col-25">
 
         <?php
-        $sql = "SELECT id, supplier_code, supplier_name, purchase_price_factor, supplier_file, file_path from supplierlists LIMIT " . $this_page_first_result . "," .  $results_per_page;
+        $sql = "SELECT id, supplier_code, supplier_name, purchase_price_factor, supplier_file, file_path, new_products_totalsum
+                    from supplierlists LIMIT " . $this_page_first_result . "," .  $results_per_page;
         $result = mysqli_query($conn, $sql);
         if(mysqli_num_rows($result) > 0) {
             // output data columns
@@ -50,6 +51,7 @@ if (!isset($_GET['page'])) {
                 <th>Price factor</th>
                 <th>File name</th>
                 <th>File location</th>
+                <th>New Products amount</th>
             </tr></thead>";
             // output data of each row
         		while($row = mysqli_fetch_assoc($result)) {
@@ -64,6 +66,7 @@ if (!isset($_GET['page'])) {
                             <td>".$row["purchase_price_factor"]."</td>
                             <td>".$row["supplier_file"]."</td>
                             <td>".$row["file_path"]."</td>
+                            <td style='text-align:center'> ".$row["new_products_totalsum"]."</td>
                         </form>
                     </tr>";
         		}
