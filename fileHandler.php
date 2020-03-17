@@ -2,12 +2,12 @@
     set_error_handler('handleError');
     set_exception_handler('handleException');
 
-    $sh = fopen("../db/settings.txt", 'r');
-    
+    $sh = fopen("db/settings.txt", 'r');
+
     $logpath = trim(fgets($sh));
-    
+
     fclose($sh);
-    
+
     /*
      * Fetch all supplier files.
      */
@@ -33,7 +33,7 @@
             echo $ex->getMessage();
 
             writeLog($ex->getMessage());
-            
+
             if($ex->getCode() > 0)
                 return;
         }
@@ -94,7 +94,7 @@
                 echo $ex->getMessage();
 
                 writeLog($ex->getMessage());
-    
+
                 if($ex->getCode() > 0)
                     return;
             }
@@ -116,7 +116,7 @@
         catch (Exception $ex)
         {
             echo $ex->getMessage();
-            
+
             writeLog($ex->getMessage());
 
             if($ex->getCode() > 0)
@@ -200,7 +200,7 @@
             catch(Exception $ex)
             {
                 echo $ex->getMessage();
-                
+
                 writeLog($ex->getMessage());
             }
         }
@@ -380,9 +380,9 @@
     function handleError($errno, $errstr)
     {
         $txt = "<b>Error:</b> ".$errstr."<br>";
-        
+
         echo $txt;
-        
+
         writeLog($txt);
     }
 
@@ -392,16 +392,16 @@
     function handleException($ex)
     {
         $txt = "<b>Exception:</b> ".$ex."<br>";
-        
+
         echo $txt;
 
         writeLog($txt);
     }
-    
+
     function writeLog($msg)
     {
         global $logpath;
-        
+
         date_default_timezone_set('Europe/Helsinki');
 
         $h = fopen($logpath."/errorlog.txt", "a");
@@ -409,8 +409,8 @@
         $time = date("Y-m-d H:i:s");
 
         $txt = "$time $msg;\n";
-        
+
         fwrite($h, $txt);
-        
+
         fclose($h);
     }

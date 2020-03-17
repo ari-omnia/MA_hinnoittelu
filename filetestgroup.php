@@ -3,10 +3,10 @@
 echo "getting in";
 echo "<br>";
 echo "require db<br>";
-require "../db/db.php";
+require "db/db.php";
 echo "db ok<br>";
-require "../fileHandler.php";
-require "../priceGenerator.php";
+require "fileHandler.php";
+require "priceGenerator.php";
 
 //var_dump($conn);
 echo "<br>";
