@@ -4,7 +4,7 @@
 
     $sh = fopen("../db/settings.txt", 'r');
     
-    $logpath = fgets($sh);
+    $logpath = trim(fgets($sh));
     
     fclose($sh);
     
@@ -200,6 +200,8 @@
             catch(Exception $ex)
             {
                 echo $ex->getMessage();
+                
+                writeLog($ex->getMessage());
             }
         }
 
@@ -406,7 +408,7 @@
 
         $time = date("Y-m-d H:i:s");
 
-        $txt = "$time $msg \n";
+        $txt = "$time $msg;\n";
         
         fwrite($h, $txt);
         

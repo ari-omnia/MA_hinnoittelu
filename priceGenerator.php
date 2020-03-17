@@ -302,6 +302,8 @@
             catch (Exception $ex)
             {
                 echo $ex->getMessage();
+                
+                writeLog($ex->getMessage());
             }
     }
 
