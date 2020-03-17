@@ -35,7 +35,7 @@
             echo $ex->getMessage();
 
             writeLog($ex->getMessage());
-            
+
             if($ex->getCode() > 0)
                 return;
         }
@@ -66,7 +66,7 @@
                     echo $ex->getMessage();
 
                     writeLog($ex->getMessage());
-                    
+
                     if($ex->getCode() > 0)
                     {
                         continue;
@@ -166,7 +166,7 @@
         if($res->num_rows == 0)
         {
             // If not in Presta, update New Products Totalsum
-            $presta = false;
+            $presta = 0;
             if (!existsPresta($product['ean_code'])) {
                 updateNewProductsTotalAdd($supplierlistRow['id'], $supplierlistRow['new_products_totalsum']);
                 $presta = true;
@@ -302,7 +302,7 @@
             catch (Exception $ex)
             {
                 echo $ex->getMessage();
-                
+
                 writeLog($ex->getMessage());
             }
     }
