@@ -219,6 +219,7 @@
         {
             echo $ex->getMessage();
 
+            writeLog($ex->getMessage());
         }
     }
     
