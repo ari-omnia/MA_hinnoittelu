@@ -77,6 +77,7 @@ require "includes/logged.php";
                         <th>Sub cat. 1</th>
                         <th>Sub cat. 2</th>
                         <th>Sales pr.</th>
+                        <th>Target cat</th>
                         <th>Grouping rule</th>
                         <th>New product</th>
                   </tr></thead>";
@@ -96,6 +97,7 @@ require "includes/logged.php";
                             <td>".$row["subcat1"]."</td>
                             <td>".$row["subcat2"]."</td>
                             <td>".$row["sales_price"]."</td>
+                            <td>".$row["target_category"]."</td>
                             <td>".$row["grouping_code"]."</td>
                             <td>".$row["new_product"]."</td>
           				  </form>
@@ -143,7 +145,7 @@ function searchGroupRule() {
   table = document.getElementById("myTable");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[10];
+    td = tr[i].getElementsByTagName("td")[11];
     if (td) {
       txtValue = td.textContent || td.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {
