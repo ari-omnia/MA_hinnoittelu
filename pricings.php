@@ -28,6 +28,7 @@ require "includes/logged.php";
       <div>
         <!--input class="button button--add" type="submit" value="Add" onclick="window.location.href='pricing.php?mode=1'"-->
         <input type="text" id="searchGroupRule" onkeyup="searchGroupRule()" placeholder="Search for group rules..." title="Type in a name">
+
     </div>
     <div style="flex-basis:820px">
     </div>
@@ -77,6 +78,7 @@ require "includes/logged.php";
                         <th>Sub cat. 2</th>
                         <th>Sales pr.</th>
                         <th>Grouping rule</th>
+                        <th>New product</th>
                   </tr></thead>";
                 // output data of each row
             		while($row = mysqli_fetch_assoc($result)) {
@@ -95,6 +97,7 @@ require "includes/logged.php";
                             <td>".$row["subcat2"]."</td>
                             <td>".$row["sales_price"]."</td>
                             <td>".$row["grouping_code"]."</td>
+                            <td>".$row["new_product"]."</td>
           				  </form>
                   </tr>";
             		}
