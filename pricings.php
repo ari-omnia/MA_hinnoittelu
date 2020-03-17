@@ -4,7 +4,7 @@ require "includes/logged.php";
 
 
   //!! define how many results you want per page
-  $results_per_page = 10;
+  $results_per_page = 100;
   // find out the number of results stored in database
   $sql='SELECT * FROM pricing';
   $result = mysqli_query($conn, $sql);
@@ -75,7 +75,7 @@ require "includes/logged.php";
                         <th>Category</th>
                         <th>Sub cat. 1</th>
                         <th>Sub cat. 2</th>
-                        <th>Pur. price</th>
+                        <th>Sales pr.</th>
                         <th>Grouping rule</th>
                   </tr></thead>";
                 // output data of each row
@@ -93,7 +93,7 @@ require "includes/logged.php";
                             <td>".$row["category"]."</td>
                             <td>".$row["subcat1"]."</td>
                             <td>".$row["subcat2"]."</td>
-                            <td>".$row["price_group_code"]."</td>
+                            <td>".$row["sales_price"]."</td>
                             <td>".$row["grouping_code"]."</td>
           				  </form>
                   </tr>";
