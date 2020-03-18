@@ -86,7 +86,7 @@ function onAdd() {
         $("#groupupdate").submit(function(event) {
             event.preventDefault();
             var id = $("#id").val();
-            var grouping_code = $("#grouping_code").val();
+            var grouping_code = $("#rg_grouping_code").val();
 
             $(".form-groupupdate-message").load("groupupdate.php", {
                 id: id,
@@ -120,7 +120,7 @@ if ($id > 0) {
 <!-- <div style="width:450px; height:350px; border-radius: 25px; padding:20px; background-color:grey ; margin-top: 15px; margin-bottom: 15px;margin-left: 20%; margin-right: auto;"-->
 <div class="container2col">
     <form id="groupupdate" name="groupupdate" action="groupupdate.php" method="post" target="_parent">
-        <input id='grouping_code' type='hidden' name='grouping_code' value=<?php echo $row['grouping_code'];?>>
+        <input id='rg_grouping_code' type='hidden' name='rg_grouping_code' value=<?php echo $row['grouping_code'];?>>
         <input class= "button button--groupupdate" type="submit" value="Regroup!">
         <p class="form-groupupdate-message"></p>
     </form>
@@ -232,7 +232,7 @@ if ($id > 0) {
                             </select>
                         </td>
                         <td>
-                            <input type="text" name="selection1" id="selection1" value=<?php echo $value = ($id > 0) ? $row['selection1'] : ""; ?>>
+                            <input type="text" name="selection1" id="selection1" value="<?php echo $value = ($id > 0) ? $row['selection1'] : ''; ?>">
                         </td>
                     </tr>
                     <tr class="tr-grouping">
@@ -282,7 +282,7 @@ if ($id > 0) {
                             </select>
                         </td>
                         <td>
-                            <input type="text" name="selection2" id="selection2" value=<?php echo $value = ($id > 0) ? $row['selection2'] : ""; ?>>
+                            <input type="text" name="selection2" id="selection2" value="<?php echo $value = ($id > 0) ? $row['selection2'] : ''; ?>">
                         </td>
                     </tr>
                     <tr class="tr-grouping">
@@ -331,7 +331,7 @@ if ($id > 0) {
                             </select>
                         </td>
                         <td>
-                            <input type="text" name="selection3" id="selection3" value=<?php echo $value = ($id > 0) ? $row['selection3'] : ""; ?>>
+                            <input type="text" name="selection3" id="selection3" value="<?php echo $value = ($id > 0) ? $row['selection3'] : ''; ?>">
                         </td>
                     </tr>
                     <tr class="tr-grouping">
@@ -380,7 +380,7 @@ if ($id > 0) {
                             </select>
                         </td>
                         <td>
-                            <input type="text" name="selection4" id="selection4" value=<?php echo $value = ($id > 0) ? $row['selection4'] : ""; ?>>
+                            <input type="text" name="selection4" id="selection4" value="<?php echo $value = ($id > 0) ? $row['selection4'] : ''; ?>">
                         </td>
                     </tr>
 
