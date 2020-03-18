@@ -141,27 +141,51 @@ require "includes/logged.php";
 
 <?php
 function printPaginatioButton($page, $number_of_pages) {
-    switch ($page) {
-        case ($page < 5):
-            return true;
-            break;
-        case (($_GET['page'] - $page) < 3):
-            return true;
-            break;
-        case (($page - $_GET['page'] ) > 3):
-            return true;
-            break;
-        case ($page % 10 == 0):
-            return true;
-            break;
-        case ($page > ($number_of_pages - 5)):
-            return true;
-            break;
+    if (!isset($_GET['page'])) {
+        switch ($page) {
+            case ($page < 4):
+                return true;
+                break;
 
-        default:
-            return false;
-            break;
+            case ($page % 10 == 0):
+                return true;
+                break;
+
+            case ($page > ($number_of_pages - 4)):
+                return true;
+                break;
+
+            default:
+                return false;
+                break;
+        }
+
+    } else {
+        switch ($page) {
+            case ($page < 4):
+                return true;
+                break;
+
+            case ($_GET['page'] - $page < 3 && $_GET['page'] - $page > 0):
+                return true;
+                break;
+            case ($page - $_GET['page'] < 3 && $page - $_GET['page'] > 0):
+                return true;
+                break;
+
+            case ($page % 10 == 0):
+                return true;
+                break;
+            case ($page > ($number_of_pages - 3)):
+                return true;
+                break;
+
+            default:
+                return false;
+                break;
+        }
     }
+
 }
 
 require "footer.php";
