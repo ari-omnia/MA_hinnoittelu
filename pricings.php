@@ -120,9 +120,15 @@ require "includes/logged.php";
         <?php
         // !!display the links to the pages
         for ($page=1;$page<=$number_of_pages;$page++) {
-          //echo "<button class='pagination-button' type='button'>$page</button>";
-          //echo '<a href="kalustoluetteloList.php?page=' . $page . '">' . $page . '</a> ';
-          echo '<a class="pagination-button" href="pricings.php?page=' . $page . '">' . $page . '</a> ';
+            if ($page == $_GET['page']) {
+                echo '<a class="pagination-button pagination-button--current" href="pricings.php?page=' . $page . '">' . $page . '</a> ';
+            } else {
+              //echo "<button class='pagination-button' type='button'>$page</button>";
+              //echo '<a href="kalustoluetteloList.php?page=' . $page . '">' . $page . '</a> ';
+                if (printPaginatioButton($page, $number_of_pages)) {
+                    echo '<a class="pagination-button" href="pricings.php?page=' . $page . '">' . $page . '</a> ';
+                }
+            }
         }
         //!!
         ?>
@@ -134,7 +140,31 @@ require "includes/logged.php";
 
 
 <?php
-  require "footer.php";
+function printPaginatioButton($page, $number_of_pages) {
+    switch ($page) {
+        case ($page < 5):
+            return true;
+            break;
+        case (($_GET['page'] - $page) < 3):
+            return true;
+            break;
+        case (($page - $_GET['page'] ) > 3):
+            return true;
+            break;
+        case ($page % 10 == 0):
+            return true;
+            break;
+        case ($page > ($number_of_pages - 5)):
+            return true;
+            break;
+
+        default:
+            return false;
+            break;
+    }
+}
+
+require "footer.php";
 ?>
 
 <script>
