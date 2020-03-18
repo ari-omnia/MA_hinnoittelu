@@ -227,7 +227,7 @@ input[type='date'] {
   height: 30px;
   align-content: center;
   padding: 5px;
-  
+
 }
 /** List View  container styles**/
 .listcontainer {
@@ -371,6 +371,11 @@ tr:nth-child(odd) {
 }
 .pagination-button:hover {
   background-color: #4c7caf;
+}
+.pagination-button--current {
+    background-color: #d6d6d6;
+    color: #2a4fbf;
+    border: solid;
 }
 /* Create two unequal columns that sits next to each other */
 /* Sidebar/left column */
