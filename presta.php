@@ -82,15 +82,102 @@
 
         try
         {
-            $sql = "INSERT INTO ps_product (date_add, id_category_default, ean13, price, wholesale_price)
+/*            $sql = "INSERT INTO ps_product (date_add, 
+                                            id_category_default, 
+                                            ean13, 
+                                            price, 
+                                            wholesale_price,
+                                            
+                                            id_shop_default,
+                                            on_sale,
+                                            online_only,
+                                            ecotax,
+                                            quantity,
+                                            minimal_quantity,
+                                            unit_price_ratio,
+                                            additional_shipping_cost,
+                                            width,
+                                            height,
+                                            depth,
+                                            weight,
+                                            out_of_stock,
+                                            quantity_discount,
+                                            qustomizable,
+                                            uploadable_files,
+                                            text_fields,
+                                            active,
+                                            redirect_type,
+                                            id_product_redirected,
+                                            available_for_order,
+                                            available_date,
+                                            condition,
+                                            show_price,
+                                            indexed,
+                                            visibility,
+                                            cache_is_pack,
+                                            cache_has_attachments,
+                                            is_virtual,
+                                            advanced_stock_management,
+                                            pack_stock_type,
+                                            icecatcode,
+                                            eancode
+                                           )
                     VALUES (
                             '".$time."',
                             '".$product['target_category']."',
                             '".$product['ean_code']."',
-                            '".$product['sales_price']."', 
+                            '".$product['sales_price']."',
+                            '".$product['supplier_purchase_price']."',
+                                
+                            '1',
+                            '0',
+                            '0',
+                            '0.000000',
+                            '0',
+                            '1',
+                            '0.000000',
+                            '0.00',
+                            '0.000000',
+                            '0.000000',
+                            '0.000000',
+                            '0.000000',
+                            '2',
+                            '0',
+                            '0',
+                            '0',
+                            '0',
+                            '0',
+                            '',
+                            '0',
+                            '1',
+                            '0000-00-00',
+                            'new',
+                            '1',
+                            '0',
+                            'both',
+                            '0',
+                            '0',
+                            '0',
+                            '0',
+                            '3',
+                            '',
+                            ''
+                           )";
+*/            
+            $sql = "INSERT INTO ps_product (date_add, 
+                                            id_category_default, 
+                                            ean13, 
+                                            price, 
+                                            wholesale_price
+                                           )
+                    VALUES (
+                            '".$time."',
+                            '".$product['target_category']."',
+                            '".$product['ean_code']."',
+                            '".$product['sales_price']."',
                             '".$product['supplier_purchase_price']."'
                            );";
-            
+
             $res = mysqli_query($prestaconn, $sql);
             
             if($res === FALSE)
@@ -116,13 +203,78 @@
 
         try
         {
-            $sql = "INSERT INTO ps_product_shop (id_product, date_add, id_category_default, price, wholesale_price)
+/*            $sql = "INSERT INTO ps_product_shop (id_product, 
+                                                 date_add, 
+                                                 id_category_default, 
+                                                 price, 
+                                                 wholesale_price,
+
+                                                 id_shop,
+                                                 on_sale,
+                                                 online_only,
+                                                 ecotax,
+                                                 minimal_quantity,
+                                                 unit_price_ratio,
+                                                 additional_shipping_cost,
+                                                 customizable,
+                                                 uploadable_files,
+                                                 text_fields,
+                                                 active,
+                                                 redirect_type,
+                                                 id_product_redirected,
+                                                 available_for_order,
+                                                 available_date,
+                                                 condition,
+                                                 show_price,
+                                                 indexed,
+                                                 visibility,
+                                                 advanced_stock_management,
+                                                 pack_stock_type
+                                                )
                     VALUES (
                             '".$last_id."',
                             '".$time."',
                             '".$product['target_category']."',
                             '".$product['sales_price']."', 
-                            '".$product['supplier_purchase_price']."'
+                            '".$product['supplier_purchase_price']."',
+
+                            '1',
+                            '0',
+                            '0',
+                            '0.000000',
+                            '1',
+                            '0.000000',
+                            '0.00',
+                            '0',
+                            '0',
+                            '0',
+                            '0',
+                            '',
+                            '0',
+                            '1',
+                            '0000-00-00',
+                            'new',
+                            '1',
+                            '0',
+                            'both',
+                            '0',
+                            '3'
+                           );";
+*/            
+            $sql = "INSERT INTO ps_product_shop (id_product, 
+                                                 date_add, 
+                                                 id_category_default, 
+                                                 price, 
+                                                 wholesale_price,
+                                                 id_shop
+                                                )
+                    VALUES (
+                            '".$last_id."',
+                            '".$time."',
+                            '".$product['target_category']."',
+                            '".$product['sales_price']."', 
+                            '".$product['supplier_purchase_price']."',
+                            '1'
                            );";
             
             $res = mysqli_query($prestaconn, $sql);
@@ -137,6 +289,39 @@
             }
         } 
         catch(Exception $ex) 
+        {
+            echo $ex->getMessage();
+            
+            writeLog($ex->getMessage());
+
+            if($ex->getCode() > 0)
+                return false;
+        }
+
+        try
+        {
+            $sql = "INSERT INTO ps_product_lang (id_product, id_shop, id_lang, description, name, available_now)
+                    VALUES (
+                            '$last_id', 
+                            '1', 
+                            '1', 
+                            '".$product['product_desc']."', 
+                            '".$product['product_desc']."', 
+                            'Saatavilla'
+                           );";
+            
+            $res = mysqli_query($prestaconn, $sql);
+            
+            if($res === FALSE)
+            {
+                throw new Exception('Inserting data to ps_product_lang table failed. '.$sql.'<br> '.mysqli_error($prestaconn).'<br>', 1);
+            }
+            else
+            {
+                throw new Exception('Inserting data to ps_product_lang table successful.<br>');
+            }
+        } 
+        catch (Exception $ex) 
         {
             echo $ex->getMessage();
             
