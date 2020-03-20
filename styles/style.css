@@ -229,6 +229,10 @@ input[type='date'] {
   padding: 5px;
 
 }
+
+.linksrc {
+    color_red;
+}
 /** List View  container styles**/
 .listcontainer {
   display: flex;
