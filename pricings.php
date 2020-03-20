@@ -2,11 +2,40 @@
 require "header.php";
 require "includes/logged.php";
 
+if (isset($_POST['searchgroup']) || isset($_POST['searchnewrow'])) {
+    if ($_POST['searchgroup'] != $_SESSION['searchgroup']) {
+        $_SESSION['searchgroup'] = $_POST['searchgroup'];
+        //$sqlWhere1 = $sqlWhere1." grouping_code ="."'".$_SESSION['searchgroup']."'";
+        //echo "sqlWhere1= ".$sqlWhere1;
+    }
+    if ($_POST['searchnewrow'] != $_SESSION['searchnewrow']) {
+        $_SESSION['searchnewrow'] = $_POST['searchnewrow'];
+    }
+}
+$sqlsearchgroup = "";
+$sqlsearchnewrow = "";
+
+if ($_SESSION['searchgroup'] != "") {
+    $sqlsearchgroup = " grouping_code ="."'".$_SESSION['searchgroup']."'";
+}
+if ($_SESSION['searchnewrow'] != "") {
+    if ($sqlsearchgroup != "") {
+        $sqlsearchgroup = $sqlsearchgroup." AND ";
+    }
+    $sqlsearchnewrow = " new_product ="."1";
+}
+
+$sqlsearch = $sqlsearchgroup.$sqlsearchnewrow;
+
+if ($sqlsearch != "") {
+    $sqlsearch = "WHERE ".$sqlsearch;
+}
 
   //!! define how many results you want per page
   $results_per_page = 100;
   // find out the number of results stored in database
-  $sql='SELECT * FROM pricing';
+  $sql='SELECT * FROM pricing '.''.$sqlsearch;
+
   $result = mysqli_query($conn, $sql);
   $number_of_results = mysqli_num_rows($result);
   // determine number of total pages available
@@ -27,8 +56,14 @@ require "includes/logged.php";
     <section class="function-container">
       <div>
         <!--input class="button button--add" type="submit" value="Add" onclick="window.location.href='pricing.php?mode=1'"-->
-        <input type="text" id="searchGroupRule" onkeyup="searchGroupRule()" placeholder="Search for group rules..." title="Type in a name">
-
+        <!--input type="text" id="searchGroupRule" onkeyup="searchGroupRule()" placeholder="Search for group rules..." title="Type in a name"-->
+        <form method="post">
+            <input type='text' id='searchgroup' name='searchgroup'>
+            <input type="checkbox" id="searchnewrow" name="searchnewrow" value="searchnewrow">
+            <label for="vehicle1"> New Products</label>
+            <input type="submit" name="button1" class="button button--add" value="Search">
+            <a href='pricings.php' class='button button--update' style="text-decoration: none;">Reset</a>
+        </form>
     </div>
     <div style="flex-basis:820px">
     </div>
@@ -61,7 +96,7 @@ require "includes/logged.php";
           <div class="col-25">
 
             <?php
-              $sql = "SELECT * from pricing LIMIT " . $this_page_first_result . "," .  $results_per_page;
+              $sql = "SELECT * from pricing ".$sqlsearch." LIMIT " . $this_page_first_result . "," .  $results_per_page;
               $result = mysqli_query($conn, $sql);
               if(mysqli_num_rows($result) > 0) {
                 // output data columns
