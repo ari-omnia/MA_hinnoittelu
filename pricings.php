@@ -61,8 +61,8 @@ if ($sqlsearch != "") {
             <input type='text' id='searchgroup' name='searchgroup'>
             <input type="checkbox" id="searchnewrow" name="searchnewrow" value="searchnewrow">
             <label for="vehicle1"> New Products</label>
-            <input type="submit" name="button1" class="button button--add" value="Search">
-            <a href='pricings.php' class='button button--update' style="text-decoration: none;">Reset</a>
+            <input type="submit" name="button1" class="button button--add" value="Src/Res">
+            <a href='pricings.php' class='button button--reset' style="text-decoration: none;">Start </a>
         </form>
     </div>
     <div style="flex-basis:820px">

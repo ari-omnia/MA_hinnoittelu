@@ -220,6 +220,12 @@ input[type='date'] {
   width: 130px;
 }
 
+.button--reset {
+    background-color: #4CAF50;
+  width: 130px;
+  padding: 12px 25px 12px 25px;
+}
+
 .button--groupupdate {
   background-color: #bb1120;
   width: 130px;
@@ -229,6 +235,9 @@ input[type='date'] {
   padding: 5px;
 
 }
+
+
+
 
 /** List View  container styles**/
 .listcontainer {
