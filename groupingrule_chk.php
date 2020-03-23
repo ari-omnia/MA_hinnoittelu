@@ -20,7 +20,7 @@ if ($mode != "errorissa" && $mode != "") {
     if ($mode == 'delete') {
         $sql = itemDelete();
 
-    } // Tässä voisi olla ELSE, ettei deleten jälkeen turhaan valuta kaikkia läpi
+    }
 
     // Reset validation error fields
     $error_item_exits = false;
@@ -197,15 +197,11 @@ if ($mode != "errorissa" && $mode != "") {
 
         if (mysqli_query($conn, $sql)) {
             $status = "";
+            if ($mode == 'add') {
+                $_SESSION['id'] = mysqli_insert_id($conn);
+            }
             mysqli_close($conn);
-            ?>
-            <script>
-                //goBack()
-            </script>
-            <?php
-
-        }
-        else {
+        } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             $status = "Error: " . $sql . "<br>" . mysqli_error($conn);
         }

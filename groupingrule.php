@@ -12,8 +12,8 @@ require "includes/logged.php";
 <script>
 var mode = "";
 
+// verify delete
 function onDelete() {
-    // verify delete
     if (confDelete()) {
         mode = "delete";
     } else {
@@ -154,11 +154,8 @@ if ($id > 0) {
                 Price group
             </div>
             <div class="col2-30">
-                <!--input id="price_group" type="text" name="price_group" value=<?php //echo $value = ($id > 0) ? $row['price_group'] : ""; ?>-->
                 <select id="price_group" name='price_group'>
-
                     <?php fillPricegroupOptions(); ?>
-
                 </select>
             </div>
 
@@ -396,19 +393,15 @@ if ($id > 0) {
                 <?php
                 if($mode=="1") {
                     echo "<button class='button button--add' type='submit' onclick='onAdd()'>Add</button>";
-                    //echo "<input class='button button--add' onclick='return validateForm()' type='submit' name='add' value='Add'>";
                 } else {
                     echo "<button class='button button--update' type='submit' onclick='onUpdate()'>Update</button>";
                     echo "<button class='button button--delete' type='submit' onclick='onDelete()'>Delete</button>";
-                    //echo "<input class='button button--update' onclick='return validateForm()' type='submit' name='update' value='Update'>";
-                    //echo "<input class='button button--delete' onclick='return confDelete()' type='submit' name='delete' value='Delete'>";
+                    $_SESSION['id']=$id;
                 }
                 ?>
                 <input class="button button--add" onclick="window.history.go(-1); return false;" type="submit" name="back" value="Cancel">
                 <?php
-                    //$get_parameters="action=view&file=filename.pdf&sql=".$row['grouping_SQL_selection']."&id=".$id;
-                    $get_parameters="id=$id";
-                    echo "<a href='groupsimulation.php?$get_parameters' target='_blank' class='button button--update'>Simulate</a>";
+                    echo "<a href='groupsimulation.php' target='_blank' class='button button--update'>Simulate</a>";
                 ?>
 
             </div>
@@ -424,7 +417,7 @@ require "footer.php";
 function fillPricegroupOptions() {
     global $conn;
     global $id;
-    // haettais ensin toiseen tauluun talletettu arvo
+    // Fetch Pricegroups to options
         $sql = "SELECT * FROM groupingrules WHERE id = $id";
         $result = mysqli_query($conn, $sql);
         while($row = mysqli_fetch_assoc($result)) {

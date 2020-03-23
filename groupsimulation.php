@@ -1,7 +1,5 @@
 <?php
-
-//require "header.php";
-//require "includes/logged.php";
+ session_start();
 require 'db/db.php';
 ?>
 <style>
@@ -10,11 +8,8 @@ p.a {
 }
 </style>
 <?php
-//echo "id ".$_GET['id'];
-$id = $_GET['id'];
 
-//$sql = $_GET['sql'];
-//echo $sql;
+$id = $_SESSION['id'];
 
 // Haetaan taulusta SQL lause
 if ($id > 0) {
@@ -28,7 +23,6 @@ $sql = $grouprule['grouping_SQL_selection'];
 
 $result = mysqli_query($conn, $sql);
 if(mysqli_num_rows($result) > 0) {
-    // output data columns
 
     // output data of each row
     ?>
