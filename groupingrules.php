@@ -21,6 +21,7 @@ $page = $_GET['page'];
 // determine the sql LIMIT starting number for the results on the displaying page
 $this_page_first_result = ($page-1)*$results_per_page;
 //!!
+$_SESSION['id'] = '';
 ?>
 
     <!-- Actual Page DIV -->
