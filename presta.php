@@ -79,7 +79,8 @@
         global $prestaconn;
 
         $time = date("Y-m-d H:i:s");
-
+        $id_manufacturer = getManufacturerName($product['manufacturer']);
+        echo "supp code ".$product['supplier_code'];
         try
         {
             $sql = "INSERT INTO ps_product (
@@ -88,6 +89,9 @@
                 ean13,
                 price,
                 wholesale_price,
+                reference,
+                id_manufacturer,
+                id_supplier,
                 id_shop_default,
                 on_sale,
                 online_only,
@@ -119,13 +123,17 @@
                 advanced_stock_management,
                 pack_stock_type,
                 icecatcode,
-                eancode)
+                eancode,
+                id_tax_rules_group)
                     VALUES (
                 '".$time."',
                 '".$product['target_category']."',
                 '".$product['ean_code']."',
                 '".$product['sales_price']."',
                 '".$product['supplier_purchase_price']."',
+                '".$product['product_code']."',
+                $id_manufacturer,
+                '".$product['supplier_code']."',
                 1,
                 0,
                 0,
@@ -157,7 +165,8 @@
                 0,
                 3,
                 '',
-                '');";
+                '',
+                1);";
 
             $res = mysqli_query($prestaconn, $sql);
 
@@ -198,8 +207,8 @@
                 customizable,
                 uploadable_files,
                 text_fields,
-                active, r
-                edirect_type,
+                active,
+                redirect_type,
                 id_product_redirected,
                 available_for_order,
                 available_date,
@@ -207,7 +216,8 @@
                 indexed,
                 visibility,
                 advanced_stock_management,
-                pack_stock_type)
+                pack_stock_type,
+                id_tax_rules_group)
                     VALUES (
                 '".$last_id."',
                 '".$time."',
@@ -232,7 +242,8 @@
                 '0',
                 'both',
                 '0',
-                '3');";
+                '3',
+                '1');";
 
             $res = mysqli_query($prestaconn, $sql);
 
@@ -397,4 +408,26 @@
 
             writeLog($ex->getMessage());
         }
+    }
+
+    function getManufacturerName($manufacturer)
+    {
+        global $prestaconn;
+
+        $sql = "SELECT * FROM ps_manufacturer WHERE name = '$manufacturer';";
+
+        $res = mysqli_query($prestaconn, $sql);
+        $row = mysqli_fetch_assoc($res);
+
+        if($res === FALSE)
+            {
+                echo "No";
+                return 0;
+            }
+            else
+            {
+                echo "Yes";
+                return $row['id_manufacturer'];
+            }
+
     }
