@@ -421,12 +421,10 @@
 
         if($res === FALSE)
             {
-                echo "No";
                 return 0;
             }
             else
             {
-                echo "Yes";
                 return $row['id_manufacturer'];
             }
 
