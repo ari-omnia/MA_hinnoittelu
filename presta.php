@@ -80,7 +80,11 @@
 
         $time = date("Y-m-d H:i:s");
         $id_manufacturer = getManufacturerName($product['manufacturer']);
-        echo "supp code ".$product['supplier_code'];
+        //echo "supp code ".$product['supplier_code'];
+        // Here we would be ready to add Manufacturer info to Presta
+        //if($id_manufacturer == '') {
+        //    addManufacturer($product['manufacturer']);
+        //}
         try
         {
             $sql = "INSERT INTO ps_product (
@@ -132,7 +136,7 @@
                 '".$product['sales_price']."',
                 '".$product['supplier_purchase_price']."',
                 '".$product['product_code']."',
-                $id_manufacturer,
+                '$id_manufacturer',
                 '".$product['supplier_code']."',
                 1,
                 0,
@@ -333,6 +337,82 @@
                 return false;
         }
 
+        try
+        {
+            $sql = "INSERT INTO ps_stock_available (
+                id_product,
+                id_product_attribute,
+                id_shop,
+                id_shop_group,
+                quantity,
+                depends_on_stock,
+                out_of_stock
+            )
+                VALUES (
+                '$last_id',
+                '0',
+                '1',
+                '0',
+                '0',
+                '0',
+                '1'
+               );";
+
+            $res = mysqli_query($prestaconn, $sql);
+
+            if($res === FALSE)
+            {
+                throw new Exception('Inserting data to ps_stock_available table failed. '.$sql.'<br> '.mysqli_error($prestaconn).'<br>', 1);
+            }
+            else
+            {
+                throw new Exception('Inserting data to ps_stock_available table successful.<br>');
+            }
+        }
+        catch (Exception $ex)
+        {
+            echo $ex->getMessage();
+
+            writeLog($ex->getMessage());
+
+            if($ex->getCode() > 0)
+                return false;
+        }
+
+        try
+        {
+            $sql = "INSERT INTO ps_category_product (
+                id_category,
+                id_product,
+                position
+            )
+                VALUES (
+                '".$product['target_category']."',
+                '$last_id',
+                '0'
+               );";
+
+            $res = mysqli_query($prestaconn, $sql);
+
+            if($res === FALSE)
+            {
+                throw new Exception('Inserting data to ps_category_product table failed. '.$sql.'<br> '.mysqli_error($prestaconn).'<br>', 1);
+            }
+            else
+            {
+                throw new Exception('Inserting data to ps_category_product table successful.<br>');
+            }
+        }
+        catch (Exception $ex)
+        {
+            echo $ex->getMessage();
+
+            writeLog($ex->getMessage());
+
+            if($ex->getCode() > 0)
+                return false;
+        }
+
         return true;
     }
 
@@ -421,11 +501,53 @@
 
         if($res === FALSE)
             {
-                return 0;
+                return '';
             }
             else
             {
                 return $row['id_manufacturer'];
             }
+
+    }
+
+    function addManufacturerName($manufacturer)
+    {
+        global $prestaconn;
+        $time = date("Y-m-d H:i:s");
+        try
+        {
+            $sql = "INSERT INTO ps_manufacturer (
+                name,
+                date_add,
+                date_upd,
+                active
+            )
+                VALUES (
+                '$manufacturer',
+                '$time',
+                '0000-00-00',
+                '1'
+               );";
+
+            $res = mysqli_query($prestaconn, $sql);
+
+            if($res === FALSE)
+            {
+                throw new Exception('Inserting data to ps_manufacturer table failed. '.$sql.'<br> '.mysqli_error($prestaconn).'<br>', 1);
+            }
+            else
+            {
+                throw new Exception('Inserting data to ps_manufacturer table successful.<br>');
+            }
+        }
+        catch (Exception $ex)
+        {
+            echo $ex->getMessage();
+
+            writeLog($ex->getMessage());
+
+            if($ex->getCode() > 0)
+                return false;
+        }
 
     }
