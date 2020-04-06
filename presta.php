@@ -82,9 +82,9 @@
         $id_manufacturer = getManufacturerName($product['manufacturer']);
         //echo "supp code ".$product['supplier_code'];
         // Here we would be ready to add Manufacturer info to Presta
-        //if($id_manufacturer == '') {
-        //    addManufacturer($product['manufacturer']);
-        //}
+        if($id_manufacturer == '') {
+            addManufacturer($product['manufacturer']);
+        }
         try
         {
             $sql = "INSERT INTO ps_product (
@@ -510,10 +510,12 @@
 
     }
 
-    function addManufacturerName($manufacturer)
+    function addManufacturer($manufacturer)
     {
         global $prestaconn;
         $time = date("Y-m-d H:i:s");
+
+        // INSERT to PS_MANUFACTURER
         try
         {
             $sql = "INSERT INTO ps_manufacturer (
@@ -538,6 +540,111 @@
             else
             {
                 throw new Exception('Inserting data to ps_manufacturer table successful.<br>');
+
+            }
+        }
+        catch (Exception $ex)
+        {
+            echo $ex->getMessage();
+
+            writeLog($ex->getMessage());
+
+            if($ex->getCode() > 0)
+                return false;
+        }
+        // Fetch and save last manufacturer_id
+        $last_mfc_id = mysqli_insert_id($prestaconn);
+
+        // INSERT to PS_MANUFACTURER_LANG 1
+        try
+        {
+            $sql = "INSERT INTO ps_manufacturer_lang (
+                id_manufacturer,
+                id_lang
+            )
+                VALUES (
+                '$last_mfc_id',
+                '1'
+               );";
+
+            $res = mysqli_query($prestaconn, $sql);
+
+            if($res === FALSE)
+            {
+                throw new Exception('Inserting data to ps_manufacturer_lang (1) table failed. '.$sql.'<br> '.mysqli_error($prestaconn).'<br>', 1);
+            }
+            else
+            {
+                throw new Exception('Inserting data to ps_manufacturer_lang (1) table successful.<br>');
+                $last_mfc_id = mysqli_insert_id($prestaconn);
+            }
+        }
+        catch (Exception $ex)
+        {
+            echo $ex->getMessage();
+
+            writeLog($ex->getMessage());
+
+            if($ex->getCode() > 0)
+                return false;
+        }
+
+        // INSERT to PS_MANUFACTURER_LANG 2
+        try
+        {
+            $sql = "INSERT INTO ps_manufacturer_lang (
+                id_manufacturer,
+                id_lang
+            )
+                VALUES (
+                '$last_mfc_id',
+                '2'
+               );";
+
+            $res = mysqli_query($prestaconn, $sql);
+
+            if($res === FALSE)
+            {
+                throw new Exception('Inserting data to ps_manufacturer_lang (2) table failed. '.$sql.'<br> '.mysqli_error($prestaconn).'<br>', 1);
+            }
+            else
+            {
+                throw new Exception('Inserting data to ps_manufacturer_lang (2) table successful.<br>');
+                $last_mfc_id = mysqli_insert_id($prestaconn);
+            }
+        }
+        catch (Exception $ex)
+        {
+            echo $ex->getMessage();
+
+            writeLog($ex->getMessage());
+
+            if($ex->getCode() > 0)
+                return false;
+        }
+
+        // INSERT to PS_MANUFACTURER_SHOP
+        try
+        {
+            $sql = "INSERT INTO ps_manufacturer_shop (
+                id_manufacturer,
+                id_shop
+            )
+                VALUES (
+                '$last_mfc_id',
+                '1'
+               );";
+
+            $res = mysqli_query($prestaconn, $sql);
+
+            if($res === FALSE)
+            {
+                throw new Exception('Inserting data to ps_manufacturer_shop table failed. '.$sql.'<br> '.mysqli_error($prestaconn).'<br>', 1);
+            }
+            else
+            {
+                throw new Exception('Inserting data to ps_manufacturer_shop table successful.<br>');
+                $last_mfc_id = mysqli_insert_id($prestaconn);
             }
         }
         catch (Exception $ex)
