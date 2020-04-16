@@ -275,13 +275,15 @@
 
         try
         {
+            $pr_product_desc = mysqli_real_escape_string($prestaconn, $product['product_desc']);
+
             $sql = "INSERT INTO ps_product_lang (id_product, id_shop, id_lang, description, name, available_now)
                     VALUES (
                             '$last_id',
                             '1',
                             '1',
-                            '".$product['product_desc']."',
-                            '".$product['product_desc']."',
+                            '$pr_product_desc',
+                            '$pr_product_desc',
                             'Saatavilla'
                            );";
 
@@ -310,13 +312,15 @@
 
         try
         {
+            $pr_product_desc = mysqli_real_escape_string($prestaconn, $product['product_desc']);
+
             $sql = "INSERT INTO ps_product_lang (id_product, id_shop, id_lang, description, name, available_now)
                     VALUES (
                             '$last_id',
                             '1',
                             '2',
-                            '".$product['product_desc']."',
-                            '".$product['product_desc']."',
+                            '$pr_product_desc',
+                            '$pr_product_desc',
                             'Saatavilla'
                            );";
 
