@@ -112,8 +112,7 @@
             }
             else
             {
-                //Removed success log entries
-                //throw new Exception('File '.$file.' found.<br>');
+                throw new Exception('File '.$file.' found.<br>');
             }
         }
         catch (Exception $ex)
@@ -291,6 +290,16 @@
     function insertIntoUnifiedlistsTable($product, $file, $fileRowNum)
     {
         global $conn;
+        $pr_supplier_file = mysqli_real_escape_string($conn, $product['supplier_file']);
+        $pr_manufacturer = mysqli_real_escape_string($conn, $product['manufacturer']);
+        $pr_supplier_code = mysqli_real_escape_string($conn, $product['supplier_code']);
+        $pr_product_code = mysqli_real_escape_string($conn, $product['product_code']);
+        $pr_product_desc = mysqli_real_escape_string($conn, $product['product_desc']);
+        $pr_ean_code = mysqli_real_escape_string($conn, $product['ean_code']);
+        $pr_category = mysqli_real_escape_string($conn, $product['category']);
+        $pr_subcat1 = mysqli_real_escape_string($conn, $product['subcat1']);
+        $pr_subcat2 = mysqli_real_escape_string($conn, $product['subcat2']);
+        $pr_purchase_price = mysqli_real_escape_string($conn, $product['purchase_price']);
 
         $sql = "INSERT INTO unifiedlists
                             (
@@ -307,16 +316,16 @@
                             )
                         VALUES
                             (
-                                '".$product["supplier_file"]."',
-                                '".$product["manufacturer"]."',
-                                '".$product["supplier_code"]."',
-                                '".$product["product_code"]."',
-                                '".$product["product_desc"]."',
-                                '".$product["ean_code"]."',
-                                '".$product["category"]."',
-                                '".$product["subcat1"]."',
-                                '".$product["subcat2"]."',
-                                '".$product["purchase_price"]."'
+                                '$pr_supplier_file',
+                                '$pr_manufacturer',
+                                '$pr_supplier_code',
+                                '$pr_product_code',
+                                '$pr_product_desc',
+                                '$pr_ean_code',
+                                '$pr_category',
+                                '$pr_subcat1',
+                                '$pr_subcat1',
+                                '$pr_purchase_price'
                             )";
 
         try
@@ -344,19 +353,29 @@
     function updateUnifiedlistsTable($product, $file, $fileRowNum)
     {
         global $conn;
+        $pr_supplier_file = mysqli_real_escape_string($conn, $product['supplier_file']);
+        $pr_manufacturer = mysqli_real_escape_string($conn, $product['manufacturer']);
+        $pr_supplier_code = mysqli_real_escape_string($conn, $product['supplier_code']);
+        $pr_product_code = mysqli_real_escape_string($conn, $product['product_code']);
+        $pr_product_desc = mysqli_real_escape_string($conn, $product['product_desc']);
+        $pr_ean_code = mysqli_real_escape_string($conn, $product['ean_code']);
+        $pr_category = mysqli_real_escape_string($conn, $product['category']);
+        $pr_subcat1 = mysqli_real_escape_string($conn, $product['subcat1']);
+        $pr_subcat2 = mysqli_real_escape_string($conn, $product['subcat2']);
+        $pr_purchase_price = mysqli_real_escape_string($conn, $product['purchase_price']);
 
         $sql = "UPDATE unifiedlists
                 SET
-                    supplier_file = '".$product["supplier_file"]."',
-                    manufacturer = '".$product["manufacturer"]."',
-                    supplier_code = '".$product["supplier_code"]."',
-                    product_code = '".$product["product_code"]."',
-                    product_desc = '".$product["product_desc"]."',
-                    category = '".$product["category"]."',
-                    subcat1 = '".$product["subcat1"]."',
-                    subcat2 = '".$product["subcat2"]."',
-                    supplier_purchase_price = '".$product["purchase_price"]."'
-                WHERE ean_code = '".$product["ean_code"]."';";
+                    supplier_file = '$pr_supplier_file',
+                    manufacturer = '$pr_manufacturer',
+                    supplier_code = '$pr_supplier_code',
+                    product_code = '$pr_product_code',
+                    product_desc = '$pr_product_desc',
+                    category = '$pr_category',
+                    subcat1 = '$pr_subcat1',
+                    subcat2 = '$pr_subcat2',
+                    supplier_purchase_price = '$pr_purchase_price'
+                WHERE ean_code = '$pr_ean_code';";
 
         try
         {

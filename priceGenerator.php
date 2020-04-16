@@ -186,6 +186,19 @@
     function insertIntoPricingTable($prod, $groupingRule, $newSupplierPrice, $salesPrice, $presta)
     {
         global $conn;
+        $pr_supplier_file = mysqli_real_escape_string($conn, $prod['supplier_file']);
+        $pr_manufacturer = mysqli_real_escape_string($conn, $prod['manufacturer']);
+        $pr_supplier_code = mysqli_real_escape_string($conn, $prod['supplier_code']);
+        $pr_product_code = mysqli_real_escape_string($conn, $prod['product_code']);
+        $pr_product_desc = mysqli_real_escape_string($conn, $prod['product_desc']);
+        $pr_ean_code = mysqli_real_escape_string($conn, $prod['ean_code']);
+        $pr_category = mysqli_real_escape_string($conn, $prod['category']);
+        $pr_subcat1 = mysqli_real_escape_string($conn, $prod['subcat1']);
+        $pr_subcat2 = mysqli_real_escape_string($conn, $prod['subcat2']);
+        $pr_purchase_price = mysqli_real_escape_string($conn, $prod['supplier_purchase_price']);
+        $pr_grouping_code = mysqli_real_escape_string($conn, $groupingRule['grouping_code']);
+        $pr_price_group = mysqli_real_escape_string($conn, $groupingRule['price_group']);
+        $pr_target_category = mysqli_real_escape_string($conn, $groupingRule['target_category']);
 
         $sql = "INSERT INTO pricing
                             (
@@ -208,21 +221,21 @@
                             )
                 VALUES
                         (
-                            '".$prod['supplier_file']."',
-                            '".$prod['manufacturer']."',
-                            '".$prod['supplier_code']."',
-                            '".$prod['product_code']."',
-                            '".$prod['product_desc']."',
-                            '".$prod['ean_code']."',
-                            '".$prod['category']."',
-                            '".$prod['subcat1']."',
-                            '".$prod['subcat2']."',
-                            '".$prod['supplier_purchase_price']."',
-                            '".$newSupplierPrice."',
-                            '".$salesPrice."',
-                            '".$groupingRule['grouping_code']."',
-                            '".$groupingRule['price_group']."',
-                            '".$groupingRule['target_category']."',
+                            '$pr_supplier_file',
+                            '$pr_manufacturer',
+                            '$pr_supplier_code',
+                            '$pr_product_code',
+                            '$pr_product_desc',
+                            '$pr_ean_code',
+                            '$pr_category',
+                            '$pr_subcat1',
+                            '$pr_subcat1',
+                            '$pr_purchase_price',
+                            '$newSupplierPrice',
+                            '$salesPrice',
+                            '$pr_grouping_code',
+                            '$pr_price_group',
+                            '$pr_target_category',
                             '$presta'
                         )";
 
@@ -252,14 +265,19 @@
     {
         global $conn;
 
+        $pr_grouping_code = mysqli_real_escape_string($conn, $groupingRule['grouping_code']);
+        $pr_price_group_code = mysqli_real_escape_string($conn, $groupingRule['price_group']);
+        $_ean_code = mysqli_real_escape_string($conn, $prod['ean_code']);
+
+
         $sql = "UPDATE pricing
                 SET
                     supplier_purchase_price = '".$prod['supplier_purchase_price']."',
                     new_purchase_price = '".$newSupplierPrice."',
                     sales_price = '".$salesPrice."',
-                    grouping_code = '".$groupingRule['grouping_code']."',
-                    price_group_code = '".$groupingRule['price_group']."'
-                WHERE ean_code = '".$prod['ean_code']."';";
+                    grouping_code = '$pr_grouping_code',
+                    price_group_code = '$pr_price_group_code'
+                WHERE ean_code = '$_ean_code';";
 
         try
         {
