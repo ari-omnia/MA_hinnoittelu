@@ -27,7 +27,8 @@
             }
             else
             {
-                throw new Exception('Getting data from groupingrules table successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Getting data from groupingrules table successful.<br>');
             }
         }
         catch (Exception $ex)
@@ -58,7 +59,8 @@
                     }
                     else
                     {
-                        throw new Exception('Groupingrule '.$sql.' successful.<br>');
+                        // Removed success log entries
+                        //throw new Exception('Groupingrule '.$sql.' successful.<br>');
                     }
                 }
                 catch (Exception $ex)
@@ -102,7 +104,8 @@
             }
             else
             {
-                throw new Exception('Getting purchase price factor with supplier code '.$product['supplier_code'].' successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Getting purchase price factor with supplier code '.$product['supplier_code'].' successful.<br>');
             }
         }
         catch (Exception $ex)
@@ -130,7 +133,8 @@
             }
             else
             {
-                throw new Exception('Getting data from pricegroups table with price group code '.$groupingRule['price_group'].' successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Getting data from pricegroups table with price group code '.$groupingRule['price_group'].' successful.<br>');
             }
         }
         catch (Exception $ex)
@@ -232,7 +236,8 @@
             }
             else
             {
-                throw new Exception('Inserting data into pricing table successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Inserting data into pricing table successful.<br>');
             }
         }
         catch (Exception $ex)
@@ -266,7 +271,8 @@
             }
             else
             {
-                throw new Exception('Updating data to pricing table successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Updating data to pricing table successful.<br>');
             }
         }
         catch (Exception $ex)
@@ -296,7 +302,8 @@
                 }
                 else
                 {
-                    throw new Exception('Updating new products totalsum to supplierlists table successful.<br>');
+                    // Removed success log entries
+                    //throw new Exception('Updating new products totalsum to supplierlists table successful.<br>');
                 }
             }
             catch (Exception $ex)

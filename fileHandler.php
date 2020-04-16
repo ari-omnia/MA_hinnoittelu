@@ -25,7 +25,8 @@
             }
             else
             {
-                throw new Exception('Getting data from supplierlists table successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Getting data from supplierlists table successful.<br>');
             }
         }
         catch(Exception $ex)
@@ -86,7 +87,8 @@
                 }
                 else
                 {
-                    throw new Exception('Getting data from supplierlists table successful.<br>');
+                    // Removed success log entries
+                    //throw new Exception('Getting data from supplierlists table successful.<br>');
                 }
             }
             catch(Exception $ex)
@@ -110,7 +112,8 @@
             }
             else
             {
-                throw new Exception('File '.$file.' found.<br>');
+                //Removed success log entries
+                //throw new Exception('File '.$file.' found.<br>');
             }
         }
         catch (Exception $ex)
@@ -135,7 +138,8 @@
             }
             else
             {
-                throw new Exception('File open successful.<br>');
+                // Removed success log entries
+                //throw new Exception('File open successful.<br>');
             }
         }
         catch (Exception $ex)
@@ -325,7 +329,8 @@
             }
             else
             {
-                throw new Exception('Row '.$fileRowNum.': inserting data into unifiedlists table successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Row '.$fileRowNum.': inserting data into unifiedlists table successful.<br>');
             }
         }
         catch(Exception $ex)
@@ -363,7 +368,8 @@
             }
             else
             {
-                throw new Exception('Row '.$fileRowNum.': updating data to unifiedlists table successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Row '.$fileRowNum.': updating data to unifiedlists table successful.<br>');
             }
         }
         catch(Exception $ex)
