@@ -36,7 +36,8 @@
             }
             else
             {
-                throw new Exception('Getting data from pricing table successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Getting data from pricing table successful.<br>');
             }
         }
         catch(Exception $ex)
@@ -180,7 +181,8 @@
             }
             else
             {
-                throw new Exception('Inserting data to ps_product table successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Inserting data to ps_product table successful.<br>');
             }
         }
         catch(Exception $ex)
@@ -257,7 +259,8 @@
             }
             else
             {
-                throw new Exception('Inserting data to ps_product_shop table successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Inserting data to ps_product_shop table successful.<br>');
             }
         }
         catch(Exception $ex)
@@ -290,7 +293,8 @@
             }
             else
             {
-                throw new Exception('Inserting lang data to ps_product_lang table successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Inserting lang data to ps_product_lang table successful.<br>');
             }
         }
         catch (Exception $ex)
@@ -324,7 +328,8 @@
             }
             else
             {
-                throw new Exception('Inserting lang 2 data to ps_product_lang table successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Inserting lang 2 data to ps_product_lang table successful.<br>');
             }
         }
         catch (Exception $ex)
@@ -366,7 +371,8 @@
             }
             else
             {
-                throw new Exception('Inserting data to ps_stock_available table successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Inserting data to ps_stock_available table successful.<br>');
             }
         }
         catch (Exception $ex)
@@ -400,7 +406,8 @@
             }
             else
             {
-                throw new Exception('Inserting data to ps_category_product table successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Inserting data to ps_category_product table successful.<br>');
             }
         }
         catch (Exception $ex)
@@ -447,7 +454,8 @@
             }
             else
             {
-                throw new Exception('Updating data to ps_product and ps_product_shop tables successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Updating data to ps_product and ps_product_shop tables successful.<br>');
             }
         }
         catch(Exception $ex)
@@ -479,7 +487,8 @@
             }
             else
             {
-                throw new Exception('Deleting item from pricing table with EAN code '.$ean.' successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Deleting item from pricing table with EAN code '.$ean.' successful.<br>');
             }
         }
         catch(Exception $ex)
@@ -539,7 +548,8 @@
             }
             else
             {
-                throw new Exception('Inserting data to ps_manufacturer table successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Inserting data to ps_manufacturer table successful.<br>');
 
             }
         }
@@ -575,7 +585,8 @@
             }
             else
             {
-                throw new Exception('Inserting data to ps_manufacturer_lang (1) table successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Inserting data to ps_manufacturer_lang (1) table successful.<br>');
                 $last_mfc_id = mysqli_insert_id($prestaconn);
             }
         }
@@ -609,7 +620,8 @@
             }
             else
             {
-                throw new Exception('Inserting data to ps_manufacturer_lang (2) table successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Inserting data to ps_manufacturer_lang (2) table successful.<br>');
                 $last_mfc_id = mysqli_insert_id($prestaconn);
             }
         }
@@ -643,7 +655,8 @@
             }
             else
             {
-                throw new Exception('Inserting data to ps_manufacturer_shop table successful.<br>');
+                // Removed success log entries
+                //throw new Exception('Inserting data to ps_manufacturer_shop table successful.<br>');
                 $last_mfc_id = mysqli_insert_id($prestaconn);
             }
         }
