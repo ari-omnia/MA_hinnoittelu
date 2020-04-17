@@ -174,6 +174,9 @@
 
                 if (!empty(trim($data[$row['column_ean_code']])) && $data[$row['column_ean_code']] !== '9999999999999')
                 {
+                    // EAN-code, Remove leading zero
+                    $data[$row['column_ean_code']] = rmvEanZero($data[$row['column_ean_code']]);
+
                     $res = findEAN('unifiedlists', $data[$row['column_ean_code']]);
 
                     $product = collectData($data, $row);
@@ -438,4 +441,12 @@
         fwrite($h, $txt);
 
         fclose($h);
+    }
+
+    function rmvEanZero($eancode) {
+        $eancode = trim($eancode);
+        if ($eancode[0] == '0') {
+            return substr($eancode, 1);
+        }
+        return $eancode;
     }
