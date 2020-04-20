@@ -424,6 +424,47 @@
                 return false;
         }
 
+        try
+        {
+            $sql = "INSERT INTO ps_product_supplier (
+                id_product,
+                id_product_attribute,
+                id_supplier,
+                product_supplier_reference,
+                product_supplier_price_te,
+                id_currency
+            )
+                VALUES (
+                '$last_id',
+                '0',
+                '".$product['supplier_code']."',
+                '',
+                '".$product['supplier_purchase_price']."',
+                '1'
+               );";
+
+            $res = mysqli_query($prestaconn, $sql);
+
+            if($res === FALSE)
+            {
+                throw new Exception('Inserting data to ps_product_supplier table failed. '.$sql.'<br> '.mysqli_error($prestaconn).'<br>', 1);
+            }
+            else
+            {
+                // Removed success log entries
+                //throw new Exception('Inserting data to ps_product_supplier table successful.<br>');
+            }
+        }
+        catch (Exception $ex)
+        {
+            echo $ex->getMessage();
+
+            writeLog($ex->getMessage());
+
+            if($ex->getCode() > 0)
+                return false;
+        }
+
         return true;
     }
 
@@ -460,6 +501,37 @@
             {
                 // Removed success log entries
                 //throw new Exception('Updating data to ps_product and ps_product_shop tables successful.<br>');
+            }
+        }
+        catch(Exception $ex)
+        {
+            echo $ex->getMessage();
+
+            writeLog($ex->getMessage());
+
+            if($ex->getCode() > 0)
+                return false;
+        }
+
+        $sql = "UPDATE ps_product_supplier
+                SET
+                    ps_product_supplier.product_supplier_price_te = '".$product['supplier_purchase_price']."'
+                WHERE   ps_product_supplier.id_product = '".$prestaId['id_product']."' AND
+                        ps_product_supplier.id_product_attribute = '0' AND
+                        ps_product_supplier.id_supplier = '".$product['supplier_code']."';";
+
+        try
+        {
+            $res = mysqli_query($prestaconn, $sql);
+
+            if($res === FALSE)
+            {
+                throw new Exception('Updating data to ps_product_supplier table failed. '.$sql.'<br> '.mysqli_error($prestaconn).'<br>', 1);
+            }
+            else
+            {
+                // Removed success log entries
+                //throw new Exception('Updating data to ps_product_supplier table successful.<br>');
             }
         }
         catch(Exception $ex)

@@ -13,13 +13,15 @@ require "presta.php";
 
 //var_dump($conn);
 echo "<br>";
-echo "kutsutaan fetchAllFiles";
+echo "Kutsutaan fetchAllFiles";
 echo "<br>";
 
 
 //arrangeFile("test.csv");
 
 fetchAllFiles();
+
+echo "Valmis fetchAllFiles";
 //groupProducts();
 //startTransfer();
 
